@@ -28,6 +28,10 @@ angular
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl'
       })
+      .when('/user/auth', {
+        templateUrl: 'views/authorization.html',
+        controller: 'AuthorizationCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

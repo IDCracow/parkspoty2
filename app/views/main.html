@@ -1,3 +1,9 @@
+<div ng-show="currentUser">
+  <h2>Welcome {{currentUser.get('username')}}</h2>
+  <p>You have been successfully logged in</p>
+  <button ng-click="logOut()">Log out</button>
+</div>
+
 <div class="jumbotron">
   <h1>'Allo, 'Allo!</h1>
   <p class="lead">
