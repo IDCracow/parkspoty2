@@ -2,24 +2,21 @@
 
 /**
  * @ngdoc function
- * @name parkspotyappApp.controller:AuthorizationCtrl
+ * @name parkspotyappApp.controller:RegisterCtrl
  * @description
- * # AuthorizationCtrl
+ * # RegisterCtrl
  * Controller of the parkspotyappApp
  */
 
-Parse.initialize('JuVVAlf1pUV6J1zOLeVTuKDtS5Urwbwk4TN0vjGO','kOGCcuP6Y5LlBDmt5sBrJVkRv6X4fgTGGUyroomx');
-
 angular.module('parkspotyappApp')
-    .controller('AuthorizationCtrl', function ($scope) {
-    $scope.awesomeThings = [
-        'HTML5 Boilerplate',
-        'AngularJS',
-        'Karma'
-    ];
-})
+    .controller('RegisterCtrl', function ($scope) {
+        $scope.awesomeThings = [
+            'HTML5 Boilerplate',
+            'AngularJS',
+            'Karma'
+        ];
+    })
     .run(['$rootScope', function($scope) {
-        $scope.scenario = 'Sign up';
         $scope.currentUser = Parse.User.current();
 
         $scope.signUp = function(form) {
@@ -39,20 +36,9 @@ angular.module('parkspotyappApp')
             });    
         };
 
-        $scope.logIn = function(form) {
-            Parse.User.logIn(form.username, form.password, {
-                success: function(user) {
-                    $scope.currentUser = user;
-                    $scope.$apply();
-                },
-                error: function(user, error) {
-                    alert("Unable to log in: " + error.code + " " + error.message);
-                }
-            });
-        };
-
         $scope.logOut = function(form) {
             Parse.User.logOut();
             $scope.currentUser = null;
         };
+
     }]);

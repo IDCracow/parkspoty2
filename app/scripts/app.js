@@ -8,6 +8,10 @@
  *
  * Main module of the application.
  */
+
+
+Parse.initialize('JuVVAlf1pUV6J1zOLeVTuKDtS5Urwbwk4TN0vjGO','kOGCcuP6Y5LlBDmt5sBrJVkRv6X4fgTGGUyroomx');
+
 angular
   .module('parkspotyappApp', [
     'ngAnimate',
@@ -28,9 +32,13 @@ angular
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl'
       })
-      .when('/user/auth', {
-        templateUrl: 'views/authorization.html',
-        controller: 'AuthorizationCtrl'
+      .when('/user/register', {
+        templateUrl: 'views/register.html',
+        controller: 'RegisterCtrl'
+      })
+      .when('/user/login', {
+        templateUrl: 'views/login.html',
+        controller: 'LoginCtrl'
       })
       .otherwise({
         redirectTo: '/'
