@@ -9,36 +9,29 @@
  */
 
 angular.module('parkspotyappApp')
-    .controller('RegisterCtrl', function ($scope) {
-        $scope.awesomeThings = [
-            'HTML5 Boilerplate',
-            'AngularJS',
-            'Karma'
-        ];
-    })
-    .run(['$rootScope', function($scope) {
-        $scope.currentUser = Parse.User.current();
+    .controller('RegisterCtrl', function ($scope, fetchUser) {
+    $scope.awesomeThings = [
+        'HTML5 Boilerplate',
+        'AngularJS',
+        'Karma'
+    ];
 
-        $scope.signUp = function(form) {
-            var user = new Parse.User();
-            user.set("email", form.email);
-            user.set("username", form.username);
-            user.set("password", form.password);
+    $scope.currentUser = fetchUser.userData();
 
-            user.signUp(null, {
-                success: function(user) {
-                    $scope.currentUser = user;
-                    $scope.$apply(); // Notify AngularJS to sync currentUser
-                },
-                error: function(user, error) {
-                    alert("Unable to sign up:  " + error.code + " " + error.message);
-                }
-            });    
-        };
+    $scope.signUp = function(form) {
+        var user = new Parse.User();
+        user.set("email", form.email);
+        user.set("username", form.username);
+        user.set("password", form.password);
 
-        $scope.logOut = function(form) {
-            Parse.User.logOut();
-            $scope.currentUser = null;
-        };
-
-    }]);
+        user.signUp(null, {
+            success: function(user) {
+                $scope.currentUser = user;
+                $scope.$apply(); // Notify AngularJS to sync currentUser
+            },
+            error: function(user, error) {
+                alert("Unable to sign up:  " + error.code + " " + error.message);
+            }
+        });    
+    };
+});

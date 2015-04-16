@@ -2,17 +2,18 @@
 
 /**
  * @ngdoc function
- * @name parkspotyappApp.controller:MainCtrl
+ * @name parkspotyappApp.controller:ProfileCtrl
  * @description
- * # MainCtrl
+ * # ProfileCtrl
  * Controller of the parkspotyappApp
  */
 angular.module('parkspotyappApp')
-  .controller('MainCtrl', function ($scope) {
+  .controller('ProfileCtrl', function ($scope, fetchUser) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
     
+    $scope.currentUser = fetchUser.userData();
   });

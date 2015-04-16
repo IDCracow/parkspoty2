@@ -1,4 +1,4 @@
-<div ng-if="!currentUser">
+<div ng-if="!fetchUser.isLoggedIn">
     <h2>Sign up</h2>
     <form name="registerform">
         <div>
@@ -21,9 +21,4 @@
             or <a href="/#/user/login">Log in</a>
         </div>
     </form>
-</div>
-<div ng-if="currentUser">
-    <h2>Welcome {{currentUser.get('username')}}</h2>
-    <p>You have been successfully logged in</p>
-    <button ng-click="logOut()">Log out</button>
 </div>

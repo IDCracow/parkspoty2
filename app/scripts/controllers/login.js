@@ -8,19 +8,22 @@
  * Controller of the parkspotyappApp
  */
 angular.module('parkspotyappApp')
-    .controller('LoginCtrl', function($scope, $location) {
+    .controller('LoginCtrl', function($scope, $location, fetchUser) {
     $scope.awesomeThings = [
         'HTML5 Boilerplate',
         'AngularJS',
         'Karma'
     ];
 
-    $scope.currentUser = Parse.User.current();
-
+    $scope.currentUser = fetchUser.userData();
+    $scope.isLoggedIn = fetchUser.isLoggedIn();
+    console.log(fetchUser.isLoggedIn());
+    
     $scope.logIn = function(form) {
         Parse.User.logIn(form.username, form.password, {
             success: function(user) {
-                $scope.currentUser = user;
+                fetchUser.setUser(user);
+                $scope.currentUser = fetchUser.userData();
                 $scope.goToUserProfile();
                 $scope.$apply();
             },
@@ -28,16 +31,9 @@ angular.module('parkspotyappApp')
                 alert("Unable to log in: " + error.code + " " + error.message);
             }
         });
-
-    };
-
-    $scope.logOut = function(form) {
-        Parse.User.logOut();
-        $scope.currentUser = null;
     };
 
     $scope.goToUserProfile = function() {
-        $location.path('/about');
-        console.log($location);
+        $location.path('/user/profile');
     };
 });
