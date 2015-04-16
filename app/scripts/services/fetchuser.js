@@ -35,6 +35,9 @@ angular.module('parkspotyappApp')
             Parse.User.logOut();
             currUser = null;
             $location.path('#/');
+        },
+        userFirstName: function() {
+            return currUser.get('username');
         }
     };
 });

@@ -16,10 +16,6 @@ angular.module('parkspotyappApp')
     ];
 
     $scope.userData = fetchUser.userData();
-    console.log('user ' + $scope.userData);
-
     $scope.isLoggedIn = fetchUser.isLoggedIn;
-    console.log('isLogged ' + fetchUser.isLoggedIn());
-
     $scope.logOut = fetchUser.logOut;
 });
