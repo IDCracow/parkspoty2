@@ -8,7 +8,7 @@
  * Controller of the parkspotyappApp
  */
 angular.module('parkspotyappApp')
-  .controller('ProfileCtrl', function ($scope, fetchUser) {
+  .controller('ProfileCtrl', function ($scope, fetchUser, $location) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -16,4 +16,8 @@ angular.module('parkspotyappApp')
     ];
     
     $scope.currentUser = fetchUser.userData();
+    
+    if (!$scope.currentUser) {
+        $location.path('#/user/login');
+    }
   });

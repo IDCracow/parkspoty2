@@ -23,6 +23,7 @@ angular.module('parkspotyappApp')
         user.set("email", form.email);
         user.set("username", form.username);
         user.set("password", form.password);
+        user.set("passwordConfirmation", form.passwordConfirmation);
 
         user.signUp(null, {
             success: function(user) {

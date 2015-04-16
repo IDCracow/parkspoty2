@@ -17,6 +17,11 @@
             <input type="password" id="passwordfield" name="passwordfield" ng-model="user.password" ng-model-options="{ debounce: 350 }" required />
         </div>
         <div>
+            <label for="passwordconfirmationfield">Password confirmation:</label>
+            <input type="password" id="passwordconfirmationfield" name="passwordconfirmationfield" ng-model="user.passwordConfirmation" match= "user.password" ng-model-options="{ debounce: 350 }" required />
+            <p ng-show="registerform.passwordconfirmationfield.$error.match">Fields do not match!</p>
+        </div>
+        <div>
             <button ng-click="signUp(user)">Sign up</button>
             or <a href="/#/user/login">Log in</a>
         </div>
