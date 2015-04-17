@@ -9,7 +9,7 @@
  */
 
 angular.module('parkspotyappApp')
-    .controller('RegisterCtrl', function ($scope, fetchUser) {
+    .controller('RegisterCtrl', function ($scope, fetchUser, $location) {
     $scope.awesomeThings = [
         'HTML5 Boilerplate',
         'AngularJS',
@@ -29,6 +29,7 @@ angular.module('parkspotyappApp')
             success: function(user) {
                 $scope.currentUser = user;
                 $scope.$apply(); // Notify AngularJS to sync currentUser
+                $location.path("/user/profile");
             },
             error: function(user, error) {
                 alert("Unable to sign up:  " + error.code + " " + error.message);

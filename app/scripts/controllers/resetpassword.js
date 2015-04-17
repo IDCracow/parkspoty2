@@ -8,10 +8,14 @@
  * Controller of the parkspotyappApp
  */
 angular.module('parkspotyappApp')
-  .controller('ResetpasswordCtrl', function ($scope) {
+  .controller('ResetPasswordCtrl', function ($scope) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
+    
+    $scope.sendResetEmail = function() {
+        
+    };
   });

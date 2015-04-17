@@ -10,7 +10,7 @@
  */
 
 
-Parse.initialize('JuVVAlf1pUV6J1zOLeVTuKDtS5Urwbwk4TN0vjGO','kOGCcuP6Y5LlBDmt5sBrJVkRv6X4fgTGGUyroomx');
+Parse.initialize('PEzsT2NgVjzwkHt2HDXMSYix5viGNIC9bsJxKtTa','3eaL1UsGbIpccAFF7WVfoEMTMVXZkFgQ5RAUsi2G');
 
 angular
     .module('parkspotyappApp', [
@@ -47,7 +47,7 @@ angular
     })
         .when('/user/reset-password', {
         templateUrl: 'views/reset_password.html',
-        controller: 'ResetPassword'
+        controller: 'ResetPasswordCtrl'
     })
         .otherwise({
         redirectTo: '/'
