@@ -17,7 +17,6 @@ angular.module('parkspotyappApp')
 
     $scope.currentUser = fetchUser.userData();
     $scope.isLoggedIn = fetchUser.isLoggedIn();
-    console.log(fetchUser.isLoggedIn());
     
     $scope.logIn = function(form) {
         Parse.User.logIn(form.username, form.password, {

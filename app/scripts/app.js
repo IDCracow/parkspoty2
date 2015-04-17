@@ -45,6 +45,10 @@ angular
         templateUrl: 'views/profile.html',
         controller: 'ProfileCtrl'
     })
+        .when('/user/reset-password', {
+        templateUrl: 'views/reset_password.html',
+        controller: 'ResetPassword'
+    })
         .otherwise({
         redirectTo: '/'
     });
