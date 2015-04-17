@@ -5,7 +5,7 @@ Parse.Cloud.beforeSave("_User", function(request, response) {
     if (domain.toLowerCase() === "infusion.com") {
         response.success();
     } else {
-        response.error("Please use your company email address.");
+        response.error("Please use your @infusion.com email address.");
     };
 });
 

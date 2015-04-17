@@ -38,6 +38,18 @@ angular.module('parkspotyappApp')
         },
         userFirstName: function() {
             return currUser.get('username');
+        },
+        resetPassword: function(email) {
+            Parse.User.requestPasswordReset(email, {
+                success: function() {
+                    // Password reset request was sent successfully
+                    console.log('email sent');
+                },
+                error: function(error) {
+                    // Show the error message somewhere
+                    alert("Error: " + error.code + " " + error.message);
+                }
+            });
         }
     };
 });
