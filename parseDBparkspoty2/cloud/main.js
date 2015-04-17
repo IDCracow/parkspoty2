@@ -1,5 +1,5 @@
 //email validation
-Parse.Cloud.beforeSave("user", function(request, response) {
+Parse.Cloud.beforeSave("_User", function(request, response) {
     var emailAddress = request.object.get("email");
     var domain = emailAddress.split('@')[1];
     if (domain.toLowerCase() === "infusion.com") {
