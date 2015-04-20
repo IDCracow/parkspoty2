@@ -1,0 +1,14 @@
+{
+  "global": {
+    "parseVersion": "1.4.2"
+  },
+  "applications": {
+    "_default": {
+      "link": "parkspoty2"
+    },
+    "parkspoty2": {
+      "applicationId": "PEzsT2NgVjzwkHt2HDXMSYix5viGNIC9bsJxKtTa",
+      "masterKey": "eNfdUxz3oUAvc1jl9zcXjblwf6ZNDk8BNVKfmKbx"
+    }
+  }
+}
