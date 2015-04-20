@@ -1,25 +1,25 @@
 <div ng-if="!fetchUser.isLoggedIn">
     <h2>Sign up</h2>
-    
+
     <form name="registerform">
         <p>
             <label for="emailfield">Email:</label>
-            <input type="email" id="emailfield" name="emailfield" ng-model="user.email" ng-model-options="{ debounce: 350 }" required />
+            <input class="input-field" type="email" id="emailfield" name="emailfield" ng-model="user.email" ng-model-options="{ debounce: 350 }" required />
             <p ng-show="registerform.emailfield.$error.email">This is not a valid email.</p>
         </p>
         <p>
             <label for="usernamefield">Username:</label>
-            <input type="text" id="usernamefield" name="usernamefield" ng-model="user.username" ng-model-options="{ debounce: 350 }" ng-minlength="3" ng-maxlength="15" required />
+            <input class="input-field"  type="text" id="usernamefield" name="usernamefield" ng-model="user.username" ng-model-options="{ debounce: 350 }" ng-minlength="3" ng-maxlength="15" required />
             <p ng-show="registerform.usernamefield.$error.minlength">Username is too short.</p>
             <p ng-show="registerform.usernamefield.$error.maxlength">Username is too long.</p>
         </p>
         <p>
             <label for="passwordfield">Password:</label>
-            <input type="password" id="passwordfield" name="passwordfield" ng-model="user.password" ng-model-options="{ debounce: 350 }" required />
+            <input class="input-field" type="password" id="passwordfield" name="passwordfield" ng-model="user.password" ng-model-options="{ debounce: 350 }" required />
         </p>
         <p>
             <label for="passwordconfirmationfield">Password confirmation:</label>
-            <input type="password" id="passwordconfirmationfield" name="passwordconfirmationfield" ng-model="user.passwordConfirmation" match= "user.password" ng-model-options="{ debounce: 350 }" required />
+            <input class="input-field" type="password" id="passwordconfirmationfield" name="passwordconfirmationfield" ng-model="user.passwordConfirmation" match= "user.password" ng-model-options="{ debounce: 350 }" required />
             <p ng-show="registerform.passwordconfirmationfield.$error.match">Fields do not match!</p>
         </p>
         <p>

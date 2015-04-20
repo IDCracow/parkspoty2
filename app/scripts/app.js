@@ -62,6 +62,6 @@ angular
             if (next.templateUrl != "views/login.html" && next.templateUrl != "views/register.html" && next.templateUrl != "views/main.html" && next.templateUrl != "views/reset_password.html") {
                 $location.path("/user/login");
             }
-        }         
+        }
     });
 });

@@ -2,12 +2,13 @@
     <h2>Log in</h2>
     <p>
         <label for="usernamefield">Username:</label>
-        <input type="text" id="usernamefield" name="usernamefield" ng-model="user.username" ng-model-options="{ debounce: 350 }" required />
+        <input class="input-field" type="text" id="usernamefield" name="usernamefield" ng-model="user.username" ng-model-options="{ debounce: 350 }" required />
     </p>
     <p>
         <label for="passwordfield">Password:</label>
-        <input type="password" id="passwordfield" name="passwordfield" ng-model="user.password" ng-model-options="{ debounce: 350 }" required />
+        <input class="input-field" type="password" id="passwordfield" name="passwordfield" ng-model="user.password" ng-model-options="{ debounce: 350 }" required />
     </p>
+
     <button ng-click="logIn(user)">Log in</button>
     or <a href="/#/user/register">Sign up</a>
 </form>

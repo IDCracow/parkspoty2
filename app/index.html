@@ -20,18 +20,19 @@
           <![endif]-->
 
         <!-- Add your site or application content here -->
-        <header ng-controller="headerCtrl">
+        <header class="container-big" ng-controller="headerCtrl">
             <div role="navigation" class="row">
-                <div class="half">
-                    <a class="navbar-brand" href="#/">parkspotyapp</a>
-                </div>
-
                 <div class="half">
                     <nav>
                         <a href="#/">Home</a>
                         <a ng-href="#/user/login" ng-if="!isLoggedIn()">Log in</a>
                         <a ng-click="logOut()" ng-href="#/" ng-if="isLoggedIn()">Log out</a>
                     </nav>
+
+                </div>
+
+                <div class="half text-right">
+                  <a class="brand" href="#/">park<span>spoty</span></a>
                 </div>
             </div>
         </header>
@@ -40,8 +41,8 @@
             <div ng-view=""></div>
         </div>
 
-        <footer>
-            <p>Parkspotyapp2</p>
+        <footer class="container-big">
+            <p class="text-center">Parkspotyapp2</p>
         </footer>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->

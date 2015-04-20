@@ -29,6 +29,13 @@ body {
   margin: 0 auto;
 }
 
+.container-big {
+  width: 95%;
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 0 $gutter;
+}
+
 .half, .quarter {
   float: left;
 }
