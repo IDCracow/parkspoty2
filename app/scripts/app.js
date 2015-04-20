@@ -49,6 +49,10 @@ angular
         templateUrl: 'views/reset_password.html',
         controller: 'ResetPasswordCtrl'
     })
+        .when('/admin', {
+        templateUrl: 'views/admin.html',
+        controller: 'AdminCtrl'
+    })
         .otherwise({
         redirectTo: '/'
     });

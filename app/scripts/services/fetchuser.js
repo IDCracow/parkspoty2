@@ -13,6 +13,8 @@ angular.module('parkspotyappApp')
     var currUser;
     var isLogged;
 
+    var userId;
+    
     return {
         userData: function () {
             if(!angular.isDefined(currUser)) {
@@ -47,9 +49,13 @@ angular.module('parkspotyappApp')
                 },
                 error: function(error) {
                     // Show the error message somewhere
-                    alert("Error: " + error.code + " " + error.message);
+                    alert('Error: ' + error.code + ' ' + error.message);
                 }
             });
+        },
+        isAdmin: function() {
+            userId = currUser['id'];
+            return Parse.Cloud.run('isAdmin');
         }
     };
 });
