@@ -18,11 +18,17 @@ angular.module('parkspotyappApp')
     $scope.currentUser = fetchUser.userData();
     $scope.username = fetchUser.userFirstName();
     
-    if (!$scope.currentUser) {
-        $location.path('#/user/login');
-    };
-
-    $scope.resetPassword = function() {
-      console.log($scope.currentUser);
+    
+    $scope.changeFlagActiveInDraw = function () {
+        console.log('safdasfas');
+        fetchUser.setActiveInDrawFlag($scope.valFlagActiveInDraw);
+    }
+    
+    $scope.changeFlagDrawRemider = function () {        
+        fetchUser.setAlertRowReminderFlag($scope.valFlagDrawRemider);
+    }
+    
+    $scope.changeFlagSpotNotifer = function () {        
+        fetchUser.setAlertFreeSpotFlag($scope.valFlagSpotNotifer);
     }
   });

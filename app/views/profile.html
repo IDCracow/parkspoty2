@@ -1,2 +1,41 @@
-<p>Hello {{username}}</p>
-<a href="#/user/reset-password">Reset password</a>
+<section class="profile-page">
+    <header class="current-date">wednesday 6th may</header>
+    <ul>
+        <li>
+            <div class="cbox cbox-bool cbox-yellow">
+                <label for="cbox_activeInDraw">
+                    <input type="checkbox" name="activeInDraw" id="cbox_activeInDraw" ng-model="valFlagActiveInDraw" ng-change="changeFlagActiveInDraw()">
+                    <span>I want to take part in a monthly draw</span>
+                </label>
+            </div>
+        </li>
+        
+        <li>
+            <div class="cbox cbox-number cbox-noinput cbox-yellow"> 
+                    <span class="cbox-text-inside">11</span> 
+                    <span>tickets left <i class="icon-info"></i></span> 
+            </div>
+        </li>
+    </ul>
+    
+    <h2 class="alerts">alerts</h2>
+    
+    <ul>
+        <li>
+            <div class="cbox cbox-bool cbox-yellow">
+                <label for="cbox_drawReminder">
+                    <input type="checkbox" name="drawReminder" id="cbox_drawReminder" ng-model="valFlagDrawRemider" ng-change="changeFlagDrawRemider()">
+                    <span>draw reminder</span>
+                </label>
+            </div>
+        </li>
+        <li>
+            <div class="cbox cbox-bool cbox-yellow">
+                <label for="cbox_spotNotifer">
+                    <input type="checkbox" name="spotNotifer" id="cbox_spotNotifer" ng-model="valFlagSpotNotifer" ng-change="changeFlagSpotNotifer()">
+                    <span>free spot notifer</span>
+                </label>
+            </div>
+        </li>
+    </ul>
+</section>

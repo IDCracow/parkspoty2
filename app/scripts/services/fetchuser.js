@@ -50,6 +50,56 @@ angular.module('parkspotyappApp')
                     alert("Error: " + error.code + " " + error.message);
                 }
             });
+        },
+        
+        // save user data after setting properites
+        saveUserData : function () {
+            currUser.save(null, {
+              success: function(user) {
+                // TODO
+                // - show notification in UI  (also error message)                
+              },
+              error: function(error) {
+                    // Show the error message somewhere
+                    alert("Error: " + error.code + " " + error.message);
+              }
+            });
+        },
+        
+        // tickets left = avaiable (12 per year)
+        getTicketsLeft : function() {
+            return currUser.get('ticketsLeft');
+        },
+        
+        getAlertFreeSpotFlag : function() {
+            return currUser.get('f_alertFreeSpot');
+        },
+        
+        getAlertRowReminderFlag : function() {
+            return currUser.get('f_alertRowReminder');
+        },
+        
+        getActiveInDrawFlag : function() {
+            return currUser.get('f_alertFreeSpot');
+        },
+        
+        // setting flags        
+        setAlertFreeSpotFlag : function(status) {
+            currUser.set("f_alertFreeSpot", status);
+            this.saveUserData();
+        },
+        
+        setAlertRowReminderFlag : function(status) {
+            currUser.set("f_alertRowReminder", status);
+            return this.saveUserData();
+        },
+        
+        setActiveInDrawFlag : function(status) {
+            currUser.set("f_activeInDraw", status);
+            return this.saveUserData();
         }
+        
+        
+        
     };
 });
