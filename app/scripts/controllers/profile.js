@@ -14,10 +14,10 @@ angular.module('parkspotyappApp')
       'AngularJS',
       'Karma'
     ];
-    
+
     $scope.currentUser = fetchUser.userData();
     $scope.username = fetchUser.userFirstName();
-    
+
     if (!$scope.currentUser) {
         $location.path('#/user/login');
     };
