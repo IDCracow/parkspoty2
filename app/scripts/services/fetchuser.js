@@ -8,7 +8,7 @@
  * Factory in the parkspotyappApp.
  */
 angular.module('parkspotyappApp')
-    .service('fetchUser', function ($location) {
+    .service('fetchUser', function ($location, $q) {
 
     var currUser;
     var isLogged;
@@ -67,8 +67,12 @@ angular.module('parkspotyappApp')
         },
         
         // tickets left = avaiable (12 per year)
-        getTicketsLeft : function() {
-            return currUser.get('ticketsLeft');
+        getTicketsLeft : function() { 
+            var q = $q.defer();
+            Parse.User.current().fetch().then(function(user){
+                q.resolve(user.get('ticketsLeft'));
+            });
+            return q.promise;
         },
         
         getAlertFreeSpotFlag : function() {
@@ -80,7 +84,7 @@ angular.module('parkspotyappApp')
         },
         
         getActiveInDrawFlag : function() {
-            return currUser.get('f_alertFreeSpot');
+            return currUser.get('f_activeInDraw');
         },
         
         // setting flags        
@@ -98,8 +102,5 @@ angular.module('parkspotyappApp')
             currUser.set("f_activeInDraw", status);
             return this.saveUserData();
         }
-        
-        
-        
     };
 });

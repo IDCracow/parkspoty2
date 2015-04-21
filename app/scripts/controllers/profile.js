@@ -13,14 +13,23 @@ angular.module('parkspotyappApp')
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
-    ];
+    ]; 
+    //defaults
+    $scope.valTicketsLeft = 12;
     
     $scope.currentUser = fetchUser.userData();
     $scope.username = fetchUser.userFirstName();
     
+    $scope.valFlagActiveInDraw = fetchUser.getActiveInDrawFlag();
+    $scope.valFlagDrawRemider = fetchUser.getAlertRowReminderFlag();
+    $scope.valFlagSpotNotifer = fetchUser.getAlertFreeSpotFlag();
     
+    
+    fetchUser.getTicketsLeft().then(function(data) { 
+         $scope.valTicketsLeft = data;
+    });
+     
     $scope.changeFlagActiveInDraw = function () {
-        console.log('safdasfas');
         fetchUser.setActiveInDrawFlag($scope.valFlagActiveInDraw);
     }
     
@@ -31,4 +40,5 @@ angular.module('parkspotyappApp')
     $scope.changeFlagSpotNotifer = function () {        
         fetchUser.setAlertFreeSpotFlag($scope.valFlagSpotNotifer);
     }
+    
   });
