@@ -25,4 +25,31 @@ angular.module('parkspotyappApp')
     $scope.resetPassword = function() {
       console.log($scope.currentUser);
     }
+    //defaults
+    $scope.valTicketsLeft = 12;
+
+    $scope.currentUser = fetchUser.userData();
+    $scope.username = fetchUser.userFirstName();
+
+    $scope.valFlagActiveInDraw = fetchUser.getActiveInDrawFlag();
+    $scope.valFlagDrawRemider = fetchUser.getAlertRowReminderFlag();
+    $scope.valFlagSpotNotifer = fetchUser.getAlertFreeSpotFlag();
+
+
+    fetchUser.getTicketsLeft().then(function(data) {
+         $scope.valTicketsLeft = data;
+    });
+
+    $scope.changeFlagActiveInDraw = function () {
+        fetchUser.setActiveInDrawFlag($scope.valFlagActiveInDraw);
+    }
+
+    $scope.changeFlagDrawRemider = function () {
+        fetchUser.setAlertRowReminderFlag($scope.valFlagDrawRemider);
+    }
+
+    $scope.changeFlagSpotNotifer = function () {
+        fetchUser.setAlertFreeSpotFlag($scope.valFlagSpotNotifer);
+    }
+
   });
