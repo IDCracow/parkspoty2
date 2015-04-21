@@ -15,6 +15,7 @@ angular.module('parkspotyappApp')
         'Karma'
     ];
  
-    $scope.itIsAdmin = fetchUser.isAdmin();
-    console.log($scope.itIsAdmin);
+    fetchUser.isAdmin().then(function(result) {
+        $scope.isAdmin = result;
+    });
 });

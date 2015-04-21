@@ -8,13 +8,11 @@
  * Factory in the parkspotyappApp.
  */
 angular.module('parkspotyappApp')
-    .service('fetchUser', function ($location) {
+    .service('fetchUser', function ($q, $location) {
 
     var currUser;
     var isLogged;
 
-    var userId;
-    
     return {
         userData: function () {
             if(!angular.isDefined(currUser)) {
@@ -54,8 +52,13 @@ angular.module('parkspotyappApp')
             });
         },
         isAdmin: function() {
-            userId = currUser['id'];
-            return Parse.Cloud.run('isAdmin');
+            var q = $q.defer();
+            Parse.Cloud.run('isAdmin').then(function(result){
+                q.resolve(result);
+            });
+            
+            return q.promise;
+           // return Parse.Cloud.run('isAdmin');
         }
     };
 });
