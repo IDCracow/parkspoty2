@@ -25,7 +25,6 @@
                 <div class="half">
                     <nav>
                         <a href="#/">Home</a>
-                        <a ng-href="#/user/login" ng-if="!isLoggedIn()">Log in</a>
                         <a ng-click="logOut()" ng-href="#/" ng-if="isLoggedIn()">Log out</a>
                     </nav>
 
@@ -37,8 +36,8 @@
             </div>
         </header>
 
-        <div class="container">
-            <div ng-view=""></div>
+        <div class="container clearfix">
+            <div ng-view="" class="mainview"></div>
         </div>
 
         <footer class="container-big">
