@@ -70,24 +70,23 @@ body
   +turn-on-gpu
 
 .ng-enter
-  transition: opacity 0.5s ease-out, left 0.5s ease-out
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out
   left: 100px
   opacity: 0
 
 
 .ng-enter-active
+  transform: translate(-100px,0)
   opacity: 1
-  left: 0
 
 
 .ng-leave
-  transition: opacity 0.5s ease-in, left 0.5s ease-in
+  transition: opacity 0.5s ease-in, transform 0.5s ease-in
   opacity: 1
-  left: 0
 
 
 .ng-leave-active
-  left: -100px
+  transform: translate(-100px,0)
   opacity: 0
 
 
