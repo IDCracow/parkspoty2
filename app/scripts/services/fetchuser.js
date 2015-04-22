@@ -42,11 +42,9 @@ angular.module('parkspotyappApp')
         resetPassword: function(email) {
             Parse.User.requestPasswordReset(email, {
                 success: function() {
-                    // Password reset request was sent successfully
                     console.log('email sent');
                 },
                 error: function(error) {
-                    // Show the error message somewhere
                     alert('Error: ' + error.code + ' ' + error.message);
                 }
             });
@@ -56,9 +54,31 @@ angular.module('parkspotyappApp')
             Parse.Cloud.run('isAdmin').then(function(result){
                 q.resolve(result);
             });
+
+            return q.promise;
+        },
+        isVerified: function(name) {
+            var q = $q.defer();
+            Parse.Cloud.run('isVerified', {'username':name}).then(function(result){
+                q.resolve(result);
+            });
+
+            return q.promise;
+        },
+        logIn: function(name, pass) {
+            var q = $q.defer();
+            var self = this;
+            Parse.User.logIn(name, pass, {
+                success: function(user) {
+                    self.setUser(user);
+                    q.resolve(user);
+                },
+                error: function(error) {
+                    q.reject(error)
+                }
+            });
             
             return q.promise;
-           // return Parse.Cloud.run('isAdmin');
         }
     };
 });

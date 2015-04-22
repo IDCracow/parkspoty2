@@ -18,4 +18,5 @@ angular.module('parkspotyappApp')
     fetchUser.isAdmin().then(function(result) {
         $scope.isAdmin = result;
     });
+    
 });

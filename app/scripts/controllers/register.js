@@ -27,8 +27,8 @@ angular.module('parkspotyappApp')
         user.signUp(null, {
             success: function(user) {
                 $scope.currentUser = user;
+                $location.path("/user/login");
                 $scope.$apply(); // Notify AngularJS to sync currentUser
-                $location.path("/user/profile");
             },
             error: function(user, error) {
                 alert("Unable to sign up:  " + error.code + " " + error.message);

@@ -9,6 +9,7 @@ Parse.Cloud.beforeSave("_User", function(request, response) {
     };
 });
 
+//user role settings
 Parse.Cloud.afterSave(Parse.User, function(request) {
     Parse.Cloud.useMasterKey();  
 
@@ -39,6 +40,7 @@ Parse.Cloud.afterSave(Parse.User, function(request) {
 
 });
 
+//check if user is admin
 Parse.Cloud.define('isAdmin', function(request, response) {
     var query = (new Parse.Query(Parse.Role));
     query.equalTo("name", "Administrator");
@@ -46,4 +48,18 @@ Parse.Cloud.define('isAdmin', function(request, response) {
     query.first().then(function(adminRole) {
         response.success(adminRole ? true : false);
     });
+});
+
+//check if user has validated email
+Parse.Cloud.define('isVerified', function(request, response) {
+    var query = new Parse.Query("User");
+    query.equalTo('username', request.params.username);
+    query.find({
+        success: function(result) {
+            response.success(result[0].attributes.emailVerified);
+        },
+        error: function(error) {
+            response.success("qwe");
+        }
+    })
 });
