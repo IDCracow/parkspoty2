@@ -77,6 +77,28 @@ angular.module('parkspotyappApp')
                     q.reject(error)
                 }
             });
+
+            return q.promise;
+        },
+        signUp: function(form) {
+            var q = $q.defer();
+            var self = this;
+
+            var user = new Parse.User();
+            user.set("email", form.email);
+            user.set("username", form.username);
+            user.set("password", form.password);
+
+            user.signUp(null, {
+                success: function(user) {
+                    self.setUser(user);
+                    q.resolve(user);
+                },
+                error: function(user, error) {
+                    alert("Unable to sign up:  " + error.code + " " + error.message);
+                    q.reject(error);
+                }
+            });
             
             return q.promise;
         }

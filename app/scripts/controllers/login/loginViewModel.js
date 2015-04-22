@@ -3,16 +3,21 @@ angular.module('parkspotyappApp')
 
     var LoginAPI = function() {};
 
+    LoginAPI.prototype.toggleVerified = false;
+
     LoginAPI.prototype.logIn = function(form){
         var self = this;
+
         fetchUser.isVerified(form.username).then(function(result) {
             if (result) {
                 fetchUser.logIn(form.username, form.password).then(function(user) {
                     self.goToUserProfile();
                 });
+            } else {
+                self.toggleVerified = true;
             }
         });
-    }
+    };
 
     LoginAPI.prototype.currentUser = function() {
         fetchUser.userData();

@@ -1,4 +1,5 @@
 <h2>Log in</h2>
+<p ng-if="vm.toggleVerified"><strong>Please verify your email before logging in.</strong></p>
 <form ng-if="!fetchUser.isLoggedIn">
     <p>
         <label for="usernamefield">Username:</label>

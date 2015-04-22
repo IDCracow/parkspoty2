@@ -11,4 +11,5 @@ angular.module('parkspotyappApp')
     .controller('LoginCtrl', function($scope, loginViewModel) {
 
     $scope.vm = loginViewModel;
+
 });
