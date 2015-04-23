@@ -59,13 +59,18 @@ angular
 })
     .run( function($rootScope, $location, fetchUser) {
 
-    // register listener to watch route changes
     $rootScope.$on( "$routeChangeStart", function(event, next, current) {
         if (!fetchUser.isLoggedIn()) {
-            // no logged user, we should be going to #login
             if (next.templateUrl != "views/login.html" && next.templateUrl != "views/register.html" && next.templateUrl != "views/main.html" && next.templateUrl != "views/reset_password.html") {
                 $location.path("/user/login");
             }
+        } else {
+            fetchUser.isAdmin().then(function(result) {
+                if (!result) {
+                    $location.path("/");   
+                }
+            });
+
         }
     });
 });
