@@ -31,7 +31,8 @@
                     <div class="collapse">
 
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="#/">Home</a></li>
+                            <li><a href="#/">Home</a></li>
+                            <li><a ng-href="#/user/profile" ng-if="isLoggedIn()">Profile</a></li>
                             <li>
                                 <a ng-href="#/user/login" ng-if="!isLoggedIn()">Log in</a>
                                 <a ng-click="logOut()" ng-href="#/" ng-if="isLoggedIn()">Log out</a>

@@ -66,11 +66,10 @@ angular
             }
         } else {
             fetchUser.isAdmin().then(function(result) {
-                if (!result) {
+                if (!result && next.templateUrl == "views/admin.html") {
                     $location.path("/");   
                 }
             });
-
         }
     });
 });
