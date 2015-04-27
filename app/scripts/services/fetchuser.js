@@ -87,6 +87,26 @@ angular.module('parkspotyappApp')
             return currUser.get('f_activeInDraw');
         },
         
+        getAllUsersForDraw : function() {
+            var q = $q.defer();
+            
+            var User = Parse.Object.extend("User");
+            var query = new Parse.Query(User);
+            
+            query.equalTo("f_activeInDraw", true);
+            
+            query.find({
+              success: function(results) {
+                q.resolve(results);
+              },
+              error: function(error) {
+                alert("Error: " + error.code + " " + error.message);
+              }
+            });
+            return q.promise;
+        },
+        
+        
         // setting flags        
         setAlertFreeSpotFlag : function(status) {
             currUser.set("f_alertFreeSpot", status);
@@ -102,5 +122,7 @@ angular.module('parkspotyappApp')
             currUser.set("f_activeInDraw", status);
             return this.saveUserData();
         }
+        
+        
     };
 });
