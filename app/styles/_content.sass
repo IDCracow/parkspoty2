@@ -7,10 +7,14 @@ a
   text-decoration: none
 
 .input-field
+  font-family: "BariolRegular", Helvetica, Arial, sans-serif
   background: none
   border: 1px solid #fff
+  border-radius: $borderRadius
   padding: $gutter/2
   color: #fff
+  font-size: 14px
+  outline: none
 
 .brand
   font-size: 24px
@@ -36,7 +40,6 @@ svg
   height: 300px
 
 .splashText
-  font-family: "BariolBold", Helvetica, Arial, sans-serif
   width: 100%
   display: block
   position: absolute
@@ -44,3 +47,9 @@ svg
   color: #fff
   font-size: 3em
   top: 0
+
+.btn
+  font-size: $inputFz
+  &-main
+    background: $mainColor
+    border-radius: $borderRadius
