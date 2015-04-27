@@ -13,32 +13,43 @@ angular.module('parkspotyappApp')
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
-    ]; 
-    //defaults
-    $scope.valTicketsLeft = 12;
-    
+    ];
+
     $scope.currentUser = fetchUser.userData();
     $scope.username = fetchUser.userFirstName();
-    
+
+    if (!$scope.currentUser) {
+        $location.path('#/user/login');
+    };
+
+    $scope.resetPassword = function() {
+      console.log($scope.currentUser);
+    }
+    //defaults
+    $scope.valTicketsLeft = 12;
+
+    $scope.currentUser = fetchUser.userData();
+    $scope.username = fetchUser.userFirstName();
+
     $scope.valFlagActiveInDraw = fetchUser.getActiveInDrawFlag();
     $scope.valFlagDrawRemider = fetchUser.getAlertRowReminderFlag();
     $scope.valFlagSpotNotifer = fetchUser.getAlertFreeSpotFlag();
-    
-    
-    fetchUser.getTicketsLeft().then(function(data) { 
+
+
+    fetchUser.getTicketsLeft().then(function(data) {
          $scope.valTicketsLeft = data;
     });
-     
+
     $scope.changeFlagActiveInDraw = function () {
         fetchUser.setActiveInDrawFlag($scope.valFlagActiveInDraw);
     }
-    
-    $scope.changeFlagDrawRemider = function () {        
+
+    $scope.changeFlagDrawRemider = function () {
         fetchUser.setAlertRowReminderFlag($scope.valFlagDrawRemider);
     }
-    
-    $scope.changeFlagSpotNotifer = function () {        
+
+    $scope.changeFlagSpotNotifer = function () {
         fetchUser.setAlertFreeSpotFlag($scope.valFlagSpotNotifer);
     }
-    
+
   });

@@ -16,43 +16,34 @@
         <!-- endbuild -->
     </head>
     <body ng-app="parkspotyappApp">
-        <!--[if lt IE 7]>
-<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-<![endif]-->
+      <!--[if lt IE 7]>
+          <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+          <![endif]-->
 
         <!-- Add your site or application content here -->
-        <div class="header" ng-controller="headerCtrl">
-            <div class="navbar navbar-default" role="navigation">
-                <div class="container">
-                    <div class="navbar-header">
+        <header class="container-big" ng-controller="headerCtrl">
+            <div role="navigation" class="row">
+                <div class="half">
+                    <nav>
+                        <a href="#/">Home</a>
+                        <a ng-click="logOut()" ng-href="#/" ng-if="isLoggedIn()">Log out</a>
+                    </nav>
 
-                        <a class="navbar-brand" href="#/">parkspotyapp</a>
-                    </div>
+                </div>
 
-                    <div class="collapse">
-
-                        <ul class="nav navbar-nav">
-                            <li class="active"><a href="#/">Home</a></li>
-                            <li>
-                                <a ng-href="#/user/login" ng-if="!isLoggedIn()">Log in</a>
-                                <a ng-click="logOut()" ng-href="#/" ng-if="isLoggedIn()">Log out</a>
-                            </li>
-                        </ul>
-                    </div>
+                <div class="half text-right">
+                  <a class="brand" href="#/">park<span>spoty</span></a>
                 </div>
             </div>
+        </header>
+
+        <div class="container clearfix">
+            <div ng-view="" class="mainview"></div>
         </div>
 
-        <div class="container">
-            <div ng-view=""></div>
-        </div>
-
-        <div class="footer">
-            <div class="container">
-                <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
-            </div>
-        </div>
-
+        <footer class="container-big">
+            <p class="text-center">Parkspotyapp2</p>
+        </footer>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
         <script>
