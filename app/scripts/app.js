@@ -49,6 +49,10 @@ angular
         templateUrl: 'views/reset_password.html',
         controller: 'ResetPasswordCtrl'
     })
+        .when('/reservation', {
+          templateUrl: 'views/reservation.html',
+          controller: 'ReservationCtrl'
+        })
         .otherwise({
         redirectTo: '/'
     });

@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('parkspotyappApp').directive('weatherInfo', function() {
     return {
         restrict: 'E', replace: true,
