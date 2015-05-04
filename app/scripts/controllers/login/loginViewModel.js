@@ -8,15 +8,15 @@ angular.module('parkspotyappApp')
     LoginAPI.prototype.logIn = function(form){
         var self = this;
 
-        fetchUser.isVerified(form.username).then(function(result) {
+        /*fetchUser.isVerified(form.username).then(function(result) {
             if (result) {
-                fetchUser.logIn(form.username, form.password).then(function(user) {
+        */        fetchUser.logIn(form.username, form.password).then(function(user) {
                     self.goToUserProfile();
                 });
-            } else {
+            /*} else {
                 self.toggleVerified = true;
             }
-        });
+        });*/
     };
 
     LoginAPI.prototype.currentUser = function() {
@@ -28,6 +28,13 @@ angular.module('parkspotyappApp')
     LoginAPI.prototype.goToUserProfile = function() {
         $location.path('/user/profile');
     };
+    LoginAPI.prototype.resendVerificationEmail = function(form) {
+        var self = this;
+        
+        fetchUser.resendVerificationEmail(form).then(function(result) {
+            console.log(result);
+        });
+    }
 
     return new LoginAPI();
 });

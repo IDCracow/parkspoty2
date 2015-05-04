@@ -99,7 +99,16 @@ angular.module('parkspotyappApp')
                     q.reject(error);
                 }
             });
-            
+
+            return q.promise;
+        },
+        resendVerificationEmail: function(username) {
+            var q = $q.defer();
+
+            Parse.Cloud.run('resendVerificationEmail', {'username':username}).then(function(result){
+                q.resolve(result);
+            });
+
             return q.promise;
         }
     };

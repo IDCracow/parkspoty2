@@ -59,7 +59,32 @@ Parse.Cloud.define('isVerified', function(request, response) {
             response.success(result[0].attributes.emailVerified);
         },
         error: function(error) {
-            response.success("qwe");
+            response.error(error);
+        }
+    })
+});
+
+//resend confirmation email
+Parse.Cloud.define('resendVerificationEmail', function(request, response) {
+    Parse.Cloud.useMasterKey(); 
+
+    var query = new Parse.Query('User');
+    query.equalTo('username', request.params.username);
+    query.first({
+        success: function(result) {
+            var myEmail = result.getEmail();
+            var fakeMail = 'resendVerificationEmail@infusion.com';
+            result.set('email', fakeMail);
+            result.save(null, {
+                success: function(result) {
+                    result.set('email', myEmail);
+                    result.save();
+                    response.success(myEmail);
+                },
+                error: function(error) {
+
+                }
+            });
         }
     })
 });

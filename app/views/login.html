@@ -1,5 +1,5 @@
 <h2>Log in</h2>
-<p ng-if="vm.toggleVerified"><strong>Please verify your email before logging in.</strong></p>
+
 <form ng-if="!fetchUser.isLoggedIn">
     <p>
         <label for="usernamefield">Username:</label>
@@ -8,6 +8,10 @@
     <p>
         <label for="passwordfield">Password:</label>
         <input type="password" id="passwordfield" name="passwordfield" ng-model="user.password" ng-model-options="{ debounce: 350 }" required />
+    </p>
+    <p>
+        <strong>Please verify your email before logging in.</strong>
+        <button type="button" ng-click="vm.resendVerificationEmail(user.username)">Resend verification email.</button>
     </p>
     <button ng-click="vm.logIn(user)">Log in</button>
     or <a href="#/user/register">Sign up</a>
