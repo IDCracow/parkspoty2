@@ -57,15 +57,15 @@ angular
         redirectTo: '/'
     });
 })
-    .run( function($rootScope, $location, fetchUser) {
+    .run( function($rootScope, $location, user) {
 
     $rootScope.$on( "$routeChangeStart", function(event, next, current) {
-        if (!fetchUser.isLoggedIn()) {
+        if (!user.isLoggedIn()) {
             if (next.templateUrl != "views/login.html" && next.templateUrl != "views/register.html" && next.templateUrl != "views/main.html" && next.templateUrl != "views/reset_password.html") {
                 $location.path("/user/login");
             }
         } else {
-            fetchUser.isAdmin().then(function(result) {
+            user.isAdmin().then(function(result) {
                 if (!result && next.templateUrl == "views/admin.html") {
                     $location.path("/");   
                 }

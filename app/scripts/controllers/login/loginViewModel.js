@@ -1,5 +1,5 @@
 angular.module('parkspotyappApp')
-    .factory('loginViewModel', function($location, fetchUser) {
+    .factory('loginViewModel', function($location, user) {
 
     var LoginAPI = function() {};
 
@@ -8,30 +8,30 @@ angular.module('parkspotyappApp')
     LoginAPI.prototype.logIn = function(form){
         var self = this;
 
-        /*fetchUser.isVerified(form.username).then(function(result) {
+        user.isVerified(form.username).then(function(result) {
             if (result) {
-        */        fetchUser.logIn(form.username, form.password).then(function(user) {
+                user.logIn(form.username, form.password).then(function(user) {
                     self.goToUserProfile();
                 });
-            /*} else {
+            } else {
                 self.toggleVerified = true;
             }
-        });*/
+        });
     };
 
     LoginAPI.prototype.currentUser = function() {
-        fetchUser.userData();
+        user.userData();
     };
     LoginAPI.prototype.isLoggedIn = function() {
-        fetchUser.isLoggedIn();
+        user.isLoggedIn();
     };
     LoginAPI.prototype.goToUserProfile = function() {
         $location.path('/user/profile');
     };
     LoginAPI.prototype.resendVerificationEmail = function(form) {
         var self = this;
-        
-        fetchUser.resendVerificationEmail(form).then(function(result) {
+
+        user.resendVerificationEmail(form).then(function(result) {
             console.log(result);
         });
     }

@@ -32,10 +32,10 @@
 
                         <ul class="nav navbar-nav">
                             <li><a href="#/">Home</a></li>
-                            <li ng-if="isLoggedIn()"><a ng-href="#/user/profile">Profile</a></li>
+                            <li ng-if="vm.isLoggedIn()"><a ng-href="#/user/profile">Profile</a></li>
                             <li>
-                                <a ng-href="#/user/login" ng-if="!isLoggedIn()">Log in</a>
-                                <a ng-click="logOut()" ng-href="#/" ng-if="isLoggedIn()">Log out</a>
+                                <a ng-href="#/user/login" ng-if="!vm.isLoggedIn()">Log in</a>
+                                <a ng-click="vm.logOut()" ng-href="#/" ng-if="vm.isLoggedIn()">Log out</a>
                             </li>
                         </ul>
                     </div>
@@ -91,11 +91,14 @@
         <script src="scripts/controllers/register/register.js"></script>
         <script src="scripts/controllers/login/loginViewModel.js"></script>
         <script src="scripts/controllers/login/login.js"></script>
-        <script src="scripts/controllers/profile.js"></script>
-        <script src="scripts/services/fetchuser.js"></script>
-        <script src="scripts/controllers/header.js"></script>
+        <script src="scripts/controllers/profile/profileViewModel.js"></script>
+        <script src="scripts/controllers/profile/profile.js"></script>
+        <script src="scripts/services/user.js"></script>
+        <script src="scripts/controllers/header/headerViewModel.js"></script>
+        <script src="scripts/controllers/header/header.js"></script>
         <script src="scripts/controllers/resetpassword.js"></script>
-        <script src="scripts/controllers/admin.js"></script>
+        <script src="scripts/controllers/admin/adminViewModel.js"></script>
+        <script src="scripts/controllers/admin/admin.js"></script>
         <!-- endbuild -->
 
 

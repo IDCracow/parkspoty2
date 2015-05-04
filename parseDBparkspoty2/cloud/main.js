@@ -14,7 +14,7 @@ Parse.Cloud.afterSave(Parse.User, function(request) {
     Parse.Cloud.useMasterKey();  
 
     query = new Parse.Query(Parse.Role);
-    if (request.user.attributes.email != "administrator@infusion.com") {
+    if (request.user.attributes.email != "mziolek@infusion.com") {
         query.equalTo("name", "User");
         query.first ( {
             success: function(object) {
@@ -73,6 +73,7 @@ Parse.Cloud.define('resendVerificationEmail', function(request, response) {
     query.first({
         success: function(result) {
             var myEmail = result.getEmail();
+            //fake mail is needed 
             var fakeMail = 'resendVerificationEmail@infusion.com';
             result.set('email', fakeMail);
             result.save(null, {

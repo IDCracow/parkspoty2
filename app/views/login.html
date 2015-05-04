@@ -9,7 +9,7 @@
         <label for="passwordfield">Password:</label>
         <input type="password" id="passwordfield" name="passwordfield" ng-model="user.password" ng-model-options="{ debounce: 350 }" required />
     </p>
-    <p>
+    <p ng-if="vm.toggleVerified">
         <strong>Please verify your email before logging in.</strong>
         <button type="button" ng-click="vm.resendVerificationEmail(user.username)">Resend verification email.</button>
     </p>

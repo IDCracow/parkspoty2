@@ -2,13 +2,13 @@
 
 /**
  * @ngdoc service
- * @name parkspotyappApp.fetchUser
+ * @name parkspotyappApp.user
  * @description
- * # fetchUser
+ * # user
  * Factory in the parkspotyappApp.
  */
 angular.module('parkspotyappApp')
-    .service('fetchUser', function ($q, $location) {
+    .service('user', function ($q, $location) {
 
     var currUser;
     var isLogged;

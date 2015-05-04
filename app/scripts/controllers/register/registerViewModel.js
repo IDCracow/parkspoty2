@@ -1,17 +1,17 @@
 angular.module('parkspotyappApp')
-    .factory('registerViewModel', function($location, fetchUser) {
+    .factory('registerViewModel', function($location, user) {
 
     var RegisterAPI = function() {};
 
     RegisterAPI.prototype.signUp = function(form) {
         var self = this;
-        fetchUser.signUp(form).then(function(user) {
+        user.signUp(form).then(function(user) {
             self.goToLoginPage();
         }); 
     };
 
     RegisterAPI.prototype.currentUser = function() {
-        fetchUser.userData();
+        user.userData();
     };
 
     RegisterAPI.prototype.goToLoginPage = function() {
