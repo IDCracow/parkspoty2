@@ -1,6 +1,6 @@
 //email validation
 Parse.Cloud.beforeSave("_User", function(request, response) {
-    var emailAddress = request.object.get("email");
+    var emailAddress = request.object.get("username");
     var domain = emailAddress.split('@')[1];
     if (domain.toLowerCase() === "infusion.com") {
         response.success();
@@ -14,7 +14,7 @@ Parse.Cloud.afterSave(Parse.User, function(request) {
     Parse.Cloud.useMasterKey();  
 
     query = new Parse.Query(Parse.Role);
-    if (request.user.attributes.email != "mziolek@infusion.com") {
+    if (request.user.attributes.username != "mziolek@infusion.com") {
         query.equalTo("name", "User");
         query.first ( {
             success: function(object) {
@@ -53,7 +53,7 @@ Parse.Cloud.define('isAdmin', function(request, response) {
 //check if user has validated email
 Parse.Cloud.define('isVerified', function(request, response) {
     var query = new Parse.Query("User");
-    query.equalTo('username', request.params.username);
+    query.equalTo('email', request.params.email);
     query.find({
         success: function(result) {
             response.success(result[0].attributes.emailVerified);
@@ -61,7 +61,7 @@ Parse.Cloud.define('isVerified', function(request, response) {
         error: function(error) {
             response.error(error);
         }
-    })
+    });
 });
 
 //resend confirmation email

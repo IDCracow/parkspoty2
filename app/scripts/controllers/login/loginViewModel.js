@@ -8,9 +8,9 @@ angular.module('parkspotyappApp')
     LoginAPI.prototype.logIn = function(form){
         var self = this;
 
-        user.isVerified(form.username).then(function(result) {
+        user.isVerified(form.email).then(function(result) {
             if (result) {
-                user.logIn(form.username, form.password).then(function(user) {
+                user.logIn(form.email, form.password).then(function(user) {
                     self.goToUserProfile();
                 });
             } else {

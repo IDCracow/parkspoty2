@@ -37,7 +37,10 @@ angular.module('parkspotyappApp')
             $location.path('#/');
         },
         userFirstName: function() {
-            return currUser.get('username');
+            return currUser.get('firstName');
+        },
+        userLastName: function() {
+            return currUser.get('lastName');
         },
         resetPassword: function(email) {
             Parse.User.requestPasswordReset(email, {
@@ -57,18 +60,18 @@ angular.module('parkspotyappApp')
 
             return q.promise;
         },
-        isVerified: function(name) {
+        isVerified: function(email) {
             var q = $q.defer();
-            Parse.Cloud.run('isVerified', {'username':name}).then(function(result){
+            Parse.Cloud.run('isVerified', {'email':email}).then(function(result){
                 q.resolve(result);
             });
 
             return q.promise;
         },
-        logIn: function(name, pass) {
+        logIn: function(email, pass) {
             var q = $q.defer();
             var self = this;
-            Parse.User.logIn(name, pass, {
+            Parse.User.logIn(email, pass, {
                 success: function(user) {
                     self.setUser(user);
                     q.resolve(user);
@@ -86,7 +89,9 @@ angular.module('parkspotyappApp')
 
             var user = new Parse.User();
             user.set("email", form.email);
-            user.set("username", form.username);
+            user.set("username", form.email);
+            user.set("firstName", form.firstname);
+            user.set("lastName", form.lastname);
             user.set("password", form.password);
 
             user.signUp(null, {

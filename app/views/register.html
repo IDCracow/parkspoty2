@@ -1,4 +1,4 @@
-<div ng-if="!fetchUser.isLoggedIn">
+<div ng-if="!vm.isLoggedIn">
     <h2>Sign up</h2>
     <form name="registerform">
         <div>
@@ -7,10 +7,16 @@
             <p ng-show="registerform.emailfield.$error.email">This is not a valid email.</p>
         </div>
         <div>
-            <label for="usernamefield">Username:</label>
-            <input type="text" id="usernamefield" name="usernamefield" ng-model="user.username" ng-model-options="{ debounce: 350 }" ng-minlength="3" ng-maxlength="15" required />
-            <p ng-show="registerform.usernamefield.$error.minlength">Username is too short.</p>
-            <p ng-show="registerform.usernamefield.$error.maxlength">Username is too long.</p>
+            <label for="firstnamefield">First name:</label>
+            <input type="text" id="firstnamefield" name="firstnamefield" ng-model="user.firstname" ng-model-options="{ debounce: 350 }" ng-minlength="3" ng-maxlength="15" required />
+            <p ng-show="registerform.firstnamefield.$error.minlength">First name is too short.</p>
+            <p ng-show="registerform.firstnamefield.$error.maxlength">First name is too long.</p>
+        </div>
+        <div>
+            <label for="lastnamefield">Last name:</label>
+            <input type="text" id="lastnamefield" name="lastnamefield" ng-model="user.lastname" ng-model-options="{ debounce: 350 }" ng-minlength="3" ng-maxlength="25" required />
+            <p ng-show="registerform.lastnamefield.$error.minlength">Last name is too short.</p>
+            <p ng-show="registerform.lastnamefield.$error.maxlength">Last name is too long.</p>
         </div>
         <div>
             <label for="passwordfield">Password:</label>

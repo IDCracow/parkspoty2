@@ -10,6 +10,8 @@ angular.module('parkspotyappApp')
         }); 
     };
 
+    RegisterAPI.prototype.isLoggedIn = user.isLoggedIn();
+    
     RegisterAPI.prototype.currentUser = function() {
         user.userData();
     };
