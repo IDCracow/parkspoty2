@@ -42,16 +42,6 @@ angular.module('parkspotyappApp')
         userLastName: function() {
             return currUser.get('lastName');
         },
-        resetPassword: function(email) {
-            Parse.User.requestPasswordReset(email, {
-                success: function() {
-                    console.log('email sent');
-                },
-                error: function(error) {
-                    alert('Error: ' + error.code + ' ' + error.message);
-                }
-            });
-        },
         isAdmin: function() {
             var q = $q.defer();
             Parse.Cloud.run('isAdmin').then(function(result){

@@ -11,7 +11,8 @@
     </p>
     <p ng-if="vm.toggleVerified">
         <strong>Please verify your email before logging in.</strong>
-        <button type="button" ng-click="vm.resendVerificationEmail(user.username)">Resend verification email.</button>
+        <button type="button" ng-click="vm.sendResetEmail(user.email)">Resend verification email.</button>
+        <p type="button" ng-if="vm.resentEmail">Check your email :)</p>
     </p>
     <button ng-click="vm.logIn(user)">Log in</button>
     or <a href="#/user/register">Sign up</a>

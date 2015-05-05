@@ -4,6 +4,7 @@ angular.module('parkspotyappApp')
     var LoginAPI = function() {};
 
     LoginAPI.prototype.toggleVerified = false;
+    LoginAPI.prototype.resentEmail = false;
 
     LoginAPI.prototype.logIn = function(form){
         var self = this;
@@ -28,11 +29,12 @@ angular.module('parkspotyappApp')
     LoginAPI.prototype.goToUserProfile = function() {
         $location.path('/user/profile');
     };
-    LoginAPI.prototype.resendVerificationEmail = function(form) {
+    LoginAPI.prototype.resendVerificationEmail = function(email) {
         var self = this;
-
-        user.resendVerificationEmail(form).then(function(result) {
-            console.log(result);
+        user.resendVerificationEmail(email).then(function(result) {
+            if (result) {
+                self.resentEmail = true;
+            }
         });
     }
 

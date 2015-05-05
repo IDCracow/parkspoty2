@@ -69,6 +69,7 @@ Parse.Cloud.define('resendVerificationEmail', function(request, response) {
     Parse.Cloud.useMasterKey(); 
 
     var query = new Parse.Query('User');
+
     query.equalTo('username', request.params.username);
     query.first({
         success: function(result) {
@@ -80,7 +81,7 @@ Parse.Cloud.define('resendVerificationEmail', function(request, response) {
                 success: function(result) {
                     result.set('email', myEmail);
                     result.save();
-                    response.success(myEmail);
+                    response.success(true);
                 },
                 error: function(error) {
 

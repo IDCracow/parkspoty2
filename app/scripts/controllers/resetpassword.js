@@ -10,7 +10,17 @@
 angular.module('parkspotyappApp')
     .controller('ResetPasswordCtrl', function ($scope, user) {
 
-    $scope.sendResetEmail = function() {                                
-        user.resetPassword($scope.resetPasswordEmail);
+    $scope.resetEmailSent = false;
+    
+    $scope.sendResetEmail = function(email) {               
+        Parse.User.requestPasswordReset(email, {
+            success: function() {
+                $scope.resetEmailSent = true;
+                $scope.$apply();
+            },
+            error: function(error) {
+                alert('Error: ' + error.code + ' ' + error.message);
+            }
+        });
     }
 });
