@@ -49,19 +49,30 @@ angular
         templateUrl: 'views/reset_password.html',
         controller: 'ResetPasswordCtrl'
     })
+        .when('/admin', {
+        templateUrl: 'views/admin.html',
+        controller: 'AdminCtrl'
+    })
         .otherwise({
         redirectTo: '/'
     });
 })
-    .run( function($rootScope, $location, fetchUser) {
+    .run( function($rootScope, $location, user) {
 
-    // register listener to watch route changes
     $rootScope.$on( "$routeChangeStart", function(event, next, current) {
-        if (fetchUser.isLoggedIn() == false) {
-            // no logged user, we should be going to #login
+        if (!user.isLoggedIn()) {
             if (next.templateUrl != "views/login.html" && next.templateUrl != "views/register.html" && next.templateUrl != "views/main.html" && next.templateUrl != "views/reset_password.html") {
                 $location.path("/user/login");
             }
+<<<<<<< HEAD
+=======
+        } else {
+            user.isAdmin().then(function(result) {
+                if (!result && next.templateUrl == "views/admin.html") {
+                    $location.path("/");   
+                }
+            });
+>>>>>>> 7d6addd81305ad4361cf7c21342fd7038e6973bf
         }
     });
 });

@@ -1,23 +1,59 @@
+body
+  font-size: $baseFz
+  font-smooth: antialiased
+
+h1,
 h2
-  font-family: "BariolRegular", Helvetica, Arial, sans-serif
+  margin: 50px 0
+
+h1
+  font-size: $h1Fz
+
+h2
+  font-family: "BariolLight", Helvetica, Arial, sans-serif
   font-weight: normal
+  font-size: $h1Fz/1.5
 
 a
   color: $emergencyColor
   text-decoration: none
 
+span
+  color: #fff
+
+button
+  border: none
+
+svg
+  width: 150px
+  height: 150px
+
 .input-field
+  font-family: "BariolRegular", Helvetica, Arial, sans-serif
   background: none
   border: 1px solid #fff
-  padding: $gutter/2
+  border-radius: $borderRadius
+  padding: $gutter/2 $gutter
   color: #fff
+  outline: none
+  width: 100%
+  font-size: $baseFz
+
+.fz40
+  font-size: 40px
+.fz30
+  font-size: 30px
+.fz22
+  font-size: 22px
+.fz20
+  font-size: 20px
+
+.inline-block
+  display: inline-block
 
 .brand
   font-size: 24px
   color: $emergencyColor
-
-span
-  color: #fff
 
 .text-right
   text-align: right
@@ -31,10 +67,6 @@ span
 .opacity
   opacity: 0.3
 
-svg
-  width: 300px
-  height: 300px
-
 .splashText
   font-family: "BariolBold", Helvetica, Arial, sans-serif
   width: 100%
@@ -44,3 +76,87 @@ svg
   color: #fff
   font-size: 3em
   top: 0
+
+.btn
+  font-family: "BariolRegular", Helvetica, Arial, sans-serif
+  font-size: $inputFz
+  line-height: $inputFz*2
+  outline: none
+  &:hover
+    cursor: pointer
+  &-main
+    background: $mainColor
+    border-radius: $borderRadius
+    color: #fff
+
+.radius
+  border-radius: $borderRadius
+
+.profile-img
+  left: -180px
+  top: 10px
+
+.cbox
+  display: inline-block
+  width: $circleSize
+  height: $circleSize
+  border-radius: $circleSize/2
+  line-height: $circleSize - 3
+  font-size: $circleFz
+  font-weight: bold
+  transition: background 0.2s, box-shadow 1s
+  position: relative
+  &-yellow
+    border: 2px solid $mainColor
+    &.selected
+      background: $mainColor
+
+  &-emergency
+    border: 2px solid $circleEmergencyColor
+    &.selected
+      background: $circleEmergencyColor
+
+  &-regular
+    border: 2px solid $circleRegularColor
+    &.selected
+      background: $circleRegularColor
+
+  &-bool
+    box-shadow: 2px 2px 5px rgba(92, 73, 67, 0.5)
+
+  &:before
+    +my-icon('5')
+    opacity: 0
+    font-size: 10px
+    width: $circleSize - 4
+    height: $circleSize
+    position: absolute
+    top: 0
+    left: 0
+    text-align: center
+  &.selected
+    box-shadow: none
+    &:before
+      opacity: 1
+  input
+    opacity: 0
+
+.list-simple
+  list-style: none
+  padding: 0
+
+.list-separator
+  border-bottom: 1px solid rgba($borderColor, .3)
+  overflow: auto
+  li
+    padding: 0.5em 0
+    border-top: 1px solid rgba($borderColor, .3)
+  span
+    margin-right: 1em
+
+.ico-bell
+  position: absolute
+  margin-left: -25px
+  &:before
+    font-size: 14px
+    +my-icon('2')
