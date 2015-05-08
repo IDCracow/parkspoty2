@@ -8,6 +8,11 @@
  * Controller of the parkspotyappApp
  */
 angular.module('parkspotyappApp')
+<<<<<<< HEAD
   .controller('AboutCtrl', function ($scope) {
+=======
+  .controller('AboutCtrl', function ($scope,weatherService) {
+    
+>>>>>>> master
     
   });
