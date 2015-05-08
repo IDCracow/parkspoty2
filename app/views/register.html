@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <header>
   <div class="profile-img absolute">
     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" width="100" height="100" viewBox="0 0 328 355" enable-background="new 0 0 328 355" xml:space="preserve" class="svg splash-image replaced-svg">
@@ -38,3 +39,40 @@
     </p>
 </form>
 </div>
+=======
+<div ng-if="!vm.isLoggedIn">
+    <h2>Sign up</h2>
+    <form name="registerform">
+        <div>
+            <label for="emailfield">Email:</label>
+            <input type="email" id="emailfield" name="emailfield" ng-model="user.email" ng-model-options="{ debounce: 350 }" required />
+            <p ng-show="registerform.emailfield.$error.email">This is not a valid email.</p>
+        </div>
+        <div>
+            <label for="firstnamefield">First name:</label>
+            <input type="text" id="firstnamefield" name="firstnamefield" ng-model="user.firstname" ng-model-options="{ debounce: 350 }" ng-minlength="3" ng-maxlength="15" required />
+            <p ng-show="registerform.firstnamefield.$error.minlength">First name is too short.</p>
+            <p ng-show="registerform.firstnamefield.$error.maxlength">First name is too long.</p>
+        </div>
+        <div>
+            <label for="lastnamefield">Last name:</label>
+            <input type="text" id="lastnamefield" name="lastnamefield" ng-model="user.lastname" ng-model-options="{ debounce: 350 }" ng-minlength="3" ng-maxlength="25" required />
+            <p ng-show="registerform.lastnamefield.$error.minlength">Last name is too short.</p>
+            <p ng-show="registerform.lastnamefield.$error.maxlength">Last name is too long.</p>
+        </div>
+        <div>
+            <label for="passwordfield">Password:</label>
+            <input type="password" id="passwordfield" name="passwordfield" ng-model="user.password" ng-model-options="{ debounce: 350 }" required />
+        </div>
+        <div>
+            <label for="passwordconfirmationfield">Password confirmation:</label>
+            <input type="password" id="passwordconfirmationfield" name="passwordconfirmationfield" ng-model="user.passwordConfirmation" match= "user.password" ng-model-options="{ debounce: 350 }" required />
+            <p ng-show="registerform.passwordconfirmationfield.$error.match">Fields do not match!</p>
+        </div>
+        <div>
+            <button ng-click="vm.signUp(user)">Sign up</button>
+            or <a href="/#/user/login">Log in</a>
+        </div>
+    </form>
+</div>
+>>>>>>> 7d6addd81305ad4361cf7c21342fd7038e6973bf

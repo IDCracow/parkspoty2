@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <header>
   <div class="profile-img absolute">
     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" width="100" height="100" viewBox="0 0 328 355" enable-background="new 0 0 328 355" xml:space="preserve" class="svg splash-image replaced-svg">
@@ -16,10 +17,19 @@
     <h2 class="no-margin-top">log in using your credentials</h2>
     <p>
         <input placeholder="Username" class="input-field" type="text" id="usernamefield" name="usernamefield" ng-model="user.username" ng-model-options="{ debounce: 350 }" required />
+=======
+<h2>Log in</h2>
+
+<form ng-if="!fetchUser.isLoggedIn">
+    <p>
+        <label for="emailfield">Email:</label>
+        <input type="text" id="emailfield" name="emailfield" ng-model="user.email" ng-model-options="{ debounce: 350 }" required />
+>>>>>>> 7d6addd81305ad4361cf7c21342fd7038e6973bf
     </p>
     <p>
         <input placeholder="Password" class="input-field" type="password" id="passwordfield" name="passwordfield" ng-model="user.password" ng-model-options="{ debounce: 350 }" required />
     </p>
+<<<<<<< HEAD
 
     <button ng-click="logIn(user)" class="btn btn-main radius full-width">Log in</button>
 </form>
@@ -28,3 +38,14 @@
 <footer>
   
 </footer>
+=======
+    <p ng-if="vm.toggleVerified">
+        <strong>Please verify your email before logging in.</strong>
+        <button type="button" ng-click="vm.sendResetEmail(user.email)">Resend verification email.</button>
+        <p type="button" ng-if="vm.resentEmail">Check your email :)</p>
+    </p>
+    <button ng-click="vm.logIn(user)">Log in</button>
+    or <a href="#/user/register">Sign up</a>
+</form>
+<a href="#/user/reset-password">Don't remember your password?</a>
+>>>>>>> 7d6addd81305ad4361cf7c21342fd7038e6973bf
