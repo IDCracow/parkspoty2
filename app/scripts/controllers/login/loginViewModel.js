@@ -31,7 +31,9 @@ angular.module('parkspotyappApp')
     };
     LoginAPI.prototype.resendVerificationEmail = function(email) {
         var self = this;
+        console.log('qwe '+email);
         user.resendVerificationEmail(email).then(function(result) {
+            console.log(result);
             if (result) {
                 self.resentEmail = true;
             }

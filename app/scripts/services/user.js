@@ -99,7 +99,8 @@ angular.module('parkspotyappApp')
         },
         resendVerificationEmail: function(username) {
             var q = $q.defer();
-
+            
+            console.log('asd '+ username);
             Parse.Cloud.run('resendVerificationEmail', {'username':username}).then(function(result){
                 q.resolve(result);
             });

@@ -64,15 +64,12 @@ angular
             if (next.templateUrl != "views/login.html" && next.templateUrl != "views/register.html" && next.templateUrl != "views/main.html" && next.templateUrl != "views/reset_password.html") {
                 $location.path("/user/login");
             }
-<<<<<<< HEAD
-=======
         } else {
             user.isAdmin().then(function(result) {
                 if (!result && next.templateUrl == "views/admin.html") {
                     $location.path("/");   
                 }
             });
->>>>>>> 7d6addd81305ad4361cf7c21342fd7038e6973bf
         }
     });
 });
