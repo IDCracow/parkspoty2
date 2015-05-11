@@ -26,12 +26,11 @@
         <button ng-click="vm.logIn(user)" class="btn btn-main radius full-width">Log in</button>
 
         <div ng-if="vm.toggleVerified">
-            <strong>Please verify your email before logging in.</strong>
-            <button type="button" ng-click="vm.resendVerificationEmail(user.email)">Resend verification email.</button>
+            <p class="alert"><strong>Please verify your email before logging in.</strong></p>
+            <button class="btn btn-alert radius" type="button" ng-click="vm.resendVerificationEmail(user.email)">Resend verification email.</button>
             <p ng-if="vm.resentEmail">Check your email :)</p>
         </div>
-        <button ng-click="vm.logIn(user)">Log in</button>
-        or <a href="#/user/register">Sign up</a>
+        <p>or <a href="#/user/register">Sign up</a></p>
     </form>
     <a href="#/user/reset-password">Don't remember your password?</a>
 </div>

@@ -39,6 +39,14 @@ svg
   width: 100%
   font-size: $baseFz
 
+.input-field-half
+  display: inline-block
+  width: auto
+  vertical-align: top
+
+.float-right
+  float: right
+
 .fz40
   font-size: 40px
 .fz30
@@ -88,7 +96,15 @@ svg
     background: $mainColor
     border-radius: $borderRadius
     color: #fff
-
+  &-alert
+    background: $circleEmergencyColor
+    padding: 0 1em
+    color: #fff
+  &:disabled
+    opacity: .5
+    &:hover
+      cursor: default
+    
 .radius
   border-radius: $borderRadius
 
@@ -160,3 +176,6 @@ svg
   &:before
     font-size: 14px
     +my-icon('2')
+
+.alert 
+  color: $circleEmergencyColor

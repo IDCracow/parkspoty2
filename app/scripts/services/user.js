@@ -89,8 +89,7 @@ angular.module('parkspotyappApp')
                     self.setUser(user);
                     q.resolve(user);
                 },
-                error: function(user, error) {
-                    alert("Unable to sign up:  " + error.code + " " + error.message);
+                error: function(error) {
                     q.reject(error);
                 }
             });
@@ -100,7 +99,6 @@ angular.module('parkspotyappApp')
         resendVerificationEmail: function(username) {
             var q = $q.defer();
             
-            console.log('asd '+ username);
             Parse.Cloud.run('resendVerificationEmail', {'username':username}).then(function(result){
                 q.resolve(result);
             });

@@ -7,11 +7,13 @@ angular.module('parkspotyappApp')
         var self = this;
         user.signUp(form).then(function(user) {
             self.goToLoginPage();
+        }, function(error) {
+            self.formError = 'Email ' + error.getEmail() + '  is already taken'; 
         }); 
     };
 
     RegisterAPI.prototype.isLoggedIn = user.isLoggedIn();
-    
+
     RegisterAPI.prototype.currentUser = function() {
         user.userData();
     };
