@@ -23,17 +23,17 @@
         <!-- Add your site or application content here -->
         <header class="container-big absolute" ng-controller="headerCtrl">
             <div role="navigation" class="row">
+                <div class="half"></div>
                 <div class="half text-right">
                   <a class="brand" href="#/">park<span>spoty</span></a>
-                        <ul class="nav navbar-nav">
-                            <li><a href="#/">Home</a></li>
-                            <li ng-if="vm.isLoggedIn()"><a ng-href="#/user/profile">Profile</a></li>
-                            <li>
-                                <a ng-href="#/user/login" ng-if="!vm.isLoggedIn()">Log in</a>
-                                <a ng-click="vm.logOut()" ng-href="#/" ng-if="vm.isLoggedIn()">Log out</a>
-                            </li>
-                        </ul>
-                    </div>
+
+                  <nav>
+                    <a href="#/">Home</a>
+                    <a ng-href="#/user/profile" ng-if="vm.isLoggedIn()">Profile</a>
+                    <a ng-href="#/user/login" ng-if="!vm.isLoggedIn()">Log in</a>
+                    <a ng-click="vm.logOut()" ng-href="#/" ng-if="vm.isLoggedIn()">Log out</a>
+                  </nav>
+                </div>
 
                 </div>
             </div>

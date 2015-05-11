@@ -16,7 +16,7 @@
         <p ng-if="vm.formError" class="alert">{{vm.formError}}</p>
         <div>
             <p>
-                <input class="input-field" type="email" id="emailfield" placeholder="email" name="emailfield" ng-model="user.email" ng-model-options="{ debounce: 350 }" required />
+                <input class="input-field" type="email" id="emailfield" placeholder="Email" name="emailfield" ng-model="user.email" ng-model-options="{ debounce: 350 }" required />
             </p>
             <p class="alert" ng-show="registerform.emailfield.$error.email">This is not a valid email.</p>
         </div>
@@ -34,12 +34,12 @@
         </div>
         <div>
             <p>
-                <input class="input-field" type="password" id="passwordfield" placeholder="password" name="passwordfield" ng-model="user.password" ng-model-options="{ debounce: 350 }" required />
+                <input class="input-field" type="password" id="passwordfield" placeholder="Password" name="passwordfield" ng-model="user.password" ng-model-options="{ debounce: 350 }" required />
             </p>
         </div>
         <div>
             <p>
-                <input class="input-field" type="password" id="passwordconfirmationfield" placeholder="repeat password" name="passwordconfirmationfield" ng-model="user.passwordConfirmation" match= "user.password" ng-model-options="{ debounce: 350 }" required />
+                <input class="input-field" type="password" id="passwordconfirmationfield" placeholder="Repeat password" name="passwordconfirmationfield" ng-model="user.passwordConfirmation" match= "user.password" ng-model-options="{ debounce: 350 }" required />
             </p>
             <p class="alert" ng-show="registerform.passwordconfirmationfield.$error.match">Fields do not match!</p>
         </div>
