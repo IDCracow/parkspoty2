@@ -21,18 +21,20 @@
           <![endif]-->
 
         <!-- Add your site or application content here -->
-        <header class="container-big" ng-controller="headerCtrl">
+        <header class="container-big absolute" ng-controller="headerCtrl">
             <div role="navigation" class="row">
-                <div class="half">
-                    <nav>
-                        <a href="#/">Home</a>
-                        <a ng-click="logOut()" ng-href="#/" ng-if="isLoggedIn()">Log out</a>
-                    </nav>
-
-                </div>
-
+                <div class="half"></div>
                 <div class="half text-right">
                   <a class="brand" href="#/">park<span>spoty</span></a>
+
+                  <nav>
+                    <a href="#/">Home</a>
+                    <a ng-href="#/user/profile" ng-if="vm.isLoggedIn()">Profile</a>
+                    <a ng-href="#/user/login" ng-if="!vm.isLoggedIn()">Log in</a>
+                    <a ng-click="vm.logOut()" ng-href="#/" ng-if="vm.isLoggedIn()">Log out</a>
+                  </nav>
+                </div>
+
                 </div>
             </div>
         </header>
@@ -41,9 +43,7 @@
             <div ng-view="" class="mainview"></div>
         </div>
 
-        <footer class="container-big">
-            <p class="text-center">Parkspotyapp2</p>
-        </footer>
+        <footer class="container-big sticked"><p class="text-center">Parkspotyapp2</p></footer>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
         <script>
@@ -80,19 +80,24 @@
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/about.js"></script>
-        <script src="scripts/controllers/register.js"></script>
-        <script src="scripts/controllers/login.js"></script>
-        <script src="scripts/controllers/profile.js"></script>
-        <script src="scripts/services/fetchuser.js"></script>
+        <script src="scripts/controllers/register/registerViewModel.js"></script>
+        <script src="scripts/controllers/register/register.js"></script>
+        <script src="scripts/controllers/login/loginViewModel.js"></script>
+        <script src="scripts/controllers/login/login.js"></script>
+        <script src="scripts/controllers/profile/profileViewModel.js"></script>
+        <script src="scripts/controllers/profile/profile.js"></script>
+        <script src="scripts/services/user.js"></script>
+        <script src="scripts/controllers/header/headerViewModel.js"></script>
+        <script src="scripts/controllers/header/header.js"></script>
         <script src="scripts/services/weather.js"></script>
         <script src="scripts/directives/weatherDirective.js"></script>
         <script src="scripts/directives/clockDirective.js"></script>
-        <script src="scripts/controllers/header.js"></script>
         <script src="scripts/controllers/resetpassword.js"></script>
+        <script src="scripts/controllers/admin/adminViewModel.js"></script>
+        <script src="scripts/controllers/admin/admin.js"></script>
+        <!-- endbuild -->
         <script src="scripts/controllers/adminpanel.js"></script>
         <script src="scripts/services/reservation.js"></script>
-        <!-- endbuild -->
-
 
     </body>
 </html>
