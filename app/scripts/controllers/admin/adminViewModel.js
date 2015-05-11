@@ -1,5 +1,5 @@
 angular.module('parkspotyappApp')
-    .factory('adminViewModel', function($location, user) {
+    .factory('adminViewModel', function($location, user, Reservation) {
 
     var AdminAPI = function() {};
 
@@ -10,6 +10,11 @@ angular.module('parkspotyappApp')
             self.isAdmin = result;
         });
 
+    } 
+    
+    AdminAPI.prototype.drawSpots = function() {
+        var self = this;
+        Reservation.doDraw();
     }
 
     return new AdminAPI();
