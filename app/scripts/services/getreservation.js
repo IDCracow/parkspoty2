@@ -2,7 +2,7 @@
 
 
 angular.module('parkspotyappApp')
-    .service('getreservation', function () {
+    .service('getreservation', function ($q) {
         return {
         getReservation: function (date) {
             
@@ -15,13 +15,19 @@ angular.module('parkspotyappApp')
 					query = new Parse.Query(Reservation);
 					query.equalTo("date", today);
 
-            query.find({
-              success: function(results) {
-                 return results;
-              },
-              error: function(error) {
-              }
+            var q = $q.defer();
+//            query.find({
+//              success: function(results) {
+//                 return results;
+//              },
+//              error: function(error) {
+//              }
+//            });
+            
+            query.find().then(function(results){
+                q.resolve(results);
             });
+            return q.promise;
         }
     };  
 });
