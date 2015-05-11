@@ -84,21 +84,21 @@ angular.module('parkspotyappApp')
             user.set("lastName", form.lastname);
             user.set("password", form.password);
 
-            user.signUp(null, {
-                success: function(user) {
-                    self.setUser(user);
-                    q.resolve(user);
-                },
-                error: function(error) {
-                    q.reject(error);
-                }
-            });
-
+                user.signUp(null, {
+                    success: function(user) {
+                        self.setUser(user);
+                        q.resolve(user);
+                    },
+                    error: function(user, error) {
+                        q.reject(error);
+                    }
+                })
+            
             return q.promise;
         },
         resendVerificationEmail: function(username) {
             var q = $q.defer();
-            
+
             Parse.Cloud.run('resendVerificationEmail', {'username':username}).then(function(result){
                 q.resolve(result);
             });
