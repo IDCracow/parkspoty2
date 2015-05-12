@@ -8,7 +8,7 @@
  * Factory in the parkspotyappApp.
  */
 angular.module('parkspotyappApp')
-    .service('user', function ($q, $location) {
+    .service('user', function ($q, $location, $rootScope) {
 
     var currUser;
     var isLogged;
@@ -43,30 +43,37 @@ angular.module('parkspotyappApp')
             return currUser.get('lastName');
         },
         isAdmin: function() {
+            $rootScope.setLoading();
             var q = $q.defer();
             Parse.Cloud.run('isAdmin').then(function(result){
+                $rootScope.unsetLoading();
                 q.resolve(result);
             });
 
             return q.promise;
         },
         isVerified: function(email) {
+            $rootScope.setLoading();
             var q = $q.defer();
             Parse.Cloud.run('isVerified', {'email':email}).then(function(result){
+                $rootScope.unsetLoading();
                 q.resolve(result);
             });
 
             return q.promise;
         },
         logIn: function(email, pass) {
+            $rootScope.setLoading();
             var q = $q.defer();
             var self = this;
             Parse.User.logIn(email, pass, {
                 success: function(user) {
+                    $rootScope.unsetLoading();
                     self.setUser(user);
                     q.resolve(user);
                 },
                 error: function(error) {
+                    $rootScope.unsetLoading();
                     q.reject(error)
                 }
             });
@@ -74,32 +81,40 @@ angular.module('parkspotyappApp')
             return q.promise;
         },
         signUp: function(form) {
-            var q = $q.defer();
-            var self = this;
+            if (form.email != '' && form.email != null && form.firstname != '' && form.firstname != null && form.lastname != '' && form.lastname != null && form.password != '' && form.password != null ) {
+                $rootScope.setLoading();
 
-            var user = new Parse.User();
-            user.set("email", form.email);
-            user.set("username", form.email);
-            user.set("firstName", form.firstname);
-            user.set("lastName", form.lastname);
-            user.set("password", form.password);
+                var q = $q.defer();
+                var self = this;
 
-                user.signUp(null, {
-                    success: function(user) {
-                        self.setUser(user);
-                        q.resolve(user);
-                    },
-                    error: function(user, error) {
-                        q.reject(error);
-                    }
-                })
-            
-            return q.promise;
+                var user = new Parse.User();
+                user.set("email", form.email);
+                user.set("username", form.email);
+                user.set("firstName", form.firstname);
+                user.set("lastName", form.lastname);
+                user.set("password", form.password);
+
+                    user.signUp(null, {
+                        success: function(user) {
+                            $rootScope.unsetLoading();
+                            self.setUser(user);
+                            q.resolve(user);
+                        },
+                        error: function(user, error) {
+                            $rootScope.unsetLoading();
+                            q.reject(error);
+                        }
+                    })
+
+                return q.promise;
+            }
         },
         resendVerificationEmail: function(username) {
+            $rootScope.setLoading();
             var q = $q.defer();
 
             Parse.Cloud.run('resendVerificationEmail', {'username':username}).then(function(result){
+                $rootScope.unsetLoading();
                 q.resolve(result);
             });
 

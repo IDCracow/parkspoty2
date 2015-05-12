@@ -5,24 +5,26 @@ angular.module('parkspotyappApp')
 
     RegisterAPI.prototype.signUp = function(form) {
         var self = this;
-        user.signUp(form).then(function(user) {
-            self.goToLoginPage();
-        }, function(error) {
-            switch(error.code) {
-                case 142:
-                    self.formError = error.message;
-                    break;
-                case -1:
-                    self.formError = error.message;
-                    break;
-                case 202: 
-                    self.formError = error.message.substring(8); 
-                    break;
-                default: 
-                    self.formError = 'Error occured. Please try again.';
-                    break;
-            }
-        });
+        if (form) {
+            user.signUp(form).then(function(user) {
+                self.goToLoginPage();
+            }, function(error) {
+                switch(error.code) {
+                    case 142:
+                        self.formError = error.message;
+                        break;
+                    case -1:
+                        self.formError = error.message;
+                        break;
+                    case 202: 
+                        self.formError = error.message.substring(8); 
+                        break;
+                    default: 
+                        self.formError = 'Error occured. Please try again.';
+                        break;
+                }
+            });
+        }
     };
 
     RegisterAPI.prototype.isLoggedIn = user.isLoggedIn();
