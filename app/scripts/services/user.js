@@ -8,11 +8,7 @@
  * Factory in the parkspotyappApp.
  */
 angular.module('parkspotyappApp')
-<<<<<<< HEAD
-    .service('user', function ($q, $location, $http) {
-=======
     .service('user', function ($q, $location, $rootScope) {
->>>>>>> master
 
     var currUser;
     var isLogged;
