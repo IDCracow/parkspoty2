@@ -8,6 +8,7 @@
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <!-- build:css(.) styles/vendor.css -->
         <!-- bower:css -->
+        <link rel="stylesheet" href="bower_components/loaders.css/loaders.css" />
         <!-- endbower -->
         <!-- endbuild -->
         <!-- build:css(.tmp) styles/main.css -->
@@ -15,17 +16,18 @@
         <link rel="stylesheet" href="styles/weather_font.css">
         <!-- endbuild -->
     </head>
-    <body ng-app="parkspotyappApp">
-      <!--[if lt IE 7]>
-          <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-          <![endif]-->
+    <body ng-app="parkspotyappApp" ng-controller="MainCtrl">
+        <!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
 
         <!-- Add your site or application content here -->
         <header class="container-big absolute" ng-controller="headerCtrl">
             <div role="navigation" class="row">
                 <div class="half"></div>
                 <div class="half text-right">
-                  <a class="brand" href="#/">park<span>spoty</span></a>
+                    <a class="brand" href="#/">park<span>spoty</span></a>
+
 
                   <nav>
                     <a href="#/">Home</a>
@@ -38,66 +40,71 @@
                   <weather-info></weather-info>
                 </div>
 
-                </div>
+            </div>
             </div>
         </header>
 
-        <div class="container clearfix">
-            <div ng-view="" class="mainview"></div>
+    <div class="container clearfix">
+        <div ng-view="" class="mainview"></div>
+    </div>
+
+    <footer class="container-big sticked"><p class="text-center">Parkspotyapp2</p></footer>
+
+    <div id="loader" ng-show="isViewLoading">
+        <div class="loader-inner ball-spin-fade-loader">
+            <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
         </div>
+    </div>
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+    <script>
+        !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
+            (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
+            r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
+                                }(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-        <footer class="container-big sticked"><p class="text-center">Parkspotyapp2</p></footer>
+        ga('create', 'UA-XXXXX-X');
+        ga('send', 'pageview');
+    </script>
 
-        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-        <script>
-            !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
-                (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
-                r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
-                                    }(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    <!-- parse.com -->
+    <script src="https://www.parsecdn.com/js/parse-1.4.2.min.js"></script>
+    <!-- //parse.com -->
 
-            ga('create', 'UA-XXXXX-X');
-            ga('send', 'pageview');
-        </script>
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-validation-match/dist/angular-input-match.min.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
 
-        <!-- parse.com -->
-        <script src="https://www.parsecdn.com/js/parse-1.4.2.min.js"></script>
-        <!-- //parse.com -->
-
-        <!-- build:js(.) scripts/vendor.js -->
-        <!-- bower:js -->
-        <script src="bower_components/angular/angular.js"></script>
-        <script src="bower_components/angular-animate/angular-animate.js"></script>
-        <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-        <script src="bower_components/angular-messages/angular-messages.js"></script>
-        <script src="bower_components/angular-resource/angular-resource.js"></script>
-        <script src="bower_components/angular-route/angular-route.js"></script>
-        <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-        <script src="bower_components/angular-touch/angular-touch.js"></script>
-        <script src="bower_components/angular-validation-match/dist/angular-input-match.min.js"></script>
-        <script src="bower_components/moment/moment.js"></script>
-        <!-- endbower -->
-        <!-- endbuild -->
-
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/about.js"></script>
-        <script src="scripts/controllers/register/registerViewModel.js"></script>
-        <script src="scripts/controllers/register/register.js"></script>
-        <script src="scripts/controllers/login/loginViewModel.js"></script>
-        <script src="scripts/controllers/login/login.js"></script>
-        <script src="scripts/controllers/profile/profileViewModel.js"></script>
-        <script src="scripts/controllers/profile/profile.js"></script>
-        <script src="scripts/services/user.js"></script>
-        <script src="scripts/controllers/header/headerViewModel.js"></script>
-        <script src="scripts/controllers/header/header.js"></script>
-        <script src="scripts/services/weather.js"></script>
-        <script src="scripts/directives/weatherDirective.js"></script>
-        <script src="scripts/directives/clockDirective.js"></script>
-        <script src="scripts/controllers/resetpassword.js"></script>
-        <script src="scripts/controllers/admin/adminViewModel.js"></script>
-        <script src="scripts/controllers/admin/admin.js"></script>
-        <!-- endbuild -->
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/about.js"></script>
+    <script src="scripts/controllers/register/registerViewModel.js"></script>
+    <script src="scripts/controllers/register/register.js"></script>
+    <script src="scripts/controllers/login/loginViewModel.js"></script>
+    <script src="scripts/controllers/login/login.js"></script>
+    <script src="scripts/controllers/profile/profileViewModel.js"></script>
+    <script src="scripts/controllers/profile/profile.js"></script>
+    <script src="scripts/services/user.js"></script>
+    <script src="scripts/controllers/header/headerViewModel.js"></script>
+    <script src="scripts/controllers/header/header.js"></script>
+    <script src="scripts/services/weather.js"></script>
+    <script src="scripts/directives/weatherDirective.js"></script>
+    <script src="scripts/directives/clockDirective.js"></script>
+    <script src="scripts/controllers/resetpassword.js"></script>
+    <script src="scripts/controllers/admin/adminViewModel.js"></script>
+    <script src="scripts/controllers/admin/admin.js"></script>
+    <!-- endbuild -->
 
 
     </body>

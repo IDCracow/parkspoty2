@@ -8,6 +8,13 @@
  * Controller of the parkspotyappApp
  */
 angular.module('parkspotyappApp')
-  .controller('MainCtrl', function ($scope) {
-    
+  .controller('MainCtrl', function ($rootScope) {
+    $rootScope.isViewLoading = false;
+    // loading animation
+    $rootScope.setLoading = function() {
+        $rootScope.isViewLoading = true;
+    };
+    $rootScope.unsetLoading = function() {
+        $rootScope.isViewLoading = false;
+    };
   });

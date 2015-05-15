@@ -1,23 +1,26 @@
 angular.module('parkspotyappApp')
-    .factory('loginViewModel', function($location, user) {
+    .factory('loginViewModel', function($location, user, $rootScope) {
 
     var LoginAPI = function() {};
 
     LoginAPI.prototype.toggleVerified = false;
     LoginAPI.prototype.resentEmail = false;
 
-    LoginAPI.prototype.logIn = function(form){
-        var self = this;
-
-        user.isVerified(form.email).then(function(result) {
-            if (result) {
-                user.logIn(form.email, form.password).then(function(user) {
-                    self.goToUserProfile();
-                });
-            } else {
-                self.toggleVerified = true;
-            }
-        });
+    LoginAPI.prototype.logIn = function(form) {
+        if (form) {
+            var self = this;
+            user.isVerified(form.email).then(function(result) {
+                if (result) {
+                    user.logIn(form.email, form.password).then(function(user) {
+                        $rootScope.unsetLoading();
+                        self.goToUserProfile();
+                    });
+                } else {
+                    $rootScope.unsetLoading();
+                    self.toggleVerified = true;
+                }
+            });
+        }
     };
 
     LoginAPI.prototype.currentUser = function() {
