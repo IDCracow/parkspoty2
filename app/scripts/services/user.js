@@ -8,7 +8,7 @@
  * Factory in the parkspotyappApp.
  */
 angular.module('parkspotyappApp')
-    .service('user', function ($q, $location) {
+    .service('user', function ($q, $location, $http) {
 
     var currUser;
     var isLogged;
@@ -21,7 +21,7 @@ angular.module('parkspotyappApp')
             return currUser;
         },
         setUser: function(user) {
-            currUser = user;    
+            currUser = user;
         },
         isLoggedIn: function() {
             if (currUser) {
@@ -98,7 +98,7 @@ angular.module('parkspotyappApp')
         },
         resendVerificationEmail: function(username) {
             var q = $q.defer();
-            
+
             Parse.Cloud.run('resendVerificationEmail', {'username':username}).then(function(result){
                 q.resolve(result);
             });
