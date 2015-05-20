@@ -12,7 +12,7 @@
 
 <div ng-if="!vm.isLoggedIn" class="row">
     <h2>Sign up</h2>
-    <form name="registerform" class="half">
+    <form name="registerform" class="half" novalidate>
         <p ng-if="vm.formError" class="alert">{{vm.formError}}</p>
         <div>
             <p>

@@ -12,11 +12,9 @@ angular.module('parkspotyappApp')
         user.sendResetEmail(email).then(function(result) {
             self.resetEmailSent = true;
             self.errorMessage = false;
-            console.log(result);
         }, function(error) {
             var errorFirstLetterUppercase = error.substr(0, 1).toUpperCase() + error.substr(1);
             self.errorMessage = errorFirstLetterUppercase;
-            console.log(errorFirstLetterUppercase);
         });
     }
 
