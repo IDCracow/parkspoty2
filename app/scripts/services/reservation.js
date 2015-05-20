@@ -49,7 +49,16 @@ angular.module('parkspotyappApp')
                 query.find({
                   success: function(user) {
                     user.set('spotCurrent', listOfWinners[i].spotname);
-                    
+                    user.save(null, {
+                      success: function(user) {
+                        // TODO
+                        // - show notification in UI  (also error message)                
+                      },
+                      error: function(error) {
+                            // Show the error message somewhere
+                            alert("Error: " + error.code + " " + error.message);
+                      }
+                    });
                   }
                 });
             }
