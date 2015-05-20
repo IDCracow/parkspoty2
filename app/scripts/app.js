@@ -51,7 +51,11 @@ angular
         .when('/admin', {
         templateUrl: 'views/admin.html',
         controller: 'AdminCtrl'
-    })
+        })
+        .when('/adminpanel', {
+          templateUrl: 'views/adminpanel.html',
+          controller: 'AdminpanelCtrl'
+		})
         .otherwise({
         redirectTo: '/'
     });
