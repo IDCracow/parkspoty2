@@ -5,6 +5,7 @@ angular.module('parkspotyappApp')
 
     LoginAPI.prototype.toggleVerified = false;
     LoginAPI.prototype.resentEmail = false;
+    LoginAPI.prototype.errorMessage = false;
 
     LoginAPI.prototype.logIn = function(form) {
         if (form) {
@@ -13,12 +14,18 @@ angular.module('parkspotyappApp')
                 if (result) {
                     user.logIn(form.email, form.password).then(function(user) {
                         $rootScope.unsetLoading();
+                        self.errorMessage = false;
                         self.goToUserProfile();
+                    }, function(error) {
+                        self.errorMessage = error;
                     });
                 } else {
                     $rootScope.unsetLoading();
                     self.toggleVerified = true;
                 }
+            }, function(error) {
+                $rootScope.unsetLoading();
+                self.toggleVerified = true;
             });
         }
     };

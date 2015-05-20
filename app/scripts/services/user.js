@@ -58,6 +58,10 @@ angular.module('parkspotyappApp')
             Parse.Cloud.run('isVerified', {'email':email}).then(function(result){
                 $rootScope.unsetLoading();
                 q.resolve(result);
+            }, function(error) {
+                $rootScope.unsetLoading();
+                q.reject(error.message);
+                console.log(error.message)
             });
 
             return q.promise;
@@ -79,17 +83,14 @@ angular.module('parkspotyappApp')
             $rootScope.setLoading();
             var q = $q.defer();
             var self = this;
-            Parse.User.logIn(email, pass, {
-                success: function(user) {
+            Parse.User.logIn(email, pass).then(function(result) {
                     $rootScope.unsetLoading();
-                    self.setUser(user);
-                    q.resolve(user);
-                },
-                error: function(error) {
+                    self.setUser(result);
+                    q.resolve(result);
+                }, function(error) {
                     $rootScope.unsetLoading();
-                    q.reject(error)
-                }
-            });
+                    q.reject(error.message);
+                });
 
             return q.promise;
         },
