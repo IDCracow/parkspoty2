@@ -12,6 +12,8 @@ angular.module('parkspotyappApp')
 
     $scope.vm = profileViewModel;
     $scope.items = [ 'one', 'one', 'one' ];
+    var date = moment();
+    $scope.date = date.format("dddd, Do MMMM");
 
     $scope.addPoint = function() {
       $scope.items.push('one');
@@ -21,5 +23,15 @@ angular.module('parkspotyappApp')
     $scope.removePoint = function() {
       $scope.items.pop();
       return false;
+    },
+
+    $scope.next = function() {
+      date.add(1, 'day');
+      $scope.date = date.format("dddd, Do MMMM");
+    },
+
+    $scope.prev = function() {
+        date.subtract(1, 'day');
+        $scope.date = date.format("dddd, Do MMMM");
     }
 });
