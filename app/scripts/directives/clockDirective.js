@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('parkspotyappApp').directive('clock', function() {
     return {
         restrict: 'E', replace: true,
