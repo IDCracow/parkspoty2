@@ -62,6 +62,19 @@ angular.module('parkspotyappApp')
 
             return q.promise;
         },
+        sendResetEmail: function(email) {     
+            $rootScope.setLoading();
+            var q = $q.defer();
+            Parse.User.requestPasswordReset(email).then(function(result) {
+                $rootScope.unsetLoading();
+                q.resolve(result);
+            }, function(error) {
+                $rootScope.unsetLoading();
+                q.reject(error.message);
+            });
+            
+            return q.promise;
+        },
         logIn: function(email, pass) {
             $rootScope.setLoading();
             var q = $q.defer();
@@ -94,17 +107,17 @@ angular.module('parkspotyappApp')
                 user.set("lastName", form.lastname);
                 user.set("password", form.password);
 
-                    user.signUp(null, {
-                        success: function(user) {
-                            $rootScope.unsetLoading();
-                            self.setUser(user);
-                            q.resolve(user);
-                        },
-                        error: function(user, error) {
-                            $rootScope.unsetLoading();
-                            q.reject(error);
-                        }
-                    })
+                user.signUp(null, {
+                    success: function(user) {
+                        $rootScope.unsetLoading();
+                        self.setUser(user);
+                        q.resolve(user);
+                    },
+                    error: function(user, error) {
+                        $rootScope.unsetLoading();
+                        q.reject(error);
+                    }
+                })
 
                 return q.promise;
             }
