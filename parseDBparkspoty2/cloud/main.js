@@ -1,3 +1,5 @@
+var _ = require('underscore');
+
 //email validation
 Parse.Cloud.beforeSave("_User", function(request, response) {
     var emailAddress = request.object.get("username");
@@ -89,4 +91,33 @@ Parse.Cloud.define('resendVerificationEmail', function(request, response) {
             });
         }
     })
+});
+
+// clear currentSpot fields on user table
+Parse.Cloud.define('clearAssignedSpotsFromUsers', function(request, response){
+   Parse.Cloud.useMasterKey();
+    
+    var User = Parse.Object.extend("User");
+    var query = new Parse.Query(User);
+    query.notEqualTo("spotCurrent", null); 
+
+    query.find({
+      success: function(results) {
+        _.each(results, function(user){ 
+               user.set('spotCurrent', null);
+               user.save({
+                   success: function(result) {
+                       response.success(result);
+                   },
+                   error:function(error) {
+                       response.error(error);
+                   }
+               })                                 
+        })
+        response.success(results);
+      },
+      error: function(error) {          
+        response.error(error.code); 
+      }
+    }); 
 });

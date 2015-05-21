@@ -29,7 +29,7 @@ angular.module('parkspotyappApp')
         
         // it will return array with winners (usernames)
         drawSpots : function (drawTable, avaiableParkSpots) {
-            console.log('draw spots');
+            console.log('draw spots', avaiableParkSpots);
             var listOfWinners = [];
             for(var i = 0; i < avaiableParkSpots.length; i++) {  
                 drawTable = _.shuffle(drawTable);
@@ -78,9 +78,14 @@ angular.module('parkspotyappApp')
                  self.winners = self.drawSpots(drawTable, self.availbleSpots);
                  console.log('winners', self.winners);
             }))
-            .then(function() {
-                  console.log('add to database');
-            });
+            .then(this.clearAssignedSpots().then(function(){
+                
+                // add to database;
+            }));
+        },
+        
+        clearAssignedSpots : function () {
+            return Parse.Cloud.run('clearAssignedSpotsFromUsers');            
         }
     }
     
