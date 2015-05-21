@@ -16,35 +16,35 @@
         <p ng-if="vm.formError" class="alert">{{vm.formError}}</p>
         <div>
             <p>
-                <input class="input-field" type="email" id="emailfield" placeholder="Email" name="emailfield" ng-model="user.email" ng-model-options="{ updateOn: 'blur' }" required />
+                <input class="input-field" type="email" id="emailfield" placeholder="Email" name="emailfield" ng-model="user.email" ng-model-options="{ updateOn: 'blur' }" required ng-disabled="isViewLoading"  />
             </p>
             <p class="alert" ng-show="registerform.emailfield.$error.email">This is not a valid email.</p>
         </div>
         <div>
             <div class="input-field-half">
-                <input class="input-field" type="text" id="firstnamefield" placeholder="First name" name="firstnamefield" ng-model="user.firstname" ng-model-options="{ updateOn: 'blur' }" ng-minlength="3" ng-maxlength="15" required />
+                <input class="input-field" type="text" id="firstnamefield" placeholder="First name" name="firstnamefield" ng-model="user.firstname" ng-model-options="{ updateOn: 'blur' }" ng-minlength="3" ng-maxlength="15" required  ng-disabled="isViewLoading"  />
                 <p class="alert" ng-show="registerform.firstnamefield.$error.minlength">First name is too short.</p>
                 <p class="alert" ng-show="registerform.firstnamefield.$error.maxlength">First name is too long.</p>
             </div>
             <div class="input-field-half float-right">
-                <input class="input-field input-field-half" type="text" id="lastnamefield" placeholder="Last name" name="lastnamefield" ng-model="user.lastname" ng-model-options="{ updateOn: 'blur' }" ng-minlength="3" ng-maxlength="25" required />
+                <input class="input-field input-field-half" type="text" id="lastnamefield" placeholder="Last name" name="lastnamefield" ng-model="user.lastname" ng-model-options="{ updateOn: 'blur' }" ng-minlength="3" ng-maxlength="25" required ng-disabled="isViewLoading"  />
                 <p class="alert" ng-show="registerform.lastnamefield.$error.minlength">Last name is too short.</p>
                 <p class="alert" ng-show="registerform.lastnamefield.$error.maxlength">Last name is too long.</p>
             </div>
         </div>
         <div>
             <p>
-                <input class="input-field" type="password" id="passwordfield" placeholder="Password" name="passwordfield" ng-model="user.password" ng-model-options="{ updateOn: 'blur' }" required />
+                <input class="input-field" type="password" id="passwordfield" placeholder="Password" name="passwordfield" ng-model="user.password" ng-model-options="{ updateOn: 'blur' }" required ng-disabled="isViewLoading"  />
             </p>
         </div>
         <div>
             <p>
-                <input class="input-field" type="password" id="passwordconfirmationfield" placeholder="Repeat password" name="passwordconfirmationfield" ng-model="user.passwordConfirmation" match= "user.password" ng-model-options="{ updateOn: 'blur' }" required />
+                <input class="input-field" type="password" id="passwordconfirmationfield" placeholder="Repeat password" name="passwordconfirmationfield" ng-model="user.passwordConfirmation" match= "user.password" ng-model-options="{ updateOn: 'blur' }" required ng-disabled="isViewLoading"  />
             </p>
             <p class="alert" ng-show="registerform.passwordconfirmationfield.$error.match">Fields do not match!</p>
         </div>
         <div>
-            <button class="btn btn-main full-width">Sign up</button>
+            <button class="btn btn-main full-width" type="submit">Sign up</button>
             <p>or <a href="/#/user/login">Log in</a></p>
         </div>
     </form>

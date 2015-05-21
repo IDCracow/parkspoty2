@@ -16,18 +16,18 @@
     <p class="alert" ng-if="vm.errorMessage">{{vm.errorMessage}}</p>
     <form name="loginform" ng-if="!user.isLoggedIn" class="half" novalidate ng-submit="loginform.$valid && vm.logIn(user)">
         <div>
-            <input placeholder="Email" class="input-field" type="email" id="emailfield" name="emailfield" ng-model="user.email" ng-model-options="{ updateOn: 'blur' }" ng-pattern="/^[a-z]+@infusion.com$/" />
+            <input placeholder="Email" class="input-field" type="email" id="emailfield" name="emailfield" ng-model="user.email" ng-model-options="{ updateOn: 'blur' }" ng-pattern="/^[a-z]+@infusion.com$/" ng-disabled="isViewLoading"  />
             <p class="alert" ng-show="loginform.emailfield.$error.email">This is not valid email</p>
         </div>
         <p>
-            <input placeholder="Password" class="input-field" type="password" id="passwordfield" name="passwordfield" ng-model="user.password" ng-model-options="{ updateOn: 'blur' }" required />
+            <input placeholder="Password" class="input-field" type="password" id="passwordfield" name="passwordfield" ng-model="user.password" ng-model-options="{ updateOn: 'blur' }" required ng-disabled="isViewLoading"  />
         </p>
 
-        <button class="btn btn-main radius full-width">Log in</button>
+        <button class="btn btn-main radius full-width" type="submit" ng-disabled="isViewLoading" >Log in</button>
 
         <div ng-if="vm.toggleVerified">
             <p class="alert"><strong>Please verify your email before logging in.</strong></p>
-            <button class="btn btn-alert radius" type="button" ng-click="vm.resendVerificationEmail(user.email)">Resend verification email.</button>
+            <button class="btn btn-alert radius" type="button" ng-click="vm.resendVerificationEmail(user.email)" ng-disabled="isViewLoading" >Resend verification email.</button>
             <p ng-if="vm.resentEmail">Check your email :)</p>
         </div>
         <p>or <a href="#/user/register">Sign up</a></p>
