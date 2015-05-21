@@ -97,18 +97,17 @@ angular.module('parkspotyappApp')
             return q.promise;
         },
         signUp: function(form) {
-            if (form.email != '' && form.email != null && form.firstname != '' && form.firstname != null && form.lastname != '' && form.lastname != null && form.password != '' && form.password != null ) {
+            if (form.email !== '' && form.email !== null && form.firstname !== '' && form.firstname !== null && form.lastname !== '' && form.lastname !== null && form.password !== '' && form.password !== null ) {
                 $rootScope.setLoading();
 
                 var q = $q.defer();
-                var self = this;
-
+                
                 var user = new Parse.User();
-                user.set("email", form.email);
-                user.set("username", form.email);
-                user.set("firstName", form.firstname);
-                user.set("lastName", form.lastname);
-                user.set("password", form.password);
+                user.set('email', form.email);
+                user.set('username', form.email);
+                user.set('firstName', form.firstname);
+                user.set('lastName', form.lastname);
+                user.set('password', form.password);
 
                 user.signUp(null, {
                     success: function(user) {
@@ -119,7 +118,7 @@ angular.module('parkspotyappApp')
                         $rootScope.unsetLoading();
                         q.reject(error);
                     }
-                })
+                });
 
                 return q.promise;
             }
