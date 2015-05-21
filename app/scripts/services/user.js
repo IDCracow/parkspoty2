@@ -42,6 +42,9 @@ angular.module('parkspotyappApp')
         userLastName: function() {
             return currUser.get('lastName');
         },
+        userCurrentSpot: function() {
+            return currUser.get('spotCurrent');
+        },
         isAdmin: function() {
             $rootScope.setLoading();
             var q = $q.defer();
