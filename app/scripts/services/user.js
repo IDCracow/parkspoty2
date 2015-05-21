@@ -60,7 +60,7 @@ angular.module('parkspotyappApp')
                 q.resolve(result);
             }, function(error) {
                 $rootScope.unsetLoading();
-                q.reject(error.code);
+                q.reject(error);
             });
 
             return q.promise;

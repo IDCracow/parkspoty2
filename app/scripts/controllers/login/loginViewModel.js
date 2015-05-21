@@ -9,33 +9,26 @@ angular.module('parkspotyappApp')
 
     LoginAPI.prototype.logIn = function(form) {
         var self = this;
-        if (form && form.email && form.password) {
-            user.isVerified(form.email).then(function(result) {
-                if (result) {
-                    user.logIn(form.email, form.password).then(function(result) {
-                        $rootScope.unsetLoading();
-                        self.errorMessage = false;
-                        self.goToUserProfile();
-                    }, function(error) {
-                        var errorFirstLetterUppercase = error.substr(0, 1).toUpperCase() + error.substr(1);
-                        self.errorMessage = errorFirstLetterUppercase;
-                    });
-                } else {
+        user.isVerified(form.email).then(function(result) {
+            if (result) {
+                user.logIn(form.email, form.password).then(function(result) {
                     $rootScope.unsetLoading();
-                    self.toggleVerified = true;
-                }
-            }, function(error) {
-                $rootScope.unsetLoading();
-                if (error == 141) {
-                    self.errorMessage = 'No such user';
-                } else {
                     self.errorMessage = false;
-                    self.toggleVerified = true;
-                }
-            });
-        } else {
-            self.errorMessage = 'All fields are required';
-        }
+                    self.goToUserProfile();
+                }, function(error) {
+                    var errorFirstLetterUppercase = error.substr(0, 1).toUpperCase() + error.substr(1);
+                    self.errorMessage = errorFirstLetterUppercase;
+                });
+            } else {
+                $rootScope.unsetLoading();
+                self.errorMessage = false;
+                self.toggleVerified = true;
+            }
+        }, function(error) {
+            $rootScope.unsetLoading();
+            self.errorMessage = 'No such user';
+            self.toggleVerified = false;
+        });
     };
 
     LoginAPI.prototype.currentUser = function() {
