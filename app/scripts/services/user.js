@@ -110,7 +110,6 @@ angular.module('parkspotyappApp')
                 user.signUp(null, {
                     success: function(user) {
                         $rootScope.unsetLoading();
-                        self.setUser(user);
                         q.resolve(user);
                     },
                     error: function(user, error) {
