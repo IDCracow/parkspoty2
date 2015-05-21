@@ -11,19 +11,19 @@
 </header>
 
 <div class="row">
+    <small class="fz22">wednesday 6th may</small>
+    <h2 class="no-margin-top">Log in</h2>
     <p class="alert" ng-if="vm.errorMessage">{{vm.errorMessage}}</p>
-    <form ng-if="!user.isLoggedIn" class="half" novalidate>
-        <small class="fz22">wednesday 6th may</small>
-
-        <h2 class="no-margin-top">Log in</h2>
-        <p>
-            <input placeholder="Email" class="input-field" type="text" id="emailfield" name="emailfield" ng-model="user.email" ng-model-options="{ updateOn: 'blur' }" required />
-        </p>
+    <form name="loginform" ng-if="!user.isLoggedIn" class="half" novalidate ng-submit="loginform.$valid && vm.logIn(user)">
+        <div>
+            <input placeholder="Email" class="input-field" type="email" id="emailfield" name="emailfield" ng-model="user.email" ng-model-options="{ updateOn: 'blur' }" required pattern="*@infusion.com" />
+            <p class="alert" ng-show="loginform.emailfield.$error.email">This is not valid email</p>
+        </div>
         <p>
             <input placeholder="Password" class="input-field" type="password" id="passwordfield" name="passwordfield" ng-model="user.password" ng-model-options="{ updateOn: 'blur' }" required />
         </p>
 
-        <button ng-click="vm.logIn(user)" class="btn btn-main radius full-width">Log in</button>
+        <button class="btn btn-main radius full-width">Log in</button>
 
         <div ng-if="vm.toggleVerified">
             <p class="alert"><strong>Please verify your email before logging in.</strong></p>
