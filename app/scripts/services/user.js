@@ -21,7 +21,7 @@ angular.module('parkspotyappApp')
             return currUser;
         },
         setUser: function(user) {
-            currUser = user;    
+            currUser = user;
         },
         isLoggedIn: function() {
             if (currUser) {

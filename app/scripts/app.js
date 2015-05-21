@@ -25,8 +25,8 @@ angular
     .config(function ($routeProvider) {
     $routeProvider
         .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        templateUrl: 'views/login.html',
+        controller: 'LoginCtrl'
     })
         .when('/about', {
         templateUrl: 'views/about.html',
@@ -65,7 +65,7 @@ angular
         } else {
             user.isAdmin().then(function(result) {
                 if (!result && next.templateUrl == "views/admin.html") {
-                    $location.path("/");   
+                    $location.path("/");
                 }
             });
             if (next.templateUrl == "views/login.html" || next.templateUrl == "views/register.html") {
