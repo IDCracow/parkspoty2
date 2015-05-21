@@ -12,7 +12,7 @@
 
 <div ng-if="!vm.isLoggedIn" class="row">
     <h2>Sign up</h2>
-    <form name="registerform" class="half" novalidate>
+    <form name="registerform" class="half" novalidate ng-submit="registerform.$valid && vm.signUp(user)">
         <p ng-if="vm.formError" class="alert">{{vm.formError}}</p>
         <div>
             <p>
@@ -44,7 +44,7 @@
             <p class="alert" ng-show="registerform.passwordconfirmationfield.$error.match">Fields do not match!</p>
         </div>
         <div>
-            <button ng-click="vm.signUp(user)" class="btn btn-main full-width">Sign up</button>
+            <button class="btn btn-main full-width">Sign up</button>
             <p>or <a href="/#/user/login">Log in</a></p>
         </div>
     </form>

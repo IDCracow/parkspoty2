@@ -16,7 +16,7 @@
     <p class="alert" ng-if="vm.errorMessage">{{vm.errorMessage}}</p>
     <form name="loginform" ng-if="!user.isLoggedIn" class="half" novalidate ng-submit="loginform.$valid && vm.logIn(user)">
         <div>
-            <input placeholder="Email" class="input-field" type="email" id="emailfield" name="emailfield" ng-model="user.email" ng-model-options="{ updateOn: 'blur' }" required pattern="*@infusion.com" />
+            <input placeholder="Email" class="input-field" type="email" id="emailfield" name="emailfield" ng-model="user.email" ng-model-options="{ updateOn: 'blur' }" ng-pattern="/^[a-z]+@infusion.com$/" />
             <p class="alert" ng-show="loginform.emailfield.$error.email">This is not valid email</p>
         </div>
         <p>
