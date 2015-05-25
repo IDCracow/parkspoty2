@@ -1,0 +1,131 @@
+// bower:scss
+// endbower
+=user-selection
+  -webkit-touch-callout: none
+  -webkit-user-select: none
+  khtml-user-select: none
+  -moz-user-select: none
+  user-select: none
+  -ms-user-select: none
+
+=turn-on-gpu
+  -webkit-transform: translate3d(0,0,0)
+  -moz-transform: translate3d(0,0,0)
+  -ms-transform: translate3d(0,0,0)
+  -o-transform: translate3d(0,0,0)
+  transform: translate3d(0,0,0)
+
+.browsehappy
+  margin: 0.2em 0
+  background: #ccc
+  color: #000
+  padding: 0.2em 0
+
+*
+  box-sizing: border-box
+  +user-selection
+
+body
+  padding: 0
+  background: url(#{$imgPath}/bg.jpg) center -300px no-repeat
+  color: #fff
+  font-family: "BariolLight", Helvetica, Arial, sans-serif
+
+.row
+  margin-left: -$gutter
+  margin-right: -$gutter
+
+.container
+  width: $containerWidth
+  margin: 1em auto
+  position: relative
+  min-height: 500px
+
+.container-big
+  width: 95%
+  margin: 0 auto
+  overflow: hidden
+  padding: 0 $gutter
+
+.half,
+.quarter
+  float: left
+
+.half
+  padding: $gutter
+  width: 50%
+
+.quarter
+  padding: $gutter
+  width: 25%
+
+.mainview
+  position: absolute
+  width: $containerWidth
+  top: 0
+  +turn-on-gpu
+
+.ng-enter
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out
+  left: 100px
+  opacity: 0
+
+.ng-enter-active
+  transform: translate(-100px,0)
+  opacity: 1
+
+.ng-leave
+  transition: opacity 0.5s ease-in, transform 0.5s ease-in
+  opacity: 1
+
+.ng-leave-active
+  transform: translate(-100px,0)
+  opacity: 0
+
+.ng-enter-stagger,
+.ng-leave-stagger
+  /* 200ms will be applied between each sucessive enter operation */
+  -webkit-transition-delay: 0.6s
+  transition-delay: 0.6s
+
+.display-table
+  display: table
+
+.display-table-cell
+  display: table-cell
+  vertical-align: middle
+
+.full-width
+  width: 100%
+
+.full-height
+  height: 100%
+
+.relative
+  position: relative
+
+.absolute
+  position: absolute
+
+.inline-block
+  display: inline-block
+
+.no-margin-top
+  margin-top: 0
+
+.sticked
+  position: fixed
+  bottom: 0
+
+.relative
+  position: relative
+
+.mt-50
+  margin-top: 50px
+
+.clearfix
+  clear: both
+  display: block
+
+header
+  z-index: 1

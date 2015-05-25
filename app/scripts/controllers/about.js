@@ -10,5 +10,4 @@
 angular.module('parkspotyappApp')
   .controller('AboutCtrl', function ($scope,weatherService) {
     
-    
   });

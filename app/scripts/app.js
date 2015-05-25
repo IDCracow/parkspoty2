@@ -9,8 +9,7 @@
  * Main module of the application.
  */
 
-
-Parse.initialize('PEzsT2NgVjzwkHt2HDXMSYix5viGNIC9bsJxKtTa','3eaL1UsGbIpccAFF7WVfoEMTMVXZkFgQ5RAUsi2G');
+Parse.initialize('PEzsT2NgVjzwkHt2HDXMSYix5viGNIC9bsJxKtTa', '3eaL1UsGbIpccAFF7WVfoEMTMVXZkFgQ5RAUsi2G');
 
 angular
     .module('parkspotyappApp', [
@@ -49,23 +48,29 @@ angular
         templateUrl: 'views/reset_password.html',
         controller: 'ResetPasswordCtrl'
     })
-        .when('/reservation', {
-          templateUrl: 'views/reservation.html',
-          controller: 'ReservationCtrl'
-        })
+        .when('/admin', {
+        templateUrl: 'views/admin.html',
+        controller: 'AdminCtrl'
+    })
         .otherwise({
         redirectTo: '/'
     });
 })
-    .run( function($rootScope, $location, fetchUser) {
-
-    // register listener to watch route changes
-    $rootScope.$on( "$routeChangeStart", function(event, next, current) {
-        if (fetchUser.isLoggedIn() == false) {
-            // no logged user, we should be going to #login
-            if (next.templateUrl != "views/login.html" && next.templateUrl != "views/register.html" && next.templateUrl != "views/main.html" && next.templateUrl != "views/reset_password.html") {
-                $location.path("/user/login");
+    .run( function($rootScope, $location, user) {
+    $rootScope.$on( '$routeChangeStart', function(event, next) {
+        if (!user.isLoggedIn()) {
+            if (next.templateUrl !== 'views/login.html' && next.templateUrl !== 'views/register.html' && next.templateUrl !== 'views/main.html' && next.templateUrl !== 'views/reset_password.html') {
+                $location.path('/user/login');
             }
-        }         
+        } else {
+            user.isAdmin().then(function(result) {
+                if (!result && next.templateUrl === 'views/admin.html') {
+                    $location.path('/');   
+                }
+            });
+            if (next.templateUrl === 'views/login.html' || next.templateUrl === 'views/register.html') {
+                $location.path('/user/profile');
+            }
+        }
     });
 });
