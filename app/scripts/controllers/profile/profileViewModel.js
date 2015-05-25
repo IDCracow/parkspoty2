@@ -5,6 +5,7 @@ angular.module('parkspotyappApp')
 
     ProfileAPI.prototype.currentUser = user.userData();
     ProfileAPI.prototype.firstName = user.userFirstName();
+    ProfileAPI.prototype.currentSpot = user.userCurrentSpot();
    
     return new ProfileAPI();
 });
