@@ -120,3 +120,42 @@ Parse.Cloud.define('clearAssignedSpotsFromUsers', function(request, response){
         }
     }); 
 });
+
+// saving current spot to user
+Parse.Cloud.define('setCurrentSpotToUser', function(request, response){
+    Parse.Cloud.useMasterKey();
+
+    var query = new Parse.Query('User');
+    
+    var listOfWinners = request.params.listOfWinners;
+    
+    var listOfWinnersEmails = [];
+    for(var i = 0; i < listOfWinners.length; i++) {
+          listOfWinnersEmails.push(listOfWinners[i].winner);      
+    } 
+    
+    query.containedIn("email", listOfWinnersEmails);
+    
+    query.find({
+        success: function(results) {          
+            var i = 0;
+             _.each(results, function(user){ 
+                user.set('spotCurrent', listOfWinners[i].spotname);
+                user.save({
+                    success: function(result) {
+                        response.success(result);
+                    },
+                    error:function(error) {
+                        response.error(error);
+                    }
+                }) 
+                i++;
+            })
+             
+            response.success(results);
+        },
+        error: function(error) {          
+            response.error(error.code); 
+        }
+    }); 
+});

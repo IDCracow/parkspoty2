@@ -18,22 +18,24 @@ angular.module('parkspotyappApp')
             return user.getAllUsersForDraw().then(function(data) {  
                  var temporaryDrawTable = [];
                  var users = data;
+                //console.log('users frin getAllUsersForDraw', users);
                  _.each(users, function(user){  
                      for(var i = 0; i < user.attributes.ticketsLeft; i++) {
                         temporaryDrawTable.push(user.attributes.username);
                      }
                  }); 
-                 return temporaryDrawTable;
+                //console.log('temporaryDrawTable frin getAllUsersForDraw', temporaryDrawTable);
+                return drawTable = temporaryDrawTable;
             });            
         },
         
         // it will return array with winners (usernames)
         drawSpots : function (drawTable, avaiableParkSpots) {
-            console.log('draw spots', avaiableParkSpots);
             var listOfWinners = [];
             for(var i = 0; i < avaiableParkSpots.length; i++) {  
                 drawTable = _.shuffle(drawTable);
                 var winner = _.first(drawTable);
+                //console.log('winner', winner);
                 var spotname = avaiableParkSpots[i].attributes.spotname;
                 listOfWinners.push({winner : winner, spotname: spotname});
                 drawTable = _.without(drawTable, winner);                
@@ -42,51 +44,47 @@ angular.module('parkspotyappApp')
         },
         
         assignSpotToUser : function(listOfWinners) {
-            // 1. save spot to user table in column 'spot'
-            for(var i = 0; i < listOfWinners.length; i++) {
-                var query = new Parse.Query(Parse.User);
-                query.equalTo("email", listOfWinners[i].winner);  // find all the women
-                query.find({
-                  success: function(user) {
-                    user.set('spotCurrent', listOfWinners[i].spotname);
-                    user.save(null, {
-                      success: function(user) {
-                        // TODO
-                        // - show notification in UI  (also error message)                
-                      },
-                      error: function(error) {
-                            // Show the error message somewhere
-                            alert("Error: " + error.code + " " + error.message);
-                      }
-                    });
-                  }
-                });
+            if(listOfWinners == undefined) {
+                //console.log('undefined listofwinners');
+                return;
             }
+         
+            
+            // 1. save spot to user table in column 'spot'
+            return Parse.Cloud.run('setCurrentSpotToUser', { 'listOfWinners' : listOfWinners}).then(function(result){
+                //console.log(result);
+            }); 
+            
+         
             // 2. add to reservation table
+            
+            // TODO Somewhere -> removing tickets -1
         },
         
         doDraw : function() { 
             var self = this; 
             
-            console.log('do draw');
-            Spot.getAvailbleSpotsForDrawing().then(function(data){
-                self.availbleSpots = data;
-                console.log(self.availbleSpots);
+            Spot.getAvailbleSpotsForDrawing()
+            .then(function(data){
+                return self.availbleSpots = data;
             })
-            .then(this.generateDrawTable().then(function(drawTable){        
-                 console.log('draw table', drawTable);
-                 self.winners = self.drawSpots(drawTable, self.availbleSpots);
-                 console.log('winners', self.winners);
-            }))
-            .then(this.clearAssignedSpots().then(function(){
-                
-                // add to database;
-            }));
+            .then(function() {
+                return self.generateDrawTable();
+            })
+            .then(function(){     
+                 return self.winners = self.drawSpots(drawTable, self.availbleSpots);
+            })
+            .then(function(){
+                return self.clearAssignedSpots()
+            })
+            .then(function() {
+                return self.assignSpotToUser(self.winners);
+            });
         },
         
         clearAssignedSpots : function () {
-            return Parse.Cloud.run('clearAssignedSpotsFromUsers');            
+            return Parse.Cloud.run('clearAssignedSpotsFromUsers');         
         }
-    }
+    };
     
   });

@@ -15,20 +15,20 @@ angular.module('parkspotyappApp')
         getAvailbleSpotsForDrawing : function() {
              var q = $q.defer();
             
-            var Spot = Parse.Object.extend("Spot");
+            var Spot = Parse.Object.extend('Spot');
             var query = new Parse.Query(Spot);
             
-            query.equalTo("f_emergency", false);
+            query.equalTo('f_emergency', false);
             
             query.find({
               success: function(results) {
                 q.resolve(results);
               },
               error: function(error) {
-                alert("Error: " + error.code + " " + error.message);
+                alert('Error: ' + error.code + ' ' + error.message);
               }
             });
             return q.promise;
         }
-    }
+    };
   });
