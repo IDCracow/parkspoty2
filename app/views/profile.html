@@ -12,43 +12,7 @@
 
 
 <section class="profile-page">
-    <header class="fz40">wednesday 6th may</header>
-
-    <ul class="list-simple list-separator">
-        <li>
-            <label for="cbox_activeInDraw">
-                <span class="cbox cbox-yellow cbox-bool text-center" ng-class="{selected : valFlagActiveInDraw}"><input type="checkbox" name="activeInDraw" id="cbox_activeInDraw" ng-model="valFlagActiveInDraw" ng-change="changeFlagActiveInDraw()"></span>
-                I want to take part in a monthly draw
-            </label>
-        </li>
-
-        <li>
-            <span class="cbox cbox-yellow text-center">{{valTicketsLeft}}</span>
-            tickets left <i class="icon-info"></i>
-        </li>
-    </ul>
-
-    <h3 class="relative mt-50"><i class="ico-bell ico-side"></i> alerts</h3>
-    <ul class="list-simple list-separator">
-        <li>
-            <label for="cbox_drawReminder">
-                <span class="cbox cbox-yellow cbox-bool text-center" ng-class="{selected : valFlagDrawRemider}"><input type="checkbox" name="drawReminder" id="cbox_drawReminder" ng-model="valFlagDrawRemider" ng-change="changeFlagDrawRemider()"></span>
-                draw reminder
-            </label>
-        </li>
-        <li>
-            <label for="cbox_spotNotifer">
-                <span class="cbox cbox-yellow cbox-bool text-center" ng-class="{selected : valFlagSpotNotifer}"><input type="checkbox" name="spotNotifer" id="cbox_spotNotifer" ng-model="valFlagSpotNotifer" ng-change="changeFlagSpotNotifer()"></span>
-                free spot notifer
-            </label>
-        </li>
-    </ul>
-</section>
-
-<section>
     <header class="fz40"><a href="" ng-click="prev()">prev</a> {{date}} <a href="" ng-click="next()">next</a></header>
-    <day></day>
-
     <div class="row">
         <div class="half">
             <h3>emergency</h3>
@@ -84,7 +48,21 @@
         </div>
     </div>
 
-    <h3 class="relative mt-50 clearfix"><i class="ico-bell ico-side"></i> alerts</h3>
+    <ul class="list-simple list-separator">
+        <li>
+            <label for="cbox_activeInDraw">
+                <span class="cbox cbox-yellow cbox-bool text-center" ng-class="{selected : valFlagActiveInDraw}"><input type="checkbox" name="activeInDraw" id="cbox_activeInDraw" ng-model="valFlagActiveInDraw" ng-change="changeFlagActiveInDraw()"></span>
+                I want to take part in a monthly draw
+            </label>
+        </li>
+
+        <li>
+            <span class="cbox cbox-yellow text-center">{{valTicketsLeft}}</span>
+            tickets left <i class="icon-info"></i>
+        </li>
+    </ul>
+
+    <h3 class="relative"><i class="ico-bell ico-side"></i> alerts</h3>
     <ul class="list-simple list-separator">
         <li>
             <label for="cbox_drawReminder">
