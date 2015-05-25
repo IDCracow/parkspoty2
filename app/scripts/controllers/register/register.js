@@ -12,5 +12,5 @@ angular.module('parkspotyappApp')
     .controller('RegisterCtrl', function ($scope, registerViewModel) {
 
     $scope.vm = registerViewModel;
-   
+
 });

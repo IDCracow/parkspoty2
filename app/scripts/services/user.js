@@ -42,6 +42,9 @@ angular.module('parkspotyappApp')
         userLastName: function() {
             return currUser.get('lastName');
         },
+        userCurrentSpot: function() {
+            return currUser.get('spotCurrent');
+        },
         isAdmin: function() {
             $rootScope.setLoading();
             var q = $q.defer();
@@ -58,53 +61,64 @@ angular.module('parkspotyappApp')
             Parse.Cloud.run('isVerified', {'email':email}).then(function(result){
                 $rootScope.unsetLoading();
                 q.resolve(result);
+            }, function(error) {
+                $rootScope.unsetLoading();
+                q.reject(error);
             });
 
+            return q.promise;
+        },
+        sendResetEmail: function(email) {     
+            $rootScope.setLoading();
+            var q = $q.defer();
+            Parse.User.requestPasswordReset(email).then(function(result) {
+                $rootScope.unsetLoading();
+                q.resolve(result);
+            }, function(error) {
+                $rootScope.unsetLoading();
+                q.reject(error.message);
+            });
+            
             return q.promise;
         },
         logIn: function(email, pass) {
             $rootScope.setLoading();
             var q = $q.defer();
             var self = this;
-            Parse.User.logIn(email, pass, {
-                success: function(user) {
+            Parse.User.logIn(email, pass).then(function(result) {
                     $rootScope.unsetLoading();
-                    self.setUser(user);
-                    q.resolve(user);
-                },
-                error: function(error) {
+                    self.setUser(result);
+                    q.resolve(result);
+                }, function(error) {
                     $rootScope.unsetLoading();
-                    q.reject(error)
-                }
-            });
+                    q.reject(error.message);
+                });
 
             return q.promise;
         },
         signUp: function(form) {
-            if (form.email != '' && form.email != null && form.firstname != '' && form.firstname != null && form.lastname != '' && form.lastname != null && form.password != '' && form.password != null ) {
+            if (form.email !== '' && form.email !== null && form.firstname !== '' && form.firstname !== null && form.lastname !== '' && form.lastname !== null && form.password !== '' && form.password !== null ) {
                 $rootScope.setLoading();
 
                 var q = $q.defer();
-                var self = this;
-
+                
                 var user = new Parse.User();
-                user.set("email", form.email);
-                user.set("username", form.email);
-                user.set("firstName", form.firstname);
-                user.set("lastName", form.lastname);
-                user.set("password", form.password);
+                user.set('email', form.email);
+                user.set('username', form.email);
+                user.set('firstName', form.firstname);
+                user.set('lastName', form.lastname);
+                user.set('password', form.password);
 
-                    user.signUp(null, {
-                        success: function(user) {
-                            $rootScope.unsetLoading();
-                            self.setUser(user);
-                            q.resolve(user);
-                        },
-                        error: function(user, error) {
-                            $rootScope.unsetLoading();
-                            q.reject(error);
-                        }
-                    })
+                user.signUp(null, {
+                    success: function(user) {
+                        $rootScope.unsetLoading();
+                        q.resolve(user);
+                    },
+                    error: function(user, error) {
+                        $rootScope.unsetLoading();
+                        q.reject(error);
+                    }
+                });
 
                 return q.promise;
             }

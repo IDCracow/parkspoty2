@@ -9,7 +9,7 @@
  * Main module of the application.
  */
 
-Parse.initialize("PEzsT2NgVjzwkHt2HDXMSYix5viGNIC9bsJxKtTa", "3eaL1UsGbIpccAFF7WVfoEMTMVXZkFgQ5RAUsi2G");
+Parse.initialize('PEzsT2NgVjzwkHt2HDXMSYix5viGNIC9bsJxKtTa', '3eaL1UsGbIpccAFF7WVfoEMTMVXZkFgQ5RAUsi2G');
 
 angular
     .module('parkspotyappApp', [
@@ -57,10 +57,10 @@ angular
     });
 })
     .run( function($rootScope, $location, user) {
-    $rootScope.$on( "$routeChangeStart", function(event, next, current) {
+    $rootScope.$on( '$routeChangeStart', function(event, next) {
         if (!user.isLoggedIn()) {
-            if (next.templateUrl != "views/login.html" && next.templateUrl != "views/register.html" && next.templateUrl != "views/main.html" && next.templateUrl != "views/reset_password.html") {
-                $location.path("/user/login");
+            if (next.templateUrl !== 'views/login.html' && next.templateUrl !== 'views/register.html' && next.templateUrl !== 'views/main.html' && next.templateUrl !== 'views/reset_password.html') {
+                $location.path('/user/login');
             }
         } else {
             user.isAdmin().then(function(result) {
@@ -68,8 +68,8 @@ angular
                     $location.path("/");
                 }
             });
-            if (next.templateUrl == "views/login.html" || next.templateUrl == "views/register.html") {
-                $location.path("/user/profile");
+            if (next.templateUrl === 'views/login.html' || next.templateUrl === 'views/register.html') {
+                $location.path('/user/profile');
             }
         }
     });

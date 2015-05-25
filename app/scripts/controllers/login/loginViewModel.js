@@ -5,22 +5,30 @@ angular.module('parkspotyappApp')
 
     LoginAPI.prototype.toggleVerified = false;
     LoginAPI.prototype.resentEmail = false;
+    LoginAPI.prototype.errorMessage = false;
 
     LoginAPI.prototype.logIn = function(form) {
-        if (form) {
-            var self = this;
-            user.isVerified(form.email).then(function(result) {
-                if (result) {
-                    user.logIn(form.email, form.password).then(function(user) {
-                        $rootScope.unsetLoading();
-                        self.goToUserProfile();
-                    });
-                } else {
+        var self = this;
+        user.isVerified(form.email).then(function(result) {
+            if (result) {
+                user.logIn(form.email, form.password).then(function(result) {
                     $rootScope.unsetLoading();
-                    self.toggleVerified = true;
-                }
-            });
-        }
+                    self.errorMessage = false;
+                    self.goToUserProfile();
+                }, function(error) {
+                    var errorFirstLetterUppercase = error.substr(0, 1).toUpperCase() + error.substr(1);
+                    self.errorMessage = errorFirstLetterUppercase;
+                });
+            } else {
+                $rootScope.unsetLoading();
+                self.errorMessage = false;
+                self.toggleVerified = true;
+            }
+        }, function(error) {
+            $rootScope.unsetLoading();
+            self.errorMessage = 'No such user';
+            self.toggleVerified = false;
+        });
     };
 
     LoginAPI.prototype.currentUser = function() {
