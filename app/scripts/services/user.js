@@ -137,7 +137,7 @@ angular.module('parkspotyappApp')
         mailMe: function(email) {
             var q = $q.defer();
 
-            Parse.Cloud.run('mailMe', {'email':email}).then(function(result){
+            Parse.Cloud.run('mailAllUsers', {'email':email}).then(function(result){
                 q.resolve(result);
             }, function(error) {
                 q.reject(error);   
