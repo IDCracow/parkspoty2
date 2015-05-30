@@ -8,17 +8,13 @@
  * Controller of the parkspotyappApp
  */
 angular.module('parkspotyappApp')
-  .controller('ReservationCtrl', function ($scope,getreservation) {
+  .controller('ReservationCtrl', function ($scope,reservation) {
        
       var today = moment();
       var tommorow = moment().add(1,"days");
-    
-      var busySpots = [];
-      getreservation.getReservation(today).then(function(data) {
-          
-         console.log(data.length); 
-          console.log(data); 
-           console.log(data[0].get('spot').id); 
-        });
+      var d = new Date("April 28, 2015 00:00:00");
+       
+      reservation.getReservation(d).then(function(data) {
+      });
     
 });

@@ -9,6 +9,6 @@ angular.module('parkspotyappApp').directive('weatherInfo', function() {
                  $scope.weatherDataIcon = 'icon-' + data.weather[0].icon;
               });
         },
-        template: "<div><span>Cracow,</span> <span>{{weatherDataTemp}}</span><span class='{{weatherDataIcon}}'></span></div>"
+        template: "<div><span>Cracow,</span> <span>{{weatherDataTemp}}&#176;C </span><span class='{{weatherDataIcon}}'></span></div>"
     };
 });
