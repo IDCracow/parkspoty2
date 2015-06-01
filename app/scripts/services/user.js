@@ -133,6 +133,16 @@ angular.module('parkspotyappApp')
             });
 
             return q.promise;
+        },
+        //emails all users with flag f_alertFreeSpot
+        sendNotificationFreeSpot: function(spotNumber, date) {
+            var q = $q.defer();
+
+            Parse.Cloud.run('sendNotificationFreeSpot', {spotNumber, date}).then(function(result) {
+                q.resolve(result);
+            });
+
+            return q.promise;
         }
     };
 });
