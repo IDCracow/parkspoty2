@@ -46,8 +46,9 @@
 </section>
 
 <section>
-    <header class="fz40">wednesday 6th may</header>
-
+    <header class="fz40"><a href="" ng-click="next()">prev</a> wednesday 6th may <a href="" ng-click="next()">next</a></header>
+    <day></day>
+    
     <div class="row">
         <div class="half">
             <h3>emergency</h3>
@@ -68,21 +69,16 @@
         </div>
 
         <div class="half">
-            <h3>regular</h3>
+            <h3>regular <button ng-click="addPoint()">+</button></h3>
+
             <ul class="list-simple list-separator">
-                <li>
-                    <label for="cbox_drawReminder">
-                        <span class="cbox cbox-regular cbox-bool text-center" ng-class="{selected : valFlagDrawRemider}">
-                            <input type="checkbox" name="drawReminder" id="cbox_drawReminder" ng-model="valFlagDrawRemider" ng-change="changeFlagDrawRemider()">
-                        </span>
-                        draw reminder
-                    </label>
-                </li>
-                <li>
-                    <label for="cbox_spotNotifer">
-                        <span class="cbox cbox-regular cbox-bool text-center" ng-class="{selected : valFlagSpotNotifer}"><input type="checkbox" name="spotNotifer" id="cbox_spotNotifer" ng-model="valFlagSpotNotifer" ng-change="changeFlagSpotNotifer()"></span>
-                        free spot notifer
-                    </label>
+                <li ng-repeat="object in items track by $index">
+                  <label for="cbox_drawReminder">
+                      <span class="cbox cbox-regular cbox-bool text-center" ng-class="{selected : valFlagDrawRemider}">
+                          <input type="checkbox" name="drawReminder" id="cbox_drawReminder" ng-model="valFlagDrawRemider" ng-change="changeFlagDrawRemider()">
+                      </span>
+                      draw reminder <a href="" ng-click="removePoint()">-</a>
+                  </label>
                 </li>
             </ul>
         </div>
@@ -104,6 +100,3 @@
         </li>
     </ul>
 </section>
-
-
-<a href="#/user/reset-password">Reset password</a>

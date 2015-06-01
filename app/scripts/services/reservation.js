@@ -4,7 +4,99 @@
 angular.module('parkspotyappApp')
     .service('reservation', function ($q) {
         return {
-        getReservation: function (date) {
+        
+           
+    };  
+});
+'use strict';
+
+/**
+ * @ngdoc service
+ * @name parkspotyappApp.Reservation
+ * @description
+ * # Reservation
+ * Service in the parkspotyappApp.
+ */
+angular.module('parkspotyappApp')
+  .service('Reservation', function (user, Spot, $q) {
+    // AngularJS will instantiate a singleton by calling "new" on this function
+    
+    var drawTable = []; //table which contains users with prepared importance
+    
+    return {
+        generateDrawTable : function () {
+            return user.getAllUsersForDraw().then(function(data) {  
+                 var temporaryDrawTable = [];
+                 var users = data;
+                //console.log('users frin getAllUsersForDraw', users);
+                 _.each(users, function(user){  
+                     for(var i = 0; i < user.attributes.ticketsLeft; i++) {
+                        temporaryDrawTable.push(user.attributes.username);
+                     }
+                 }); 
+                //console.log('temporaryDrawTable frin getAllUsersForDraw', temporaryDrawTable);
+                return drawTable = temporaryDrawTable;
+            });            
+        },
+        
+        // it will return array with winners (usernames)
+        drawSpots : function (drawTable, avaiableParkSpots) {
+            var listOfWinners = [];
+            for(var i = 0; i < avaiableParkSpots.length; i++) {  
+                drawTable = _.shuffle(drawTable);
+                var winner = _.first(drawTable);
+                //console.log('winner', winner);
+                var spotname = avaiableParkSpots[i].attributes.spotname;
+                listOfWinners.push({winner : winner, spotname: spotname});
+                drawTable = _.without(drawTable, winner);                
+            }
+            return listOfWinners;
+        },
+        
+        assignSpotToUser : function(listOfWinners) {
+            if(listOfWinners == undefined) {
+                //console.log('undefined listofwinners');
+                return;
+            }
+         
+            
+            // 1. save spot to user table in column 'spot'
+            return Parse.Cloud.run('setCurrentSpotToUser', { 'listOfWinners' : listOfWinners}).then(function(result){
+                //console.log(result);
+            }); 
+            
+         
+            // 2. add to reservation table
+            
+            // TODO Somewhere -> removing tickets -1
+        },
+        
+        doDraw : function() { 
+            var self = this; 
+            
+            Spot.getAvailbleSpotsForDrawing()
+            .then(function(data){
+                return self.availbleSpots = data;
+            })
+            .then(function() {
+                return self.generateDrawTable();
+            })
+            .then(function(){     
+                 return self.winners = self.drawSpots(drawTable, self.availbleSpots);
+            })
+            .then(function(){
+                return self.clearAssignedSpots()
+            })
+            .then(function() {
+                return self.assignSpotToUser(self.winners);
+            });
+        },
+        
+        clearAssignedSpots : function () {
+            return Parse.Cloud.run('clearAssignedSpotsFromUsers');         
+        }
+
+getReservation: function (date) {
             
             var today = moment(date).hours(2).minute(0).seconds(0).milliseconds(0).toDate();
             
@@ -64,6 +156,6 @@ angular.module('parkspotyappApp')
                 return Parse.Object.destroyAll(myObj);
             });
         }
-           
-    };  
-});
+    };
+    
+  });
