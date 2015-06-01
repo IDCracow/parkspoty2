@@ -21,7 +21,7 @@ angular.module('parkspotyappApp')
             return currUser;
         },
         setUser: function(user) {
-            currUser = user;    
+            currUser = user;
         },
         isLoggedIn: function() {
             if (currUser) {
@@ -78,7 +78,7 @@ angular.module('parkspotyappApp')
                 $rootScope.unsetLoading();
                 q.reject(error.message);
             });
-            
+
             return q.promise;
         },
         logIn: function(email, pass) {
@@ -86,13 +86,13 @@ angular.module('parkspotyappApp')
             var q = $q.defer();
             var self = this;
             Parse.User.logIn(email, pass).then(function(result) {
-                    $rootScope.unsetLoading();
-                    self.setUser(result);
-                    q.resolve(result);
-                }, function(error) {
-                    $rootScope.unsetLoading();
-                    q.reject(error.message);
-                });
+                $rootScope.unsetLoading();
+                self.setUser(result);
+                q.resolve(result);
+            }, function(error) {
+                $rootScope.unsetLoading();
+                q.reject(error.message);
+            });
 
             return q.promise;
         },
@@ -101,7 +101,7 @@ angular.module('parkspotyappApp')
                 $rootScope.setLoading();
 
                 var q = $q.defer();
-                
+
                 var user = new Parse.User();
                 user.set('email', form.email);
                 user.set('username', form.email);
@@ -132,7 +132,90 @@ angular.module('parkspotyappApp')
                 q.resolve(result);
             });
 
+            return q.promise; 
+        },
+        mailMe: function(email) {
+            var q = $q.defer();
+
+            Parse.Cloud.run('mailMe', {'email':email}).then(function(result){
+                q.resolve(result);
+            }, function(error) {
+                q.reject(error);   
+            });
+
             return q.promise;
+        },
+        
+         // save user data after setting properites
+        saveUserData : function () {
+            currUser.save(null, {
+              success: function(user) {
+                // TODO
+                // - show notification in UI  (also error message)                
+              },
+              error: function(error) {
+                    // Show the error message somewhere
+                    alert("Error: " + error.code + " " + error.message);
+              }
+            });
+        },
+        
+        // tickets left = avaiable (12 per year)
+        getTicketsLeft : function() { 
+            var q = $q.defer();
+            Parse.User.current().fetch().then(function(user){
+                q.resolve(user.get('ticketsLeft'));
+            });
+            return q.promise;
+        },
+        
+        getAlertFreeSpotFlag : function() {
+            return currUser.get('f_alertFreeSpot');
+        },
+        
+        getAlertRowReminderFlag : function() {
+            return currUser.get('f_alertRowReminder');
+        },
+        
+        getActiveInDrawFlag : function() {
+            return currUser.get('f_activeInDraw');
+        },
+        
+        getAllUsersForDraw : function() {
+            var q = $q.defer();
+            
+            var User = Parse.Object.extend("User");
+            var query = new Parse.Query(User);
+            
+            query.equalTo("f_activeInDraw", true);
+            
+            query.find({
+              success: function(results) {
+                q.resolve(results);
+              },
+              error: function(error) {
+                alert("Error: " + error.code + " " + error.message);
+              }
+            });
+            return q.promise;
+        },
+        
+        
+        // setting flags        
+        setAlertFreeSpotFlag : function(status) {
+            currUser.set("f_alertFreeSpot", status);
+            this.saveUserData();
+        },
+        
+        setAlertRowReminderFlag : function(status) {
+            currUser.set("f_alertRowReminder", status);
+            return this.saveUserData();
+        },
+        
+        setActiveInDrawFlag : function(status) {
+            currUser.set("f_activeInDraw", status);
+            return this.saveUserData(); 
         }
+        
     };
 });

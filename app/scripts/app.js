@@ -25,8 +25,8 @@ angular
     .config(function ($routeProvider) {
     $routeProvider
         .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        templateUrl: 'views/login.html',
+        controller: 'LoginCtrl'
     })
         .when('/about', {
         templateUrl: 'views/about.html',
@@ -50,12 +50,12 @@ angular
     })
         .when('/admin', {
         templateUrl: 'views/admin.html',
-        controller: 'AdminCtrl'
+        controller: 'AdminCtrl' 
     })
         .when('/reservation', {
         templateUrl: 'views/reservation.html',
         controller: 'ReservationCtrl'
-    })
+    })  
         .otherwise({
         redirectTo: '/'
     });
