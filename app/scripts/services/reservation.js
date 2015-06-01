@@ -18,7 +18,7 @@ angular.module('parkspotyappApp')
  * Service in the parkspotyappApp.
  */
 angular.module('parkspotyappApp')
-  .service('Reservation', function (user, Spot, $q) {
+  .service('Reservation', function (user, Spot, Draw, $q) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     
     var drawTable = []; //table which contains users with prepared importance
@@ -46,7 +46,7 @@ angular.module('parkspotyappApp')
                 drawTable = _.shuffle(drawTable);
                 var winner = _.first(drawTable);
                 //console.log('winner', winner);
-                var spot = {'spotId' : avaiableParkSpots[i].id,'spotname' : avaiableParkSpots[i].attributes.spotname};
+                var spot = {'spotId' : avaiableParkSpots[i].id, 'spotname' : avaiableParkSpots[i].attributes.spotname};
                 listOfWinners.push({winner : winner, spot: spot});
                 drawTable = _.without(drawTable, winner);                
             }
@@ -67,8 +67,9 @@ angular.module('parkspotyappApp')
         
         assignReserviationToUser : function(listOfWinners, month, year) {
             for(var i = 0; i < listOfWinners.length; i++) { 
-               this.takespotForMonth(listOfWinners[i].winner.userId, listOfWinners[i].winner.spotId, listOfWinners[i].winner.username, month, year);
+               this.takespotForMonth(listOfWinners[i].winner.userId, listOfWinners[i].spot.spotId, listOfWinners[i].winner.username, month, year);
             }
+            return true;
         },
         
         doDraw : function(month, year) { 
@@ -91,8 +92,10 @@ angular.module('parkspotyappApp')
                 return self.assignSpotToUser(self.winners);
             })            
             .then(function() {       
-                console.log('self.winners', self.winners);
                 return self.assignReserviationToUser(self.winners, month, year);
+            })            
+            .then(function() {       
+                return Draw.setDraw(self.winners, month, year);
             });
         },
         
@@ -148,7 +151,7 @@ angular.module('parkspotyappApp')
         },
         
         takespotForMonth: function (userId, spotId, username, month, year) {
-                        
+                         
             var Spot = Parse.Object.extend("Spot");
             var spot = new Spot();
             spot.id = spotId;
@@ -159,8 +162,7 @@ angular.module('parkspotyappApp')
             
             var m = moment(new Date(year, month, 1));
             var daysInMonth = m.endOf('month').format('D');
-               
-                console.log(daysInMonth);
+                
             for(var i = 0; i < daysInMonth; i++) {
                 var Reservation = Parse.Object.extend("Reservations");
                 var reservation = new Reservation();
@@ -180,6 +182,8 @@ angular.module('parkspotyappApp')
                   }
                 });                
             }
+            
+            return true;
             
         },
             
