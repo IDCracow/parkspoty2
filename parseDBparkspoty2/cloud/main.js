@@ -121,7 +121,7 @@ Parse.Cloud.define('clearAssignedSpotsFromUsers', function(request, response){
     }); 
 });
 
-// saving current spot to user
+// saving current spot to user and removeing -1 ticket from user
 Parse.Cloud.define('setCurrentSpotToUser', function(request, response){
     Parse.Cloud.useMasterKey();
 
@@ -140,7 +140,11 @@ Parse.Cloud.define('setCurrentSpotToUser', function(request, response){
         success: function(results) {          
             var i = 0;
              _.each(results, function(user){ 
+                var ticketsLeft = user.get('ticketsLeft');
+                 
                 user.set('spotCurrent', listOfWinners[i].spotname);
+                user.set('ticketsLeft', ticketsLeft-1);
+                 
                 user.save({
                     success: function(result) {
                         response.success(result);
