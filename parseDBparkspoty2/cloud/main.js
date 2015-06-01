@@ -133,7 +133,7 @@ Parse.Cloud.define('setCurrentSpotToUser', function(request, response){
     
     var listOfWinnersEmails = [];
     for(var i = 0; i < listOfWinners.length; i++) {
-          listOfWinnersEmails.push(listOfWinners[i].winner);      
+          listOfWinnersEmails.push(listOfWinners[i].winner.email);      
     } 
     
     query.containedIn("email", listOfWinnersEmails);
@@ -144,7 +144,7 @@ Parse.Cloud.define('setCurrentSpotToUser', function(request, response){
              _.each(results, function(user){ 
                 var ticketsLeft = user.get('ticketsLeft');
                  
-                user.set('spotCurrent', listOfWinners[i].spotname);
+                user.set('spotCurrent', listOfWinners[i].spot.spotname);
                 user.set('ticketsLeft', ticketsLeft-1);
                  
                 user.save({
