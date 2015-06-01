@@ -96,7 +96,7 @@ angular.module('parkspotyappApp')
             return Parse.Cloud.run('clearAssignedSpotsFromUsers');         
         },
 
-        getReservation: function (day,month,year) {
+        getReservationForDay: function (day,month,year) {
             
             var Reservation = Parse.Object.extend("Reservations");
             var query = new Parse.Query(Reservation);
@@ -105,6 +105,41 @@ angular.module('parkspotyappApp')
 			query = new Parse.Query(Reservation);
 			query.equalTo("day", day);
             query.equalTo("month", month);
+            query.equalTo("year", year);
+
+            var q = $q.defer();
+            query.find().then(function(results){
+                console.log(results);
+                q.resolve(results);
+            });
+            return q.promise; 
+        },
+        
+        getReservationForMonth: function (month,year) {
+            
+            var Reservation = Parse.Object.extend("Reservations");
+            var query = new Parse.Query(Reservation);
+            
+            var self = this,
+			query = new Parse.Query(Reservation);
+            query.equalTo("month", month);
+            query.equalTo("year", year);
+
+            var q = $q.defer();
+            query.find().then(function(results){
+                console.log(results);
+                q.resolve(results);
+            });
+            return q.promise; 
+        },
+        
+        getReservationForYear: function (year) {
+            
+            var Reservation = Parse.Object.extend("Reservations");
+            var query = new Parse.Query(Reservation);
+            
+            var self = this,
+			query = new Parse.Query(Reservation);
             query.equalTo("year", year);
 
             var q = $q.defer();
