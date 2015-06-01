@@ -10,10 +10,11 @@
 angular.module('parkspotyappApp')
   .controller('AboutCtrl', function ($scope,weatherService,reservation) {
     $scope.takespot = function() {
-        reservation.takespot('oYOVt1P6IW','Xh5vWw0S45',false);
+        var d = new Date("June 02, 2015 00:00:00");
+        reservation.takespot('oYOVt1P6IW','Xh5vWw0S45',false,d);
     }
     $scope.releasespot = function() {
-        reservation.releasespot('Xh5vWw0S45');
+        reservation.releasespot('IB34XhmZjJ');
     }
         
   });

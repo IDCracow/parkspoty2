@@ -24,8 +24,8 @@ angular.module('parkspotyappApp')
             
             
         },
-        takespot: function (userId,spotId,femergency) {
-            var today = moment().hours(2).minute(0).seconds(0).milliseconds(0).toDate();
+        takespot: function (userId,spotId,femergency,date) {
+            var today = moment(date).hours(2).minute(0).seconds(0).milliseconds(0).toDate();
             
             var Reservation = Parse.Object.extend("Reservations");
             var reservation = new Reservation();
@@ -53,15 +53,12 @@ angular.module('parkspotyappApp')
             
         },
             
-        releasespot: function(spotId) {
+        releasespot: function(id) {
             
             var Reservation = Parse.Object.extend("Reservations");
             var query = new Parse.Query(Reservation);
         
-            var Spot = Parse.Object.extend("Spot");
-            var spot = new Spot();
-            spot.id = spotId;
-			query.equalTo("spot",spot);
+			query.equalTo("objectId",id);
 
             query.find().then(function(myObj){
                 return Parse.Object.destroyAll(myObj);
