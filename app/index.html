@@ -28,16 +28,12 @@
                 <div class="half text-right">
                     <a class="brand" href="#/">park<span>spoty</span></a>
 
-
-                  <nav>
-                    <a href="#/">Home</a>
-                    <a ng-href="#/user/profile" ng-if="vm.isLoggedIn()">Profile</a>
-                    <a ng-href="#/user/login" ng-if="!vm.isLoggedIn()">Log in</a>
-                    <a ng-click="vm.logOut()" ng-href="#/" ng-if="vm.isLoggedIn()">Log out</a>
-                  </nav>
-
-                  <clock></clock>
-                  <weather-info></weather-info>
+                    <nav>
+                        <a href="#/">Home</a>
+                        <a ng-href="#/user/profile" ng-if="vm.isLoggedIn()">Profile</a>
+                        <a ng-href="#/user/login" ng-if="!vm.isLoggedIn()">Log in</a>
+                        <a ng-click="vm.logOut()" ng-href="#/" ng-if="vm.isLoggedIn()">Log out</a>
+                    </nav>
                 </div>
 
             </div>
@@ -70,20 +66,21 @@
     <script src="https://www.parsecdn.com/js/parse-1.4.2.min.js"></script>
     <!-- //parse.com -->
 
-    <!-- build:js(.) scripts/vendor.js -->
-    <!-- bower:js -->
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.js"></script>
-    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-    <script src="bower_components/angular-messages/angular-messages.js"></script>
-    <script src="bower_components/angular-resource/angular-resource.js"></script>
-    <script src="bower_components/angular-route/angular-route.js"></script>
-    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="bower_components/angular-touch/angular-touch.js"></script>
-    <script src="bower_components/angular-validation-match/dist/angular-input-match.min.js"></script>
-    <script src="bower_components/moment/moment.js"></script>
-    <!-- endbower -->
-    <!-- endbuild -->
+        <!-- build:js(.) scripts/vendor.js -->
+        <!-- bower:js -->
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/angular-animate/angular-animate.js"></script>
+        <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+        <script src="bower_components/angular-messages/angular-messages.js"></script>
+        <script src="bower_components/angular-resource/angular-resource.js"></script>
+        <script src="bower_components/angular-route/angular-route.js"></script>
+        <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+        <script src="bower_components/angular-touch/angular-touch.js"></script>
+        <script src="bower_components/angular-validation-match/dist/angular-input-match.min.js"></script>
+        <script src="bower_components/moment/moment.js"></script>
+        <script src="bower_components/underscore/underscore.js"></script>
+        <!-- endbower -->
+        <!-- endbuild -->
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/app.js"></script>
@@ -101,14 +98,15 @@
     <script src="scripts/services/weather.js"></script>
     <script src="scripts/services/reservation.js"></script>
     <script src="scripts/controllers/reservation.js"></script>
+    <script src="scripts/services/spot.js"></script>
     <script src="scripts/directives/weatherDirective.js"></script>
     <script src="scripts/directives/clockDirective.js"></script>
     <script src="scripts/controllers/resetPassword/resetpassword.js"></script>
     <script src="scripts/controllers/resetPassword/resetPasswordViewModel.js"></script>
     <script src="scripts/controllers/admin/adminViewModel.js"></script>
     <script src="scripts/controllers/admin/admin.js"></script>
+    <script src="scripts/services/draw.js"></script>
     <!-- endbuild -->
-
 
     </body>
 </html>

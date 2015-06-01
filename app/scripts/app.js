@@ -55,8 +55,7 @@ angular
         .when('/reservation', {
         templateUrl: 'views/reservation.html',
         controller: 'ReservationCtrl'
-    })
-        .otherwise({
+    }).otherwise({
         redirectTo: '/'
     });
 })
