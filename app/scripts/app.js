@@ -50,16 +50,12 @@ angular
     })
         .when('/admin', {
         templateUrl: 'views/admin.html',
-        controller: 'AdminCtrl'
-<<<<<<< HEAD
+        controller: 'AdminCtrl' 
     })
         .when('/reservation', {
         templateUrl: 'views/reservation.html',
         controller: 'ReservationCtrl'
-    })
-=======
-        })
->>>>>>> AdminPanel
+    })  
         .otherwise({
         redirectTo: '/'
     });

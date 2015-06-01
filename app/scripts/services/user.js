@@ -132,9 +132,7 @@ angular.module('parkspotyappApp')
                 q.resolve(result);
             });
 
-            return q.promise;
-<<<<<<< HEAD
-=======
+            return q.promise; 
         },
         mailMe: function(email) {
             var q = $q.defer();
@@ -216,8 +214,7 @@ angular.module('parkspotyappApp')
         
         setActiveInDrawFlag : function(status) {
             currUser.set("f_activeInDraw", status);
-            return this.saveUserData();
->>>>>>> AdminPanel
+            return this.saveUserData(); 
         }
         
     };
