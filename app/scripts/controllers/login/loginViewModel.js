@@ -47,7 +47,7 @@ angular.module('parkspotyappApp')
                 self.resentEmail = true;
             }
         });
-    }
-
+    };
+    
     return new LoginAPI();
 });

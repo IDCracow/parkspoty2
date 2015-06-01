@@ -52,6 +52,10 @@ angular
         templateUrl: 'views/admin.html',
         controller: 'AdminCtrl'
     })
+        .when('/reservation', {
+        templateUrl: 'views/reservation.html',
+        controller: 'ReservationCtrl'
+    })
         .otherwise({
         redirectTo: '/'
     });

@@ -5,10 +5,10 @@ angular.module('parkspotyappApp').directive('weatherInfo', function() {
         restrict: 'E', replace: true,
         controller: function($scope,weatherService) {
               weatherService.getWeather(function(data) {
-                 $scope.weatherDataTemp = data.main.temp;
+                 $scope.weatherDataTemp = Math.round(data.main.temp);
                  $scope.weatherDataIcon = 'icon-' + data.weather[0].icon;
               });
         },
-        template: "<div><span>Kraków,</span> <span>{{weatherDataTemp}}</span><span class='{{weatherDataIcon}}'></span></div>"
+        template: "<div><span>Cracow,</span> <span>{{weatherDataTemp}}&#176;C </span><span class='{{weatherDataIcon}}'></span></div>"
     };
 });
