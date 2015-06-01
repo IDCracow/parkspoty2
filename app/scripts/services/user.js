@@ -133,17 +133,6 @@ angular.module('parkspotyappApp')
             });
 
             return q.promise;
-        },
-        mailMe: function(email) {
-            var q = $q.defer();
-
-            Parse.Cloud.run('mailAllUsers', {'email':email}).then(function(result){
-                q.resolve(result);
-            }, function(error) {
-                q.reject(error);   
-            });
-
-            return q.promise;
         }
     };
 });

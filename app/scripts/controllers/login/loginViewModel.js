@@ -48,13 +48,6 @@ angular.module('parkspotyappApp')
             }
         });
     };
-    LoginAPI.prototype.mailMe = function(email) {
-        user.mailMe(email).then(function(result) {
-            console.log(result); 
-        }, function(error) {
-            console.log(error);
-        });
-    }
-
+    
     return new LoginAPI();
 });
