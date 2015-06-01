@@ -16,5 +16,4 @@ angular.module('parkspotyappApp')
        
       reservation.getReservation(d).then(function(data) {
       });
-    
 });

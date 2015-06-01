@@ -8,7 +8,7 @@
  * Controller of the parkspotyappApp
  */
 angular.module('parkspotyappApp')
-    .controller('ProfileCtrl', function ($scope, profileViewModel) {
+    .controller('ProfileCtrl', function ($scope, profileViewModel, Reservation) {
 
     $scope.vm = profileViewModel;
     $scope.items = [ 'one', 'one', 'one' ];
@@ -28,6 +28,13 @@ angular.module('parkspotyappApp')
     $scope.next = function() {
       date.add(1, 'day');
       $scope.date = date.format("dddd, Do MMMM");
+      Reservation.getReservation('2015-06-02').then( function( result ) {
+        console.log( result.toFullJSON() );
+
+        result.forEach( function( item ) {
+            console.log(item.toJSON());
+        })
+      });
     },
 
     $scope.prev = function() {

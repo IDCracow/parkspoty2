@@ -94,9 +94,9 @@ angular.module('parkspotyappApp')
         
         clearAssignedSpots : function () {
             return Parse.Cloud.run('clearAssignedSpotsFromUsers');         
-        }
+        },
 
-getReservation: function (date) {
+        getReservation: function (date) {
             
             var today = moment(date).hours(2).minute(0).seconds(0).milliseconds(0).toDate();
             
@@ -116,6 +116,7 @@ getReservation: function (date) {
             
             
         },
+        
         takespot: function (userId,spotId,femergency,date) {
             var today = moment(date).hours(2).minute(0).seconds(0).milliseconds(0).toDate();
             
