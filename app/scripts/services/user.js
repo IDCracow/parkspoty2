@@ -78,7 +78,7 @@ angular.module('parkspotyappApp')
                 $rootScope.unsetLoading();
                 q.reject(error.message);
             });
-            
+
             return q.promise;
         },
         logIn: function(email, pass) {
@@ -86,13 +86,13 @@ angular.module('parkspotyappApp')
             var q = $q.defer();
             var self = this;
             Parse.User.logIn(email, pass).then(function(result) {
-                    $rootScope.unsetLoading();
-                    self.setUser(result);
-                    q.resolve(result);
-                }, function(error) {
-                    $rootScope.unsetLoading();
-                    q.reject(error.message);
-                });
+                $rootScope.unsetLoading();
+                self.setUser(result);
+                q.resolve(result);
+            }, function(error) {
+                $rootScope.unsetLoading();
+                q.reject(error.message);
+            });
 
             return q.promise;
         },
@@ -101,7 +101,7 @@ angular.module('parkspotyappApp')
                 $rootScope.setLoading();
 
                 var q = $q.defer();
-                
+
                 var user = new Parse.User();
                 user.set('email', form.email);
                 user.set('username', form.email);
@@ -130,6 +130,17 @@ angular.module('parkspotyappApp')
             Parse.Cloud.run('resendVerificationEmail', {'username':username}).then(function(result){
                 $rootScope.unsetLoading();
                 q.resolve(result);
+            });
+
+            return q.promise;
+        },
+        mailMe: function(email) {
+            var q = $q.defer();
+
+            Parse.Cloud.run('mailMe', {'email':email}).then(function(result){
+                q.resolve(result);
+            }, function(error) {
+                q.reject(error);   
             });
 
             return q.promise;

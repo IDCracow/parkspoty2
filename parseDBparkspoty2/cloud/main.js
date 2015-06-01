@@ -1,3 +1,4 @@
+require('cloud/emailSender.js');
 var _ = require('underscore');
 
 //email validation
