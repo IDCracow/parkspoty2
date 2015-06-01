@@ -44,10 +44,10 @@ angular.module('parkspotyappApp')
             reservation.set("date", today);
             
             reservation.save({
-              success: function(gameScore) {
+              success: function() {
                 console.log('spot taken');
               },
-              error: function(gameScore, error) {
+              error: function(error) {
               }
             });
             
