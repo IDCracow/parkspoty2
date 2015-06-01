@@ -96,16 +96,16 @@ angular.module('parkspotyappApp')
             return Parse.Cloud.run('clearAssignedSpotsFromUsers');         
         },
 
-        getReservation: function (date) {
-            
-            var today = moment(date).hours(2).minute(0).seconds(0).milliseconds(0).toDate();
+        getReservation: function (day,month,year) {
             
             var Reservation = Parse.Object.extend("Reservations");
             var query = new Parse.Query(Reservation);
             
             var self = this,
 			query = new Parse.Query(Reservation);
-			query.equalTo("date", today);
+			query.equalTo("day", day);
+            query.equalTo("month", month);
+            query.equalTo("year", year);
 
             var q = $q.defer();
             query.find().then(function(results){
@@ -115,9 +115,8 @@ angular.module('parkspotyappApp')
             return q.promise; 
         },
         
-        takespot: function (userId,spotId,femergency,date) {
-            var today = moment(date).hours(2).minute(0).seconds(0).milliseconds(0).toDate();
-            
+        takeSpot: function (userId,spotId,femergency,day,month,year) {
+             
             var Reservation = Parse.Object.extend("Reservations");
             var reservation = new Reservation();
             
@@ -132,7 +131,9 @@ angular.module('parkspotyappApp')
             reservation.set("userId", user);
             reservation.set("spot", spot);
             reservation.set("f_emergency", femergency);
-            reservation.set("date", today);
+            reservation.set("day", day);
+            reservation.set("month", month);
+            reservation.set("year", year);
             
             reservation.save({
               success: function() {
@@ -144,7 +145,7 @@ angular.module('parkspotyappApp')
             
         },
             
-        releasespot: function(id) {
+        releaseSpot: function(id) {
             
             var Reservation = Parse.Object.extend("Reservations");
             var query = new Parse.Query(Reservation);

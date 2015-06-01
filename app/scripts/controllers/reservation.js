@@ -10,11 +10,5 @@
 angular.module('parkspotyappApp')
   .controller('ReservationCtrl', function ($scope,reservation) {
        
-      var today = moment();
-      var tommorow = moment().add(1,"days");
-      var d = new Date("June 01, 2015 00:00:00");
-       
-      reservation.getReservation(d).then(function(data) {
-      });
-    
+  
 });
