@@ -17,11 +17,5 @@ angular.module('parkspotyappApp')
         Reservation.doDraw();
     };
 
-    AdminAPI.prototype.send = function(keyVal) {
-        notification.sendNotification(keyVal).then(function(result) {
-            console.log(result);
-        });
-    };
-
     return new AdminAPI();
 });
