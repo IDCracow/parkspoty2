@@ -134,27 +134,6 @@ angular.module('parkspotyappApp')
 
             return q.promise; 
         },
-        mailMe: function(email) {
-            var q = $q.defer();
-
-            Parse.Cloud.run('mailMe', {'email':email}).then(function(result){
-                q.resolve(result);
-            }, function(error) {
-                q.reject(error);   
-            });
-
-            return q.promise;
-        },
-        //emails all users with flag f_alertFreeSpot
-        sendNotificationFreeSpot: function(spotNumber, date) {
-            var q = $q.defer();
-
-            Parse.Cloud.run('sendNotificationFreeSpot', {spotNumber, date}).then(function(result) {
-                q.resolve(result);
-            });
-
-            return q.promise;
-        },
         // save user data after setting properites
         saveUserData : function () {
             currUser.save(null, {

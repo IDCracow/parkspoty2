@@ -8,34 +8,32 @@ Parse.Cloud.define('mailAllUsers', function(request, response) {
     var allUsers = new Parse.Query(Parse.User);
 
     allUsers.each(function(user, status) {
-        if (user.getEmail() === 'mziolek@infusion.com') {
-            Mandrill.sendTemplate({
-                template_name: 'parkspot-draw-reminder',
-                template_content: [{
-                    name: 'username',
-                    content: user.firstName
-                }],
-                message: {
-                    text: "Hello!",
-                    subject: "Parkspoty reminder",
-                    from_email: "parkspoty@infusion.com",
-                    from_name: "Parkspoty",
-                    to: [{
-                        email: user.email
-                    }]
-                },
-                async: true
-            },{
-                success: function(httpResponse) {
-                    console.log(httpResponse);
-                    response.success("Emails sent to all users!");
-                },
-                error: function(httpResponse) {
-                    console.error(httpResponse);
-                    response.error(httpResponse);
-                }
-            });
-        }
+        Mandrill.sendTemplate({
+            template_name: 'parkspot-draw-reminder',
+            template_content: [{
+                name: 'username',
+                content: user.firstName
+            }],
+            message: {
+                text: "Hello!",
+                subject: "Parkspoty reminder",
+                from_email: "parkspoty@infusion.com",
+                from_name: "Parkspoty",
+                to: [{
+                    email: user.email
+                }]
+            },
+            async: true
+        },{
+            success: function(httpResponse) {
+                console.log(httpResponse);
+                response.success("Emails sent to all users!");
+            },
+            error: function(httpResponse) {
+                console.error(httpResponse);
+                response.error(httpResponse);
+            }
+        });
     });
 });
 
@@ -87,6 +85,64 @@ Parse.Cloud.define('sendNotificationFreeSpot', function(request, response) {
     });
 });
 
+Parse.Cloud.define('sendNotification', function(request, response) {
+    var args = request.params.args;
+
+    var email;
+    var customMessage = '';
+    var subject = '';
+
+    var email = args.email;
+    if (args.message) {
+        customMessage = args.message;
+    };
+    if (args.subject) {
+        subject = args.subject;   
+    };
+
+    var user = new Parse.Query(Parse.User);
+    user.equalTo('email', email);
+
+    user.first({
+        success: function(userToMail) {
+            Mandrill.sendTemplate({
+                template_name: 'parkspot-notification',
+                template_content: [{
+                    name: 'username',
+                    content: userToMail.attributes.firstName
+                },{
+                    name: 'message',
+                    content: customMessage
+                },{
+                    name: 'subject',
+                    content: subject
+                }],
+                message: {
+                    text: "Hello!",
+                    subject: subject,
+                    from_email: "parkspoty@infusion.com",
+                    from_name: "Parkspoty",
+                    to: [{
+                        email: email
+                    }]
+                },
+                async: true
+            },{
+                success: function(httpResponse) {
+                    response.success(true);
+                },
+                error: function(httpResponse) {
+                    response.error(httpResponse);
+                }
+            });
+        },
+        error: function(error) {
+            response.success(error);   
+        }
+    });
+});
+
+//Job sending email
 Parse.Cloud.job('drawingReminderMailing', function(request, status) {
     var date = new Date();
     var day = date.getUTCDate();
