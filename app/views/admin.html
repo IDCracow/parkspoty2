@@ -1,4 +1,14 @@
 <section style="margin-top:200px">
     <p ng-if="vm.isAdmin">This is the admin view.</p>
     <button ng-click="vm.drawSpots()">Draw spots for next month</button>
+    
+    <table>
+        <tr ng-repeat="item in vm.spots">
+            <td ng-repeat="field in item">{{field}}</td>
+        </tr>
+    </table>
+    <button ng-click="vm.createSpot('34D', false, false)">create spot</button>
+    <button ng-click="vm.removeSpot('34D')">remove spot</button>
+    <button ng-click="vm.updateSpot('34D', true, false)">update spot</button>
+    
 </section>

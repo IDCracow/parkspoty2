@@ -1,4 +1,5 @@
 require('cloud/emailSender.js');
+require('cloud/spotCRUD.js');
 
 var _ = require('underscore');
 

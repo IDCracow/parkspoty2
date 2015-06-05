@@ -21,7 +21,7 @@ angular.module('parkspotyappApp')
             return q.promise;
         },
         /*
-        keyVal should look like this: ({email: 'mziolek@infusion.com', subject: 'tytulik wiadomosci', message: 'To jest wiadomosc do wpisania'})
+        keyVal should look like this: ({email: 'test@infusion.com', subject: 'tytulik wiadomosci', message: 'To jest wiadomosc do wpisania'})
         */
         sendNotification: function(keyVal) {
             var q = $q.defer();
