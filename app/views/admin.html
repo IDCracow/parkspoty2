@@ -1,14 +1,36 @@
 <section style="margin-top:200px">
     <p ng-if="vm.isAdmin">This is the admin view.</p>
     <button ng-click="vm.drawSpots()">Draw spots for next month</button>
-    
+
     <table>
-        <tr ng-repeat="item in vm.spots">
-            <td ng-repeat="field in item">{{field}}</td>
+        <tr>
+            <th>Spot</th>
+            <th>Outside</th>
+            <th>Emergency</th>
+        </tr>
+        <tr ng-repeat="item in vm.spots | orderBy:'spotname'" id="row{{$index}}">
+            <form novalidate>
+                <td>
+                    <input type="text" ng-model="spot.spotname" name="spotname" ng-init="spot.spotname = item.spotname" disabled />
+                </td>
+                <td>
+                    <input type="text" ng-model="spot.f_outside" name="f_outside" ng-init="spot.f_outside = item.f_outside" disabled />
+                </td>
+                <td>
+                    <input type="text" ng-model="spot.f_emergency" name="f_emergency" ng-init="spot.f_emergency = item.f_emergency" disabled />
+                </td>
+                <td class="remove-spot">
+                    <button ng-click="vm.removeSpot('{{item.spotname}}')">Remove</button>
+                </td>
+                <td class="edit-spot">
+                    <button ng-click="vm.editSpot('#row{{$index}}')" class="edit-btn">Edit</button>
+                    <button ng-click="vm.updateSpot(spot)" class="update-btn">Update spot</button>
+                </td>
+            </form>
         </tr>
     </table>
     <button ng-click="vm.createSpot('34D', false, false)">create spot</button>
     <button ng-click="vm.removeSpot('34D')">remove spot</button>
     <button ng-click="vm.updateSpot('34D', true, false)">update spot</button>
-    
+
 </section>

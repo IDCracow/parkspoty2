@@ -18,29 +18,48 @@ angular.module('parkspotyappApp')
         Reservation.doDraw();
     };
 
+    AdminAPI.prototype.spots;
+    AdminAPI.prototype.editable = true;
+
     AdminAPI.prototype.getSpots = function() {
-        var self = this;
-        
         Spot.getSpots().then(function(result) {
-            self.spots = result;
+            AdminAPI.prototype.spots = result;
         });
     };
 
     AdminAPI.prototype.createSpot = function(spotName, isOutside, isEmergency) {
         Spot.createSpot(spotName, isOutside, isEmergency).then(function(result) {
-            console.log(result); 
+            AdminAPI.prototype.getSpots();
         });
     };
 
     AdminAPI.prototype.removeSpot = function(spotName) {
         Spot.removeSpot(spotName).then(function(result) {
-            console.log(result); 
+            AdminAPI.prototype.getSpots();
         });
     };
 
-    AdminAPI.prototype.updateSpot = function(spotName, isOutside, isEmergency) {
-        Spot.updateSpot(spotName, isOutside, isEmergency).then(function(result) {
-            console.log(result); 
+    AdminAPI.prototype.updateSpot = function(spot) {
+        if (spot.f_outside == "true") {
+            var outside = true;
+        } else {
+            var outside = false;
+        };
+        if (spot.f_emergency == "true") {
+            var emergency = true;
+        } else {
+            var emergency = false;
+        };
+        Spot.updateSpot(spot.spotname, outside, emergency).then(function(result) {
+            AdminAPI.prototype.getSpots();
+        });
+    };
+
+    AdminAPI.prototype.editSpot = function(row) {
+        var editingRow = angular.element(document.querySelector(row));
+        var inputs = editingRow.find('input');
+        _.each(inputs, function(input) {
+            input.disabled = false; 
         });
     };
 
