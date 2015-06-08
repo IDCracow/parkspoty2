@@ -49,19 +49,19 @@ angular.module('parkspotyappApp')
 
             return q.promise;
         },
-        removeSpot : function(spotName) {
+        removeSpot : function(spotId) {
             var q = $q.defer();
 
-            Parse.Cloud.run('removeSpot', {spotname: spotName}).then( function(result) {
+            Parse.Cloud.run('removeSpot', {spotId: spotId}).then( function(result) {
                 q.resolve(result);
             });
 
             return q.promise;
         },
-        updateSpot : function(spotName, isOutside, isEmergency) {
+        updateSpot : function(spotId, spotName, isOutside, isEmergency) {
             var q = $q.defer();
 
-            Parse.Cloud.run('updateSpot', {spotname: spotName, outside: isOutside, emergency: isEmergency}).then( function(result) {
+            Parse.Cloud.run('updateSpot', {spotId: spotId, spotname: spotName, outside: isOutside, emergency: isEmergency}).then( function(result) {
                 q.resolve(result);
             });
 

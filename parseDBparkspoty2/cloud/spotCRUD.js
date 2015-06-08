@@ -8,7 +8,7 @@ Parse.Cloud.define('getSpots', function(request, response) {
         spots.find({
             success: function(results) {
                 _.each(results, function(result) {
-                    allSpots.push(result.attributes);
+                    allSpots.push(result);
                 });
                 response.success(allSpots);
             }
@@ -60,9 +60,9 @@ Parse.Cloud.define('createSpot', function(request, response) {
 });
 
 Parse.Cloud.define('removeSpot', function(request, response) {
-    var spotName = request.params.spotname;
+    var spotId = request.params.spotId;
     var spots = new Parse.Query('Spot');
-    spots.equalTo('spotname', spotName);
+    spots.equalTo('objectId', spotId);
 
     spots.first({
         success: function(object) {
@@ -86,13 +86,14 @@ Parse.Cloud.define('removeSpot', function(request, response) {
 });
 
 Parse.Cloud.define('updateSpot', function(request, response) {
-    var spotName = request.params.spotname;
+    var spotId = request.params.spotId;
     var spots = new Parse.Query('Spot');
-    spots.equalTo('spotname', spotName);
+    spots.equalTo('objectId', spotId);
 
     spots.first({
         success: function(object) {
             if (object) {
+                object.set('spotname', request.params.spotname);
                 object.set('f_emergency', request.params.emergency);
                 object.set('f_outside', request.params.outside);
                 object.save(null, {

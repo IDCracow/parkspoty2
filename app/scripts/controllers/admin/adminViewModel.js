@@ -18,7 +18,7 @@ angular.module('parkspotyappApp')
         Reservation.doDraw();
     };
 
-    AdminAPI.prototype.spots;
+    AdminAPI.prototype.spots = [];
     AdminAPI.prototype.editable = true;
 
     AdminAPI.prototype.getSpots = function() {
@@ -27,32 +27,26 @@ angular.module('parkspotyappApp')
         });
     };
 
-    AdminAPI.prototype.createSpot = function(spotName, isOutside, isEmergency) {
-        Spot.createSpot(spotName, isOutside, isEmergency).then(function(result) {
+    AdminAPI.prototype.createSpot = function(newSpot) {
+        if (newSpot.spotname) {
+            Spot.createSpot(newSpot.spotname, newSpot.f_outside, newSpot.f_emergency).then(function(result) {
+                AdminAPI.prototype.getSpots();
+            });
+        }
+    };
+
+    AdminAPI.prototype.removeSpot = function(spotId) {
+        Spot.removeSpot(spotId).then(function(result) {
             AdminAPI.prototype.getSpots();
         });
     };
 
-    AdminAPI.prototype.removeSpot = function(spotName) {
-        Spot.removeSpot(spotName).then(function(result) {
-            AdminAPI.prototype.getSpots();
-        });
-    };
-
-    AdminAPI.prototype.updateSpot = function(spot) {
-        if (spot.f_outside == "true") {
-            var outside = true;
-        } else {
-            var outside = false;
-        };
-        if (spot.f_emergency == "true") {
-            var emergency = true;
-        } else {
-            var emergency = false;
-        };
-        Spot.updateSpot(spot.spotname, outside, emergency).then(function(result) {
-            AdminAPI.prototype.getSpots();
-        });
+    AdminAPI.prototype.updateSpot = function(spotId, spot) {
+        if (spot.spotname) {
+            Spot.updateSpot(spotId, spot.spotname, spot.f_outside, spot.f_emergency).then(function(result) {
+                AdminAPI.prototype.getSpots();
+            });
+        }
     };
 
     AdminAPI.prototype.editSpot = function(row) {
