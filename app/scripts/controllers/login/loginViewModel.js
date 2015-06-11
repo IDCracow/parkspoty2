@@ -48,6 +48,14 @@ angular.module('parkspotyappApp')
             }
         });
     };
+    LoginAPI.prototype.sendNotificationFreeSpot = function(spotNumber, date) {
+        user.sendNotificationFreeSpot(spotNumber, date).then(function(result) {
+            if (result) {
+                console.log(resul);
+                //show some message   
+            }
+        });
+    };
     
     return new LoginAPI();
 });

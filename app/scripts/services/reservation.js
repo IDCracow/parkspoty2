@@ -1,15 +1,5 @@
 'use strict';
 
-
-angular.module('parkspotyappApp')
-    .service('reservation', function ($q) {
-        return {
-        
-           
-    };  
-});
-'use strict';
-
 /**
  * @ngdoc service
  * @name parkspotyappApp.Reservation

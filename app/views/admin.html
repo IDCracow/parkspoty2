@@ -1,4 +1,40 @@
 <section style="margin-top:200px">
     <p ng-if="vm.isAdmin">This is the admin view.</p>
     <button ng-click="vm.drawSpots()">Draw spots for next month</button>
+
+    <table>
+        <tr>
+            <th>Spot</th>
+            <th>Outside</th>
+            <th>Emergency</th>
+        </tr>
+        <tr ng-repeat="item in vm.spots | orderBy:'attributes.spotname'" id="row{{$index}}">
+            <form novalidate>
+                <td>
+                    <input type="text" ng-model="spot.spotname" name="spotname" ng-init="spot.spotname = item.attributes.spotname" disabled />
+                </td>
+                <td>
+                    <input type="checkbox" ng-model="spot.f_outside" name="f_outside" ng-init="spot.f_outside = item.attributes.f_outside" disabled />
+                </td>
+                <td>
+                    <input type="checkbox" ng-model="spot.f_emergency" name="f_emergency" ng-init="spot.f_emergency = item.attributes.f_emergency" disabled />
+                </td>
+                <td class="remove-spot">
+                    <button ng-click="vm.removeSpot('{{item.id}}')">Remove</button>
+                </td>
+                <td class="edit-spot">
+                    <button ng-click="vm.editSpot('#row{{$index}}')" class="edit-btn">Edit</button>
+                    <button ng-click="vm.updateSpot(item.id, spot)" class="update-btn">Update spot</button>
+                </td>
+            </form>
+        </tr>
+    </table>
+    <form novalidate>
+        <input type="text" name="spotname" ng-model="newSpot.spotname" />
+        <label for="f_outside">Is outside?</label>
+        <input type="checkbox" name="f_outside" id="f_outside" ng-model="newSpot.f_outside" ng-init="newSpot.f_outside = false" />
+        <label for="f_emergency">Is emergency?</label>
+        <input type="checkbox" name="f_emergency" id="f_emergency" ng-model="newSpot.f_emergency" ng-init="newSpot.f_emergency = false" />
+        <button ng-click="vm.createSpot(newSpot)">Create spot</button>
+    </form>
 </section>
