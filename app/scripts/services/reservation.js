@@ -1,15 +1,5 @@
 'use strict';
 
-
-angular.module('parkspotyappApp')
-    .service('reservation', function ($q) {
-        return {
-        
-           
-    };  
-});
-'use strict';
-
 /**
  * @ngdoc service
  * @name parkspotyappApp.Reservation
@@ -112,9 +102,7 @@ angular.module('parkspotyappApp')
                 console.log(results);
                 q.resolve(results);
             });
-            return q.promise;
-            
-            
+            return q.promise; 
         },
         
         takespot: function (userId,spotId,femergency,date) {

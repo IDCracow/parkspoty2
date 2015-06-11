@@ -50,7 +50,7 @@ angular
     })
         .when('/admin', {
         templateUrl: 'views/admin.html',
-        controller: 'AdminCtrl'
+        controller: 'AdminCtrl' 
     })
         .when('/reservation', {
         templateUrl: 'views/reservation.html',
