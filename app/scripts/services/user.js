@@ -160,8 +160,8 @@ angular.module('parkspotyappApp')
             return currUser.get('f_alertFreeSpot');
         },
 
-        getAlertRowReminderFlag : function() {
-            return currUser.get('f_alertRowReminder');
+        getAlertDrawReminderFlag : function() {
+            return currUser.get('f_alertDrawReminder');
         },
 
         getActiveInDrawFlag : function() {
@@ -188,16 +188,19 @@ angular.module('parkspotyappApp')
         },
         // setting flags        
         setAlertFreeSpotFlag : function(status) {
+            console.log(status);
             currUser.set("f_alertFreeSpot", status);
             this.saveUserData();
         },
 
-        setAlertRowReminderFlag : function(status) {
-            currUser.set("f_alertRowReminder", status);
+        setAlertDrowReminderFlag : function(status) {
+            console.log(status);
+            currUser.set("f_alertDrawReminder", status);
             return this.saveUserData();
         },
 
         setActiveInDrawFlag : function(status) {
+            console.log(status);
             currUser.set("f_activeInDraw", status);
             return this.saveUserData(); 
         }

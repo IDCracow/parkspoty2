@@ -32,13 +32,15 @@
     <ul class="list-simple list-separator">
         <li>
             <label for="cbox_drawReminder">
-                <span class="cbox cbox-yellow cbox-bool text-center" ng-class="{selected : valFlagDrawRemider}"><input type="checkbox" name="drawReminder" id="cbox_drawReminder" ng-model="valFlagDrawRemider" ng-change="changeFlagDrawRemider()"></span>
+                <span class="cbox cbox-yellow cbox-bool text-center" ng-class="{selected : vm.valFlagDrawReminder()}">
+                    <input type="checkbox" name="drawReminder" id="cbox_drawReminder" ng-model="valFlagDrawReminder" ng-change="vm.changeFlagDrawReminder(!vm.valFlagDrawReminder())">
+                </span>
                 draw reminder
             </label>
         </li>
         <li>
             <label for="cbox_spotNotifer">
-                <span class="cbox cbox-yellow cbox-bool text-center" ng-class="{selected : valFlagSpotNotifer}"><input type="checkbox" name="spotNotifer" id="cbox_spotNotifer" ng-model="valFlagSpotNotifer" ng-change="changeFlagSpotNotifer()"></span>
+                <span class="cbox cbox-yellow cbox-bool text-center" ng-class="{selected : vm.valFlagSpotNotifier()}"><input type="checkbox" name="spotNotifer" id="cbox_spotNotifer" ng-model="valFlagSpotNotifier" ng-change="vm.changeFlagSpotNotifier(!vm.valFlagSpotNotifier())"></span>
                 free spot notifer
             </label>
         </li>
@@ -83,20 +85,4 @@
             </ul>
         </div>
     </div>
-
-    <h3 class="relative mt-50 clearfix"><i class="ico-bell ico-side"></i> alerts</h3>
-    <ul class="list-simple list-separator">
-        <li>
-            <label for="cbox_drawReminder">
-                <span class="cbox cbox-yellow cbox-bool text-center" ng-class="{selected : valFlagDrawRemider}"><input type="checkbox" name="drawReminder" id="cbox_drawReminder" ng-model="valFlagDrawRemider" ng-change="changeFlagDrawRemider()"></span>
-                draw reminder
-            </label>
-        </li>
-        <li>
-            <label for="cbox_spotNotifer">
-                <span class="cbox cbox-yellow cbox-bool text-center" ng-class="{selected : valFlagSpotNotifer}"><input type="checkbox" name="spotNotifer" id="cbox_spotNotifer" ng-model="valFlagSpotNotifer" ng-change="changeFlagSpotNotifer()"></span>
-                free spot notifer
-            </label>
-        </li>
-    </ul>
 </section>
