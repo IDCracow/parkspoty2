@@ -35,6 +35,28 @@ angular.module('parkspotyappApp')
             });
              
             return q.promise;
+        },
+        
+        getDrawsInMonth : function (month, year) {            
+            var Draw = Parse.Object.extend('Draw');
+            var query = new Parse.Query(Draw);
+             
+			query.equalTo("month", month);
+			query.equalTo("year", year);
+
+            var q = $q.defer();
+            query.find().then(function(results){ 
+                q.resolve(results);
+            });
+            return q.promise; 
+        },
+        
+        getDrawMonths : function () {
+            var previousMonth = false;
+            var currentMonth = false;
+            var nextMonth = null;
         }
+        
+        
     }
   });
