@@ -15,8 +15,8 @@ angular.module('parkspotyappApp')
     var date = moment();
     $scope.date = date.format("dddd, Do MMMM");
 
-    $scope.addPoint = function() {
-      $scope.items.push('one');
+    $scope.addPoint = function(item) {
+      $scope.items.push(item);
       return false;
     },
 
@@ -25,15 +25,19 @@ angular.module('parkspotyappApp')
       return false;
     },
 
+    $scope.clearPoints = function() {
+      $scope.items = [];
+    },
+
     $scope.next = function() {
       date.add(1, 'day');
       $scope.date = date.format("dddd, Do MMMM");
-      Reservation.getReservationForDay(20,6,2015).then( function( result ) {
-        console.log(result);
-        // console.log( result.toFullJSON() );
+      $scope.clearPoints();
 
+      Reservation.getReservationForDay(20,6,2015).then( function( result ) {
+        
         result.forEach( function( item ) {
-          console.log(item.toJSON());
+          $scope.addPoint(item.get('user'));
         })
       });
     },
