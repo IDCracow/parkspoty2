@@ -19,11 +19,21 @@ angular.module('parkspotyappApp')
     };
 
     AdminAPI.prototype.spots = [];
+    AdminAPI.prototype.spotsRemoved = [];
     AdminAPI.prototype.editable = true;
 
     AdminAPI.prototype.getSpots = function() {
         Spot.getSpots().then(function(result) {
-            AdminAPI.prototype.spots = result;
+            AdminAPI.prototype.spots = [];
+            AdminAPI.prototype.spotsRemoved = [];
+            var spots = result;
+            _.each(spots, function(item) {
+                if (!item.attributes.f_removed) {
+                    AdminAPI.prototype.spots.push(item);  
+                } else {
+                    AdminAPI.prototype.spotsRemoved.push(item);
+                }
+            });
         });
     };
 

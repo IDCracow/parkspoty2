@@ -27,6 +27,7 @@ Parse.Cloud.define('createSpot', function(request, response) {
     newSpot.set('spotname', spotName);
     newSpot.set('f_emergency', request.params.emergency);
     newSpot.set('f_outside', request.params.outside);
+    newSpot.set('f_removed', false);
 
     var checkSpots = new Parse.Query('Spot');
     checkSpots.equalTo('spotname', spotName);
@@ -67,12 +68,10 @@ Parse.Cloud.define('removeSpot', function(request, response) {
     spots.first({
         success: function(object) {
             if (object) {
-                object.destroy({
-                    success: function(result) {
-                        response.success(result);
-                    },
-                    error: function(error) {
-                        response.success(error);
+                object.set('f_removed', true);
+                object.save(null, {
+                    success: function() {
+                        response.success(true);   
                     }
                 });
             } else {
