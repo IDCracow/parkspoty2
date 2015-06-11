@@ -35,10 +35,16 @@ angular.module('parkspotyappApp')
       $scope.clearPoints();
 
       Reservation.getReservationForDay(20,6,2015).then( function( result ) {
-        
+        var array = [];
+         
         result.forEach( function( item ) {
-          $scope.addPoint(item.get('user'));
-        })
+          array.push(item.toJSON());
+        });
+
+        //getting emergency spots        
+        _.where(array, { f_emergency: false }).forEach( function( arrayItem ) {
+          $scope.addPoint( arrayItem );
+        });
       });
     },
 
