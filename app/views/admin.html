@@ -28,6 +28,29 @@
                 </td>
             </form>
         </tr>
+        <tr>
+            <td>Removed spots</td>
+        </tr>
+        <tr ng-repeat="itemRemoved in vm.spotsRemoved | orderBy:'attributes.spotname'" id="row{{$index}}">
+            <form novalidate>
+                <td>
+                    <input type="text" ng-model="spot.spotname" name="spotname" ng-init="spot.spotname = itemRemoved.attributes.spotname" disabled />
+                </td>
+                <td>
+                    <input type="checkbox" ng-model="spot.f_outside" name="f_outside" ng-init="spot.f_outside = itemRemoved.attributes.f_outside" disabled />
+                </td>
+                <td>
+                    <input type="checkbox" ng-model="spot.f_emergency" name="f_emergency" ng-init="spot.f_emergency = itemRemoved.attributes.f_emergency" disabled />
+                </td>
+                <td class="remove-spot">
+                    <button ng-click="vm.removeSpot('{{itemRemoved.id}}')">Remove</button>
+                </td>
+                <td class="edit-spot">
+                    <button ng-click="vm.editSpot('#row{{$index}}')" class="edit-btn">Edit</button>
+                    <button ng-click="vm.updateSpot(itemRemoved.id, spot)" class="update-btn">Update spot</button>
+                </td>
+            </form>
+        </tr>
     </table>
     <form novalidate>
         <input type="text" name="spotname" ng-model="newSpot.spotname" />
