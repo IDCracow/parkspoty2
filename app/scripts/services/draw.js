@@ -66,11 +66,36 @@ angular.module('parkspotyappApp')
         },
         
         getDrawMonths : function () {
+            var _self = this;
+            
             var previousMonth = false;
             var currentMonth = false;
-            var nextMonth = null;
+            var nextMonth = false;
+            
+            var d = new Date();
+            var currentMonthN = d.getMonth() + 1;
+            var currentYearN = d.getFullYear();
+            
+            return _self.getDrawsInMonth(currentMonthN-1, currentYearN)
+            .then(function(data) {
+                if(data.length) {
+                    previousMonth = true;
+                }
+                return _self.getDrawsInMonth(currentMonthN, currentYearN);
+            })
+            .then(function(data2){
+                if(data2.length) {
+                    previousMonth = currentMonth = true;   
+                }
+                return _self.getDrawsInMonth(currentMonthN+1, currentYearN);
+            })
+            .then(function(data3){
+                if(data3.length){
+                    previousMonth = currentMonth = nextMonth = true;
+                }
+                
+                return {availableMonths : { previousMonth, currentMonth, nextMonth }};
+            });
         }
-        
-        
     }
   });
