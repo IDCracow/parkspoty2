@@ -28,12 +28,13 @@ angular.module('parkspotyappApp')
     $scope.next = function() {
       date.add(1, 'day');
       $scope.date = date.format("dddd, Do MMMM");
-      Reservation.getReservation('2015-06-02').then( function( result ) {
-        console.log( result.toFullJSON() );
+      Reservation.getReservation('2015-06-20-06').then( function( result ) {
+        console.log(result);
+        // console.log( result.toFullJSON() );
 
-        result.forEach( function( item ) {
-            console.log(item.toJSON());
-        })
+        // result.forEach( function( item ) {
+        //     console.log(item.toJSON());
+        // })
       });
     },
 
