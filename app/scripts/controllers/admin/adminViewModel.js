@@ -24,10 +24,10 @@ angular.module('parkspotyappApp')
 
     AdminAPI.prototype.getSpots = function() {
         Spot.getSpots().then(function(result) {
-            //AdminAPI.prototype.spots = result;
+            AdminAPI.prototype.spots = [];
+            AdminAPI.prototype.spotsRemoved = [];
             var spots = result;
             _.each(spots, function(item) {
-                console.log(item.attributes.f_removed); 
                 if (!item.attributes.f_removed) {
                     AdminAPI.prototype.spots.push(item);  
                 } else {
