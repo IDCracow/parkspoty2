@@ -117,7 +117,6 @@ angular.module('parkspotyappApp')
 
             var q = $q.defer();
             query.find().then(function(results){
-                console.log(results);
                 q.resolve(results);
             });
             return q.promise; 
