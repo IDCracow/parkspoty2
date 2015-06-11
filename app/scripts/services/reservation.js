@@ -8,7 +8,7 @@
  * Service in the parkspotyappApp.
  */
 angular.module('parkspotyappApp')
-  .service('Reservation', function (user, Spot, $q) {
+  .service('Reservation', function (user, Spot, Draw, $q) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     
     var drawTable = []; //table which contains users with prepared importance
@@ -21,7 +21,7 @@ angular.module('parkspotyappApp')
                 //console.log('users frin getAllUsersForDraw', users);
                  _.each(users, function(user){  
                      for(var i = 0; i < user.attributes.ticketsLeft; i++) {
-                        temporaryDrawTable.push(user.attributes.username);
+                        temporaryDrawTable.push({'userId' : user.id, 'email' : user.attributes.email, 'username' : (user.attributes.firstName + ' ' + user.attributes.lastName)});
                      }
                  }); 
                 //console.log('temporaryDrawTable frin getAllUsersForDraw', temporaryDrawTable);
@@ -36,49 +36,56 @@ angular.module('parkspotyappApp')
                 drawTable = _.shuffle(drawTable);
                 var winner = _.first(drawTable);
                 //console.log('winner', winner);
-                var spotname = avaiableParkSpots[i].attributes.spotname;
-                listOfWinners.push({winner : winner, spotname: spotname});
+                var spot = {'spotId' : avaiableParkSpots[i].id, 'spotname' : avaiableParkSpots[i].attributes.spotname};
+                listOfWinners.push({winner : winner, spot: spot});
                 drawTable = _.without(drawTable, winner);                
             }
             return listOfWinners;
         },
         
         assignSpotToUser : function(listOfWinners) {
-            if(listOfWinners == undefined) {
-                //console.log('undefined listofwinners');
+            if(listOfWinners == undefined) { 
                 return;
             }
          
-            
-            // 1. save spot to user table in column 'spot'
+            console.log(listOfWinners);
+            //  save spot to user table in column 'spot'
             return Parse.Cloud.run('setCurrentSpotToUser', { 'listOfWinners' : listOfWinners}).then(function(result){
                 //console.log(result);
-            }); 
-            
-         
-            // 2. add to reservation table
-            
-            // TODO Somewhere -> removing tickets -1
+            });  
         },
         
-        doDraw : function() { 
+        assignReserviationToUser : function(listOfWinners, month, year) {
+            for(var i = 0; i < listOfWinners.length; i++) { 
+               this.takespotForMonth(listOfWinners[i].winner.userId, listOfWinners[i].spot.spotId, listOfWinners[i].winner.username, month, year);
+            }
+            return true;
+        },
+        
+        doDraw : function(month, year) { 
             var self = this; 
             
             Spot.getAvailbleSpotsForDrawing()
-            .then(function(data){
+            .then(function(data) {
                 return self.availbleSpots = data;
             })
             .then(function() {
                 return self.generateDrawTable();
             })
-            .then(function(){     
+            .then(function() {     
                  return self.winners = self.drawSpots(drawTable, self.availbleSpots);
             })
-            .then(function(){
+            .then(function() {
                 return self.clearAssignedSpots()
             })
             .then(function() {
                 return self.assignSpotToUser(self.winners);
+            })            
+            .then(function() {       
+                return self.assignReserviationToUser(self.winners, month, year);
+            })            
+            .then(function() {       
+                return Draw.setDraw(self.winners, month, year);
             });
         },
         
@@ -87,7 +94,6 @@ angular.module('parkspotyappApp')
         },
 
         getReservationForDay: function (day,month,year) {
-            
             var Reservation = Parse.Object.extend("Reservations");
             var query = new Parse.Query(Reservation);
             
@@ -162,10 +168,48 @@ angular.module('parkspotyappApp')
             reservation.save({
               success: function() {
                 console.log('spot taken');
+
               },
               error: function(error) {
               }
             });
+            
+        },
+        
+        takespotForMonth: function (userId, spotId, username, month, year) {
+                         
+            var Spot = Parse.Object.extend("Spot");
+            var spot = new Spot();
+            spot.id = spotId;
+            
+            var User = Parse.Object.extend("User");
+            var user = new User();
+            user.id = userId;
+            
+            var m = moment(new Date(year, month, 1));
+            var daysInMonth = m.endOf('month').format('D');
+                
+            for(var i = 0; i < daysInMonth; i++) {
+                var Reservation = Parse.Object.extend("Reservations");
+                var reservation = new Reservation();
+            
+                reservation.set("userId", user);
+                reservation.set("user", username);
+                reservation.set("spot", spot);
+                reservation.set("f_emergency", false);
+                reservation.set("day", i);
+                reservation.set("month", month);
+                reservation.set("year", year);
+
+                reservation.save({
+                  success: function(gameScore) { 
+                  },
+                  error: function(gameScore, error) {
+                  }
+                });                
+            }
+            
+            return true;
             
         },
             
