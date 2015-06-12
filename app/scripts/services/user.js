@@ -132,7 +132,18 @@ angular.module('parkspotyappApp')
                 q.resolve(result);
             });
 
-            return q.promise; 
+            return q.promise;
+        },
+        mailMe: function(email) {
+            var q = $q.defer();
+
+            Parse.Cloud.run('mailMe', {'email':email}).then(function(result){
+                q.resolve(result);
+            }, function(error) {
+                q.reject(error);   
+            });
+
+            return q.promise;
         },
         // save user data after setting properites
         saveUserData : function () {
@@ -186,15 +197,14 @@ angular.module('parkspotyappApp')
             });
             return q.promise;
         },
+
         // setting flags        
         setAlertFreeSpotFlag : function(status) {
-            console.log(status);
             currUser.set("f_alertFreeSpot", status);
             this.saveUserData();
         },
 
         setAlertDrowReminderFlag : function(status) {
-            console.log(status);
             currUser.set("f_alertDrawReminder", status);
             return this.saveUserData();
         },
@@ -202,7 +212,7 @@ angular.module('parkspotyappApp')
         setActiveInDrawFlag : function(status) {
             console.log(status);
             currUser.set("f_activeInDraw", status);
-            return this.saveUserData(); 
+            return this.saveUserData();
         }
     };
 });

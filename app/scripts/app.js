@@ -55,8 +55,7 @@ angular
         .when('/reservation', {
         templateUrl: 'views/reservation.html',
         controller: 'ReservationCtrl'
-    })  
-        .otherwise({
+    }).otherwise({
         redirectTo: '/'
     });
 })
@@ -68,8 +67,8 @@ angular
             }
         } else {
             user.isAdmin().then(function(result) {
-                if (!result && next.templateUrl === 'views/admin.html') {
-                    $location.path('/');   
+                if (!result && next.templateUrl == "views/admin.html") {
+                    $location.path("/");
                 }
             });
             if (next.templateUrl === 'views/login.html' || next.templateUrl === 'views/register.html') {

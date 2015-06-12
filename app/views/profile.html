@@ -10,7 +10,6 @@
     <h1>hello {{vm.firstName}} <span class="current-spot">{{vm.currentSpot}}</span></h1>
 </header>
 
-
 <section class="profile-page">
     <header class="fz40">wednesday 6th may</header>
 
@@ -48,9 +47,8 @@
 </section>
 
 <section>
-    <header class="fz40"><a href="" ng-click="next()">prev</a> wednesday 6th may <a href="" ng-click="next()">next</a></header>
-    <day></day>
-    
+
+    <header class="fz40"><a href="" ng-click="prev()">prev</a> {{date}} <a href="" ng-click="next()">next</a></header>
     <div class="row">
         <div class="half">
             <h3>emergency</h3>
@@ -75,14 +73,15 @@
 
             <ul class="list-simple list-separator">
                 <li ng-repeat="object in items track by $index">
-                  <label for="cbox_drawReminder">
-                      <span class="cbox cbox-regular cbox-bool text-center" ng-class="{selected : valFlagDrawRemider}">
-                          <input type="checkbox" name="drawReminder" id="cbox_drawReminder" ng-model="valFlagDrawRemider" ng-change="changeFlagDrawRemider()">
-                      </span>
-                      draw reminder <a href="" ng-click="removePoint()">-</a>
-                  </label>
+                    <label for="cbox_drawReminder">
+                        <span class="cbox cbox-regular cbox-bool text-center" ng-class="{selected : valFlagDrawRemider}">
+                            <input type="checkbox" name="drawReminder" id="cbox_drawReminder" ng-model="valFlagDrawRemider" ng-change="changeFlagDrawRemider()">
+                        </span>
+                        draw reminder <a href="" ng-click="removePoint()">-</a>
+                    </label>
                 </li>
             </ul>
         </div>
     </div>
+
 </section>

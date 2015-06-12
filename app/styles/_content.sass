@@ -163,12 +163,31 @@ svg
 
 .list-separator
   border-bottom: 1px solid rgba($borderColor, .3)
-  overflow: auto
+  overflow: visible
   li
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out
     padding: 0.5em 0
     border-top: 1px solid rgba($borderColor, .3)
   span
     margin-right: 1em
+  .ng-enter
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out
+    left: 10px
+    opacity: 0
+  .ng-enter-active
+    transform: translate(-30px,0)
+    opacity: 1
+  .ng-leave
+    transition: opacity 0.3s ease-in, transform 0.3s ease-in
+    opacity: 1
+  .ng-leave-active
+    transform: translate(50px,0)
+    opacity: 0
+  .ng-enter-stagger,
+  .ng-leave-stagger
+    /* 200ms will be applied between each sucessive enter operation */
+    -webkit-transition-delay: 0.3s
+    transition-delay: 0.3s
 
 .ico-bell
   position: absolute
