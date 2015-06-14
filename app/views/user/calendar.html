@@ -1,0 +1,4 @@
+<p>{{vm.todayDay}} {{vm.todayMonth}} {{vm.todayYear}}</p>
+<div class="month">
+    <day-of-month ng-repeat="day in vm.getNumber(vm.daysInMonth) track by $index">{{$index + 1}}</day-of-month>
+</div>

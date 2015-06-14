@@ -42,4 +42,5 @@ angular.module('parkspotyappApp')
         date.subtract(1, 'day');
         $scope.date = date.format("dddd, Do MMMM");
     }
+
 });

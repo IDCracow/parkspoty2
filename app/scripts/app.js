@@ -55,6 +55,10 @@ angular
         .when('/reservation', {
         templateUrl: 'views/reservation.html',
         controller: 'ReservationCtrl'
+    })
+        .when('/user/calendar', {
+        templateUrl: 'views/user/calendar.html',
+        controller: 'UserCalendarCtrl'
     }).otherwise({
         redirectTo: '/'
     });
