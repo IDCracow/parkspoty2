@@ -8,10 +8,13 @@
  * Controller of the parkspotyappApp
  */
 angular.module('parkspotyappApp')
-  .controller('UserCalendarCtrl', function ($scope, calendarViewModel) {
+    .controller('UserCalendarCtrl', function ($scope, calendarViewModel) {
 
     $scope.vm = calendarViewModel;
-    
+
     $scope.vm.getReservationsForCurrentMonth($scope.vm.todayMonth, $scope.vm.todayYear);
+
+    //$scope.vm.getDateRange(startDate, endDate, dateFormat);
     
-  });
+    console.log($scope.vm.getDateRange("12-04-2015","16-04-2015","DD-MM-YYYY"));
+});

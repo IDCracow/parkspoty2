@@ -1,4 +1,7 @@
-<p>{{vm.todayDay}} {{vm.todayMonth}} {{vm.todayYear}}</p>
 <div class="month">
-    <day-of-month ng-repeat="day in vm.getNumber(vm.daysInMonth) track by $index">{{$index + 1}}</day-of-month>
+    <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+    <day-of-month data-dayname="{{dayname}}" ng-repeat="day in vm.getNumber(vm.daysInMonth) track by $index"></day-of-month>
 </div>
+<p>{{vm.thisMonthFirstDay}}</p>
+
+<p>{{vm.daysInMonth}}</p>
