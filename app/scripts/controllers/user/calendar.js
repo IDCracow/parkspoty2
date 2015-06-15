@@ -12,9 +12,6 @@ angular.module('parkspotyappApp')
 
     $scope.vm = calendarViewModel;
 
-    $scope.vm.getReservationsForCurrentMonth($scope.vm.todayMonth, $scope.vm.todayYear);
+   $scope.month = $scope.vm.getMonthDays({year: 2015, month: 6}) //$scope.vm.getReservationsForCurrentMonth($scope.vm.todayMonth, $scope.vm.todayYear);
 
-    //$scope.vm.getDateRange(startDate, endDate, dateFormat);
-    
-    console.log($scope.vm.getDateRange("12-04-2015","16-04-2015","DD-MM-YYYY"));
 });

@@ -30,6 +30,7 @@ module.exports = function(config) {
       'bower_components/angular-validation-match/dist/angular-input-match.min.js',
       'bower_components/moment/moment.js',
       'bower_components/underscore/underscore.js',
+      'bower_components/moment-recur/moment-recur.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

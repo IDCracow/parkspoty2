@@ -9,12 +9,15 @@
 angular.module('parkspotyappApp')
     .directive('dayOfMonth', function () {
 
-    function link() {
-
+    function link(scope, element) {
+        console.log(scope.day.day());
+        if (scope.$index == 0) {
+            element.addClass('days-from-left-'+scope.day.day() - 1);
+        }
     };
 
     return {
-        template: '<div>{{$index + 1}}</div>',
+        templateUrl: 'scripts/directives/day-of-month/day-of-month.html',
         restrict: 'E',
         link: link
     };

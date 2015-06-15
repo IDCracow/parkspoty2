@@ -1,11 +1,19 @@
+$day-width: 60px
+
 .month
     width: 100%
     max-width: 420px
 
 .month > span,
 day-of-month
-    width: 60px
-    height: 60px
-    line-height: 60px
+    width: $day-width
+    height: $day-width
+    line-height: $day-width
     text-align: center
     display: inline-block
+    
+$class-slug: days-from-left !default
+
+@for $i from 0 through 6
+    .#{$class-slug}-#{$i}
+        margin-left: $day-width * $i
