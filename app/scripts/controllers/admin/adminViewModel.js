@@ -15,7 +15,7 @@ angular.module('parkspotyappApp')
 
     AdminAPI.prototype.drawSpots = function(month, year) {
         var self = this;
-        Reservation.doDraw(month, year);
+        return Reservation.doDraw(month, year);
     };
 
     AdminAPI.prototype.spots = [];

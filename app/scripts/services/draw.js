@@ -68,9 +68,7 @@ angular.module('parkspotyappApp')
         getDrawMonths : function () {
             var _self = this;
             
-            var previousMonth = false;
-            var currentMonth = false;
-            var nextMonth = false;
+            var availableMonths = [];
             
             var d = new Date();
             var currentMonthN = d.getMonth() + 1;
@@ -78,23 +76,23 @@ angular.module('parkspotyappApp')
             
             return _self.getDrawsInMonth(currentMonthN-1, currentYearN)
             .then(function(data) {
-                if(data.length) {
-                    previousMonth = true;
+                if(!data.length) {
+                    availableMonths.push({month:(currentMonthN-1), year:currentYearN});
                 }
                 return _self.getDrawsInMonth(currentMonthN, currentYearN);
             })
             .then(function(data2){
-                if(data2.length) {
-                    previousMonth = currentMonth = true;   
+                if(!data2.length) {
+                    availableMonths.push({month:(currentMonthN), year:currentYearN});
                 }
                 return _self.getDrawsInMonth(currentMonthN+1, currentYearN);
             })
             .then(function(data3){
-                if(data3.length){
-                    previousMonth = currentMonth = nextMonth = true;
+                if(!data3.length){
+                    availableMonths.push({month:(currentMonthN+1), year:currentYearN});
                 }
                 
-                return {availableMonths : { previousMonth, currentMonth, nextMonth }};
+                return availableMonths;
             });
         }
     }
