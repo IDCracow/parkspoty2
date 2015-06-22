@@ -17,6 +17,11 @@ angular.module('parkspotyappApp')
         var self = this;
         return Reservation.doDraw(month, year);
     };
+    
+    AdminAPI.prototype.removeDraw = function(month, year) {
+        var self = this;
+        return Draw.removeDraw(month, year);
+    };
 
     AdminAPI.prototype.spots = [];
     AdminAPI.prototype.editable = true;

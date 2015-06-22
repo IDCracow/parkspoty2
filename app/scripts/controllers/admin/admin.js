@@ -12,6 +12,5 @@ angular.module('parkspotyappApp')
  
     $scope.vm = adminViewModel;
      
-    
     adminViewModel.getSpots();
 });
