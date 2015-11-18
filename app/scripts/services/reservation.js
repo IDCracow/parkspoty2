@@ -65,7 +65,7 @@ angular.module('parkspotyappApp')
         doDraw : function(month, year) { 
             var self = this; 
             
-            Spot.getAvailbleSpotsForDrawing()
+            return Spot.getAvailbleSpotsForDrawing()
             .then(function(data) {
                 return self.availbleSpots = data;
             })

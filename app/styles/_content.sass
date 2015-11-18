@@ -17,7 +17,7 @@ h2
 a
   color: $emergencyColor
   text-decoration: none
-
+draw-months-wrapper
 span
   color: #fff
 
@@ -220,3 +220,12 @@ svg
     top: 50%
     left: 50%
     transform: translateX(-50%) translateY(-50%)
+
+.draw-months-wrapper
+  p 
+    display: none
+  &.success
+    select, button
+      display: none
+    p
+      display: block

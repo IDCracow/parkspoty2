@@ -1,7 +1,14 @@
-<section style="margin-top:200px">
-    <p ng-if="vm.isAdmin">This is the admin view.</p>
-    <button ng-click="vm.drawSpots()">Draw spots for next month</button>
+<p ng-if="vm.isAdmin">This is the admin view.</p>
 
+<section class="drawing" style="margin-top:200px">
+    <div class="row">
+        <label>Draw for selected month</label>
+        <draw-months></draw-months>
+    </div>
+    
+</section>
+
+<section style="margin-top:20px">
     <table>
         <tr>
             <th>Spot</th>

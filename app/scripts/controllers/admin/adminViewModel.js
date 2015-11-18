@@ -1,5 +1,5 @@
 angular.module('parkspotyappApp')
-    .factory('adminViewModel', function($location, user, Reservation, notification, Spot) {
+    .factory('adminViewModel', function($location, user, Reservation, notification, Spot, Draw) {
 
     var AdminAPI = function() {};
 
@@ -13,9 +13,14 @@ angular.module('parkspotyappApp')
 
     }; 
 
-    AdminAPI.prototype.drawSpots = function() {
+    AdminAPI.prototype.drawSpots = function(month, year) {
         var self = this;
-        Reservation.doDraw(6,2015);
+        return Reservation.doDraw(month, year);
+    };
+    
+    AdminAPI.prototype.removeDraw = function(month, year) {
+        var self = this;
+        return Draw.removeDraw(month, year);
     };
 
     AdminAPI.prototype.spots = [];

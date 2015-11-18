@@ -49,6 +49,107 @@ angular.module('parkspotyappApp')
             }
              
             return q.promise;
-        }
+        },
+        
+        getDrawsInMonth : function (month, year) {            
+            var Draw = Parse.Object.extend('Draw');
+            var query = new Parse.Query(Draw);
+             
+			query.equalTo("month", month);
+			query.equalTo("year", year);
+
+            var q = $q.defer();
+            query.find().then(function(results){ 
+                q.resolve(results);
+            });
+            return q.promise; 
+        },
+        
+        getDrawMonths : function () {
+            var _self = this;
+            
+            var availableMonths = [];
+            
+            var d = new Date();
+            var currentMonthN = d.getMonth() + 1;
+            var currentYearN = d.getFullYear();
+            
+            return _self.getDrawsInMonth(currentMonthN-1, currentYearN)
+            .then(function(data) {
+                if(!data.length) {
+                    availableMonths.push({month:(currentMonthN-1), year:currentYearN});
+                }
+                return _self.getDrawsInMonth(currentMonthN, currentYearN);
+            })
+            .then(function(data2){
+                if(!data2.length) {
+                    availableMonths.push({month:(currentMonthN), year:currentYearN});
+                }
+                return _self.getDrawsInMonth(currentMonthN+1, currentYearN);
+            })
+            .then(function(data3){
+                if(!data3.length){
+                    availableMonths.push({month:(currentMonthN+1), year:currentYearN});
+                }
+                
+                return availableMonths;
+            });
+        },
+        
+        // removing draw from table 'draw' and all containing reserviations from table 'reservations'
+        removeDraw : function(month, year) {
+            var Draw = Parse.Object.extend('Draw');
+            var query = new Parse.Query(Draw);
+             
+			query.equalTo("month", month);
+			query.equalTo("year", year);
+            
+            var q = $q.defer();
+            query.find().then(function(results){ 
+                q.resolve(results);
+                _.each(results, function(result) {
+                    result.destroy({
+                          success: function(draw) {
+                            // Execute any logic that should take place after the object is saved. 
+                              
+                          },
+                          error: function(draw, error) {
+                            // Execute any logic that should take place if the save fails.
+                            // error is a Parse.Error with an error code and message.
+                            console.log('Failed to remove new object, with error code: ' + error.message);
+                          }
+                    });
+                });
+                
+                // removing reservations which are not emergency type
+                var Reservations = Parse.Object.extend('Reservations');
+                var query = new Parse.Query(Reservations);  
+
+                query.equalTo("month", month);
+                query.equalTo("year", year);
+                query.equalTo("f_emergency", false);
+                
+                query.limit(1000); // default is 100
+                
+                query.find().then(function(results){ 
+                    q.resolve(results);
+                    _.each(results, function(result) {
+                        result.destroy({
+                              success: function(reservations) {
+                              },
+                              error: function(reservations, error) {
+                                // Execute any logic that should take place if the save fails.
+                                // error is a Parse.Error with an error code and message.
+                                console.log('Failed to remove new object, with error code: ' + error.message);
+                              }
+                        });
+                    });
+                });
+                
+            });
+            
+            return q.promise;  
+        },
+        
     }
   });
