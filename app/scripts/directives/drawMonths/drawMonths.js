@@ -12,14 +12,13 @@ angular.module('parkspotyappApp').directive('drawMonths', function(Draw, adminVi
             });
         },
         link: function($scope, element) {
-            var dropdownItem = null;             
-            $scope.drawMonth = null;
+             $scope.drawMonth = null;
             $scope.drawYear = null;
             
-            $scope.checkSelection = function (e) {
-                var selectedDrawDate = e.target[e.target.selectedIndex].value;
-                dropdownItem = e.target;
+            $scope.checkSelection = function () {
                 
+                var selectedDrawDate = $scope.drawmonths;
+                 
                 if(selectedDrawDate != 0) 
                 {
                     var selectedDrawDate = selectedDrawDate.split('_');
@@ -35,7 +34,7 @@ angular.module('parkspotyappApp').directive('drawMonths', function(Draw, adminVi
                 if($scope.drawMonth != 0 && $scope.drawYear !=0) 
                 {
                     adminViewModel.drawSpots(parseInt($scope.drawMonth), parseInt($scope.drawYear)).then(function(result) {
-                        angular.element(dropdownItem).parent().addClass('success');
+                        angular.element(element).addClass('success');
                     }); 
                 }
             };

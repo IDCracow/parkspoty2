@@ -1,5 +1,5 @@
 <div class="draw-months-wrapper" ng-init="isDisabled = true">
-    <select ng-model="drawmonths" class="dropdown-month" ng-click="$event=$event" ng-change="checkSelection($event)" > 
+    <select ng-model="drawmonths" class="dropdown-month" ng-click="$event=$event" ng-change="checkSelection()" > 
         <option ng-repeat="date in availableMonths" value="{{date.month}}_{{date.year}}">{{date.month}} / {{date.year}}</option>
     </select>
 
