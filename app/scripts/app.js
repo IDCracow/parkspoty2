@@ -52,6 +52,26 @@ angular
         templateUrl: 'views/admin.html',
         controller: 'AdminCtrl' 
     })
+        .when('/admin', {
+            templateUrl: 'views/admin.html',
+            controller: 'AdminCtrl' 
+    })
+        .when('/admin/spots', {
+            templateUrl: 'views/admin/spots.html',
+            controller: 'AdminCtrl' 
+    })
+        .when('/admin/tickets', {
+            templateUrl: 'views/admin/tickets.html',
+            controller: 'AdminCtrl' 
+    })
+        .when('/admin/dodraw', {
+            templateUrl: 'views/admin/dodraw.html',
+            controller: 'AdminCtrl' 
+    })
+        .when('/admin/draws', {
+            templateUrl: 'views/admin/draws.html',
+            controller: 'AdminCtrl' 
+    })
         .when('/reservation', {
         templateUrl: 'views/reservation.html',
         controller: 'ReservationCtrl'
