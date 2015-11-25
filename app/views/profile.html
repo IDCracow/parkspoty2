@@ -47,41 +47,5 @@
 </section>
 
 <section>
-
-    <header class="fz40"><a href="" ng-click="prev()">prev</a> {{date}} <a href="" ng-click="next()">next</a></header>
-    <div class="row">
-        <div class="half">
-            <h3>emergency</h3>
-            <ul class="list-simple list-separator">
-                <li>
-                    <label for="cbox_activeInDraw">
-                        <span class="cbox cbox-emergency cbox-bool text-center" ng-class="{selected : valFlagActiveInDraw}">
-                            <input type="checkbox" name="activeInDraw" id="cbox_activeInDraw" ng-model="valFlagActiveInDraw" ng-change="changeFlagActiveInDraw()">
-                        </span>
-                        I want to take part in a monthly draw
-                    </label>
-                </li>
-
-                <li>
-                    <span class="cbox cbox-emergency text-center">{{valTicketsLeft}}</span> tickets left <i class="icon-info"></i>
-                </li>
-            </ul>
-        </div>
-
-        <div class="half">
-            <h3>regular <button ng-click="addPoint()">+</button></h3>
-
-            <ul class="list-simple list-separator">
-                <li ng-repeat="object in items track by $index">
-                    <label for="cbox_drawReminder">
-                        <span class="cbox cbox-regular cbox-bool text-center" ng-class="{selected : valFlagDrawRemider}">
-                            <input type="checkbox" name="drawReminder" id="cbox_drawReminder" ng-model="valFlagDrawRemider" ng-change="changeFlagDrawRemider()">
-                        </span>
-                        draw reminder <a href="" ng-click="removePoint()">-</a>
-                    </label>
-                </li>
-            </ul>
-        </div>
-    </div>
-
+    <day-preview></day-preview>
 </section>

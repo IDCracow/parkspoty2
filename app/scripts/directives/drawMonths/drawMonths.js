@@ -12,7 +12,7 @@ angular.module('parkspotyappApp').directive('drawMonths', function(Draw, adminVi
             });
         },
         link: function($scope, element) {
-             $scope.drawMonth = null;
+            $scope.drawMonth = null;
             $scope.drawYear = null;
             
             $scope.checkSelection = function () {
